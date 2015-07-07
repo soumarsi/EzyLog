@@ -17,6 +17,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    
+    NSLog(@"Height: %f",[[UIScreen mainScreen] bounds].size.height);
+    
+     NSLog(@"Width: %f",[[UIScreen mainScreen] bounds].size.width);
+    
     return YES;
 }
 

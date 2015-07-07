@@ -1,0 +1,431 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0322C94DD82A499096572FC3 /* UIView+Facade.h in Headers */ = {isa = PBXBuildFile; fileRef = 324216A3D7B657535735C3D1 /* UIView+Facade.h */; };
+		44C93308F9A1351847240E81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B856FE642599F711283C0A39 /* Foundation.framework */; };
+		532F6AC5031B9FD69F453BF2 /* Pods-EzyLog-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F6D7BE87E3B46CFDF8411C /* Pods-EzyLog-dummy.m */; };
+		727DB2EA1A7ACA3105FF5F18 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B856FE642599F711283C0A39 /* Foundation.framework */; };
+		739D86CC3F79352F49D2B876 /* UIView+Facade.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD95206E439CD2699ACB810 /* UIView+Facade.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		AD21E0AEAADDA1B502E41DBB /* Pods-EzyLog-Facade-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6694A869F93568D658B855 /* Pods-EzyLog-Facade-dummy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		74A276385D956BD1EEA9AA70 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71396CB4816835455369222F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F52546B0AB11FE7F85903B3;
+			remoteInfo = "Pods-EzyLog-Facade";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0F6694A869F93568D658B855 /* Pods-EzyLog-Facade-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-EzyLog-Facade-dummy.m"; sourceTree = "<group>"; };
+		1C4F93ECE96DB16CFCE29518 /* Pods-EzyLog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EzyLog.release.xcconfig"; sourceTree = "<group>"; };
+		2CEDD66E13E293D74459A5E2 /* Pods-EzyLog-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-EzyLog-resources.sh"; sourceTree = "<group>"; };
+		324216A3D7B657535735C3D1 /* UIView+Facade.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+Facade.h"; path = "Facade/UIView+Facade.h"; sourceTree = "<group>"; };
+		68993512730FFCACC87495D1 /* Pods-EzyLog-Facade-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EzyLog-Facade-Private.xcconfig"; sourceTree = "<group>"; };
+		7BD95206E439CD2699ACB810 /* UIView+Facade.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+Facade.m"; path = "Facade/UIView+Facade.m"; sourceTree = "<group>"; };
+		810BF98F92C886AB9DDC41DC /* libPods-EzyLog-Facade.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EzyLog-Facade.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		99CC09D9AC1277CF54BDBFCA /* Pods-EzyLog-Facade-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-EzyLog-Facade-prefix.pch"; sourceTree = "<group>"; };
+		99D1C4202D7408FCA6C23748 /* Pods-EzyLog-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-EzyLog-acknowledgements.markdown"; sourceTree = "<group>"; };
+		AFB9333BC5C81474AC05543D /* Pods-EzyLog-Facade.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EzyLog-Facade.xcconfig"; sourceTree = "<group>"; };
+		B2F6D7BE87E3B46CFDF8411C /* Pods-EzyLog-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-EzyLog-dummy.m"; sourceTree = "<group>"; };
+		B856FE642599F711283C0A39 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		B985DF98DCD1637380EA7DC0 /* libPods-EzyLog.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EzyLog.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DFA4C9998CAEE08D13C1B491 /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		F0C6569B8605C90B8A4B4971 /* Pods-EzyLog-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-EzyLog-environment.h"; sourceTree = "<group>"; };
+		F47D7D1B87FF90F9E1F39F21 /* Pods-EzyLog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EzyLog.debug.xcconfig"; sourceTree = "<group>"; };
+		FB501B1CBF7686D6BDA5F582 /* Pods-EzyLog-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-EzyLog-acknowledgements.plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		78E8CBD3E24B0ED2AB4BBECB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				727DB2EA1A7ACA3105FF5F18 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9B9FB0979BBF4EC7DDAD335 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				44C93308F9A1351847240E81 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		023951D27386F739DC95405F /* Facade */ = {
+			isa = PBXGroup;
+			children = (
+				324216A3D7B657535735C3D1 /* UIView+Facade.h */,
+				7BD95206E439CD2699ACB810 /* UIView+Facade.m */,
+				70F6D4BE8A4634C46C94DA34 /* Support Files */,
+			);
+			path = Facade;
+			sourceTree = "<group>";
+		};
+		08D3BE650D644C970152BABA = {
+			isa = PBXGroup;
+			children = (
+				DFA4C9998CAEE08D13C1B491 /* Podfile */,
+				4DE87D351EDAF88009669BEB /* Frameworks */,
+				B0F203133D0198BC386351C4 /* Pods */,
+				B04E9F8C8AE6E1B867F3E31B /* Products */,
+				2B822851D6A764E43EEDBC1C /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		2B822851D6A764E43EEDBC1C /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				312C20F91DD424B60D2C0738 /* Pods-EzyLog */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		312C20F91DD424B60D2C0738 /* Pods-EzyLog */ = {
+			isa = PBXGroup;
+			children = (
+				99D1C4202D7408FCA6C23748 /* Pods-EzyLog-acknowledgements.markdown */,
+				FB501B1CBF7686D6BDA5F582 /* Pods-EzyLog-acknowledgements.plist */,
+				B2F6D7BE87E3B46CFDF8411C /* Pods-EzyLog-dummy.m */,
+				F0C6569B8605C90B8A4B4971 /* Pods-EzyLog-environment.h */,
+				2CEDD66E13E293D74459A5E2 /* Pods-EzyLog-resources.sh */,
+				F47D7D1B87FF90F9E1F39F21 /* Pods-EzyLog.debug.xcconfig */,
+				1C4F93ECE96DB16CFCE29518 /* Pods-EzyLog.release.xcconfig */,
+			);
+			name = "Pods-EzyLog";
+			path = "Target Support Files/Pods-EzyLog";
+			sourceTree = "<group>";
+		};
+		4DE87D351EDAF88009669BEB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6DE820410CEEAFB0EEDBE6B5 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6DE820410CEEAFB0EEDBE6B5 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				B856FE642599F711283C0A39 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		70F6D4BE8A4634C46C94DA34 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				AFB9333BC5C81474AC05543D /* Pods-EzyLog-Facade.xcconfig */,
+				68993512730FFCACC87495D1 /* Pods-EzyLog-Facade-Private.xcconfig */,
+				0F6694A869F93568D658B855 /* Pods-EzyLog-Facade-dummy.m */,
+				99CC09D9AC1277CF54BDBFCA /* Pods-EzyLog-Facade-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-EzyLog-Facade";
+			sourceTree = "<group>";
+		};
+		B04E9F8C8AE6E1B867F3E31B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B985DF98DCD1637380EA7DC0 /* libPods-EzyLog.a */,
+				810BF98F92C886AB9DDC41DC /* libPods-EzyLog-Facade.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B0F203133D0198BC386351C4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				023951D27386F739DC95405F /* Facade */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		2A88D547F505B3AEA1500687 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0322C94DD82A499096572FC3 /* UIView+Facade.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		1F52546B0AB11FE7F85903B3 /* Pods-EzyLog-Facade */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C185B6B0D53928FA7E83EE60 /* Build configuration list for PBXNativeTarget "Pods-EzyLog-Facade" */;
+			buildPhases = (
+				9E57C25D2EA4986208A1EEA0 /* Sources */,
+				78E8CBD3E24B0ED2AB4BBECB /* Frameworks */,
+				2A88D547F505B3AEA1500687 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-EzyLog-Facade";
+			productName = "Pods-EzyLog-Facade";
+			productReference = 810BF98F92C886AB9DDC41DC /* libPods-EzyLog-Facade.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		BD3FA2EF48B8428C50A9531B /* Pods-EzyLog */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 562678B03DBC29855804425C /* Build configuration list for PBXNativeTarget "Pods-EzyLog" */;
+			buildPhases = (
+				3691C821155373D941156CFB /* Sources */,
+				F9B9FB0979BBF4EC7DDAD335 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9368AFE5117D71E049A5B26C /* PBXTargetDependency */,
+			);
+			name = "Pods-EzyLog";
+			productName = "Pods-EzyLog";
+			productReference = B985DF98DCD1637380EA7DC0 /* libPods-EzyLog.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		71396CB4816835455369222F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+			};
+			buildConfigurationList = D72DA35E79BDF8816D8D0544 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 08D3BE650D644C970152BABA;
+			productRefGroup = B04E9F8C8AE6E1B867F3E31B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BD3FA2EF48B8428C50A9531B /* Pods-EzyLog */,
+				1F52546B0AB11FE7F85903B3 /* Pods-EzyLog-Facade */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3691C821155373D941156CFB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				532F6AC5031B9FD69F453BF2 /* Pods-EzyLog-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9E57C25D2EA4986208A1EEA0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD21E0AEAADDA1B502E41DBB /* Pods-EzyLog-Facade-dummy.m in Sources */,
+				739D86CC3F79352F49D2B876 /* UIView+Facade.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9368AFE5117D71E049A5B26C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-EzyLog-Facade";
+			target = 1F52546B0AB11FE7F85903B3 /* Pods-EzyLog-Facade */;
+			targetProxy = 74A276385D956BD1EEA9AA70 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		05D5988AD78F8F13E2270B2C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 68993512730FFCACC87495D1 /* Pods-EzyLog-Facade-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-EzyLog-Facade/Pods-EzyLog-Facade-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		37FBD6B75565ABE849BB24DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 68993512730FFCACC87495D1 /* Pods-EzyLog-Facade-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-EzyLog-Facade/Pods-EzyLog-Facade-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		42476A834CD165B8F1551027 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		51AEC45671FBF761D7260D3E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F47D7D1B87FF90F9E1F39F21 /* Pods-EzyLog.debug.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		7537CA669639982A5EF0881D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C4F93ECE96DB16CFCE29518 /* Pods-EzyLog.release.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		B6CBF887BFA78814FA14AF1F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		562678B03DBC29855804425C /* Build configuration list for PBXNativeTarget "Pods-EzyLog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				51AEC45671FBF761D7260D3E /* Debug */,
+				7537CA669639982A5EF0881D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C185B6B0D53928FA7E83EE60 /* Build configuration list for PBXNativeTarget "Pods-EzyLog-Facade" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05D5988AD78F8F13E2270B2C /* Debug */,
+				37FBD6B75565ABE849BB24DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D72DA35E79BDF8816D8D0544 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42476A834CD165B8F1551027 /* Debug */,
+				B6CBF887BFA78814FA14AF1F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 71396CB4816835455369222F /* Project object */;
+}

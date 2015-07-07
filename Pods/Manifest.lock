@@ -1,0 +1,10 @@
+PODS:
+  - Facade (0.2.2)
+
+DEPENDENCIES:
+  - Facade
+
+SPEC CHECKSUMS:
+  Facade: 171a5ece6d25cfe89f85fb87675c8a6cb7754b64
+
+COCOAPODS: 0.37.2
