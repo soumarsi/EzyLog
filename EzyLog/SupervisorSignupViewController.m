@@ -32,6 +32,21 @@
      NSString *licence;
     //NSMutableDictionary *result;
     NSUserDefaults *defaults;
+    
+    
+    NSString *strday;
+    NSString *strmon;
+    NSString *stryear;
+    
+    //
+    UIButton *btn;
+    
+    UIButton *btn1;
+    
+    UIButton *buttonForDatePicker;
+    
+    //
+    BOOL datePicked;
 }
 
 @end
@@ -41,7 +56,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    datePicked=NO;
+    
     [_supervisorsignupscroller setContentSize:CGSizeMake([UIScreen mainScreen].bounds.size.width, 959.0f)];
+    
+    _supervisorsignupscroller.delegate=self;
     UIColor *color = [UIColor colorWithRed:102.0f/255.0f green:102.0f/255.0f blue:102.0f/255.0f alpha:1.0f];
     self.fname.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"First Name" attributes:@{NSForegroundColorAttributeName: color}];
     self.lname.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Last Name" attributes:@{NSForegroundColorAttributeName: color}];
@@ -78,6 +97,62 @@
     
     // Do any additional setup after loading the view.
 }
+
+
+
+-(void)monthString
+{
+    if ([strmon isEqualToString:@"1"]) {
+        strmon=@"Jan";
+    }
+    else if ([strmon isEqualToString:@"2"])
+    {
+        strmon=@"Feb";
+    }
+    else if ([strmon isEqualToString:@"3"])
+    {
+        strmon=@"Mar";
+    }
+    else if ([strmon isEqualToString:@"4"])
+    {
+        strmon=@"Apr";
+    }
+    else if ([strmon isEqualToString:@"5"])
+    {
+        strmon=@"May";
+    }
+    else if ([strmon isEqualToString:@"6"])
+    {
+        strmon=@"Jun";
+    }
+    else if ([strmon isEqualToString:@"7"])
+    {
+        strmon=@"Jul";
+    }
+    else if ([strmon isEqualToString:@"8"])
+    {
+        strmon=@"Aug";
+    }
+    else if ([strmon isEqualToString:@"9"])
+    {
+        strmon=@"Sep";
+    }
+    else if ([strmon isEqualToString:@"10"])
+    {
+        strmon=@"Oct";
+    }
+    else if ([strmon isEqualToString:@"11"])
+    {
+        strmon=@"Nov";
+    }
+    else if ([strmon isEqualToString:@"12"])
+    {
+        strmon=@"Dec";
+    }
+    
+}
+
+
 - (IBAction)Registerclk:(id)sender
 {
     ELSupervisorSignatureViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"SuperSignature_Page"];
@@ -348,6 +423,18 @@
         [_supervisorsignupscroller setContentOffset:CGPointMake(0.0f, 400.0f) animated:YES];
     }
 }
+
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+
+
+    NSLog(@"Screen height...%f",[UIScreen mainScreen].bounds.size.height);
+    NSLog(@"Scrool offset.y....%f",scrollView.contentOffset.y);
+    
+
+}
+
 /*
 #pragma mark - Navigation
 
@@ -360,6 +447,8 @@
 
 - (IBAction)datebutton1day:(id)sender
 {
+    buttonForDatePicker=(UIButton *)(id)sender;
+    
     [_postcode resignFirstResponder];
     [_licenceno resignFirstResponder];
     [picker resignFirstResponder];
@@ -370,6 +459,8 @@
 
 - (IBAction)datebutton1month:(id)sender
 {
+    
+    buttonForDatePicker=(UIButton *)(id)sender;
     [_postcode resignFirstResponder];
     [_licenceno resignFirstResponder];
     [picker resignFirstResponder];
@@ -380,6 +471,8 @@
 
 - (IBAction)datebutton1year:(id)sender
 {
+    buttonForDatePicker=(UIButton *)(id)sender;
+    
     [_postcode resignFirstResponder];
     [_licenceno resignFirstResponder];
     [picker resignFirstResponder];
@@ -391,21 +484,47 @@
 -(void)OpenDatePicker
 {
     [_supervisorsignupscroller setContentOffset:CGPointMake(0.0f,290.0f) animated:YES];
-    myview = [[UIView alloc] initWithFrame:CGRectMake(0,630,375,270)];
+    
+   // myview = [[UIView alloc] initWithFrame:CGRectMake(0,630,375,270)];
+    
+     myview = [[UIView alloc] initWithFrame:CGRectMake(0,self.view.bounds.size.height-(self.view.bounds.size.height/2.47),self.view.bounds.size.width,self.view.bounds.size.height/2.47)];
+    
+     [self.view addSubview:myview];
+    
     [myview setBackgroundColor: [UIColor colorWithRed:(255.0f/255.0f) green:(255.0f/255.0f) blue:(255.0f/255.0f) alpha:1]];
-    UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(0,225,187,42)];
+    
+    
+    picker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,0,self.view.bounds.size.width,myview.bounds.size.height-42)];
+    [myview addSubview:picker];
+
+    
+    
+    //UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(0,225,187,42)];
+    
+     btn=[[UIButton alloc]initWithFrame:CGRectMake(0,myview.bounds.size.height-42,self.view.bounds.size.width/2,42)];
+    
     btn.backgroundColor=[UIColor colorWithRed:(100.0f/255.0f) green:(179.0f/255.0f) blue:(25.0f/255.0f) alpha:1];
     [btn setTitle: @"OK" forState: UIControlStateNormal];
     [myview addSubview:btn];
     
-    UIButton *btn1=[[UIButton alloc]initWithFrame:CGRectMake(187,225,188,42)];
+    btn1=[[UIButton alloc]initWithFrame:CGRectMake(187,225,188,42)];
+    
+    btn1=[[UIButton alloc]initWithFrame:CGRectMake(self.view.bounds.size.width/2,myview.bounds.size.height-42,self.view.bounds.size.width/2,42)];
+    
     btn1.backgroundColor=[UIColor colorWithRed:(0.0f/255.0f) green:(0.0f/255.0f) blue:(0.0f/255.0f) alpha:1];
     [btn1 setTitle: @"CANCEL" forState: UIControlStateNormal];
     [myview addSubview:btn1];
-    picker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,10,375,10)];
-    [myview addSubview:picker];
-    [_supervisorsignupscroller addSubview:myview];
-    [picker setBackgroundColor: [UIColor colorWithRed:(245.0f/255.0f) green:(245.0f/255.0f) blue:(245.0f/255.0f) alpha:1]];
+    
+   // [_supervisorsignupscroller addSubview:myview];
+    
+    
+    [_supervisorsignupscroller setContentOffset:CGPointMake(0.0f,buttonForDatePicker.frame.origin.y-30) animated:YES];
+    
+    _supervisorsignupscroller.scrollEnabled=NO;
+    
+   
+    
+    //[picker setBackgroundColor: [UIColor colorWithRed:(245.0f/255.0f) green:(245.0f/255.0f) blue:(245.0f/255.0f) alpha:1]];
      picker.datePickerMode=UIDatePickerModeDate;
     picker.date=[NSDate date];
     if (dob==1) {
@@ -426,21 +545,39 @@
 
 -(void)buttoncross:(id)sender
 {
+    _supervisorsignupscroller.scrollEnabled=YES;
+    
     [UIView animateWithDuration:0.4f
      // delay:0.1f
      // options:UIViewAnimationTransitionNone
                      animations:^{
                          
-                         [_supervisorsignupscroller setContentOffset:CGPointMake(0.0f,220.0f)];
+                         //[_supervisorsignupscroller setContentOffset:CGPointMake(0.0f,220.0f)];
+                         
+                         
+                         if([UIScreen mainScreen].bounds.size.height==568)
+                             
+                             [_supervisorsignupscroller setContentOffset:CGPointMake(0.0f,235) animated:YES];
+                         
+                         
+                         else if([UIScreen mainScreen].bounds.size.height==667)
+                             [_supervisorsignupscroller setContentOffset:CGPointMake(0.0f,160) animated:YES];
+                         
+                         else if([UIScreen mainScreen].bounds.size.height==480)
+                             [_supervisorsignupscroller setContentOffset:CGPointMake(0.0f,300) animated:YES];
+
+                         
+                         
+                         
                      }
                      completion:^(BOOL finished){
                          
                      }
      ];
     
-    _dobday1.text=NULL;
-    _dobmonth1.text=NULL;
-    _dobyear1.text=NULL;
+//    _dobday1.text=NULL;
+//    _dobmonth1.text=NULL;
+//    _dobyear1.text=NULL;
     
     self.navigationItem.rightBarButtonItem=nil;
     [myview removeFromSuperview];
@@ -451,13 +588,56 @@
 
 -(void)buttonInfo:(id)sender
 {
-    
+    _supervisorsignupscroller.scrollEnabled=YES;
     
     
     [UIView animateWithDuration:0.4f
      // delay:0.1f
      // options:UIViewAnimationTransitionNone
                      animations:^{
+                         
+                         
+                         if(datePicked==NO)
+                         {
+                             
+                             
+                             NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
+                             
+                             NSInteger Day = [components day];
+                             NSInteger month = [components month];
+                             NSInteger year = [components year];
+                             
+                             strday=[NSString stringWithFormat:@"%ld",(long)Day];
+                             strmon=[NSString stringWithFormat:@"%ld",(long)month];
+                             [self monthString];
+                             stryear=[NSString stringWithFormat:@"%ld",(long)year];
+                             
+                             NSLog(@"Day: %@ Month %@ Year %@",strday,strmon,stryear);
+                             
+                             //                            // strday = [strday substringWithRange:NSMakeRange(4,2)];
+                             //                             strmon = [strmon substringWithRange:NSMakeRange(0,3)];
+                             //                             stryear = [stryear substringWithRange:NSMakeRange(7,4)];
+                             
+                             
+                             _licencedaylabel.font = [UIFont fontWithName:@"OpenSans" size:14];
+                             _licencedaylabel.text=strday;
+                             
+                             _licencemonthlabel.font = [UIFont fontWithName:@"OpenSans" size:14];
+                             _licencemonthlabel.text=strmon;
+                             
+                             _licenceyearlabel.font = [UIFont fontWithName:@"OpenSans" size:14];
+                             _licenceyearlabel.text=stryear;
+                             
+                             
+                             
+                             
+                             
+                         }
+                         
+                         
+                         
+                         
+                         else{
                          _dobday1.font = [UIFont fontWithName:@"OpenSans" size:14];
                          _dobday1.text=dobday;
                          
@@ -466,9 +646,25 @@
                          
                          _dobyear1.font = [UIFont fontWithName:@"OpenSans" size:14];
                          _dobyear1.text=dobyear;
+                         }
                          
                         
-                         [_supervisorsignupscroller setContentOffset:CGPointMake(0.0f,220.0f)];
+                         if([UIScreen mainScreen].bounds.size.height==568)
+                             
+                             [_supervisorsignupscroller setContentOffset:CGPointMake(0.0f,235) animated:YES];
+                         
+                         else if([UIScreen mainScreen].bounds.size.height==667)
+                             [_supervisorsignupscroller setContentOffset:CGPointMake(0.0f,160) animated:YES];
+                         
+                         else if([UIScreen mainScreen].bounds.size.height==480)
+                             [_supervisorsignupscroller setContentOffset:CGPointMake(0.0f,300) animated:YES];
+                         
+                         
+                     
+                         
+                     
+                     
+                     
                      }
                      completion:^(BOOL finished){
                          
@@ -552,6 +748,8 @@
     dobmon = [dobmon substringWithRange:NSMakeRange(0,3)];
     dobyear = [dobyear substringWithRange:NSMakeRange(7,4)];
     
+    datePicked=YES;
+    
     //NSLog(@"Date....%@",strday);
     
     //[picker removeFromSuperview];
@@ -561,6 +759,8 @@
 
 - (IBAction)licenceday:(id)sender
 {
+    buttonForDatePicker=(UIButton *)(id)sender;
+    
     [_licenceno resignFirstResponder];
     [_insno resignFirstResponder];
     [picker resignFirstResponder];
@@ -571,6 +771,8 @@
 
 - (IBAction)licencemonth:(id)sender
 {
+    buttonForDatePicker=(UIButton *)(id)sender;
+    
     [_licenceno resignFirstResponder];
     [_insno resignFirstResponder];
     [picker resignFirstResponder];
@@ -581,6 +783,8 @@
 
 - (IBAction)licenceyear:(id)sender
 {
+    buttonForDatePicker=(UIButton *)(id)sender;
+    
     [_licenceno resignFirstResponder];
     [_insno resignFirstResponder];
     [picker resignFirstResponder];
@@ -601,26 +805,44 @@
     dobmon = [dobmon substringWithRange:NSMakeRange(0,3)];
     dobyear = [dobyear substringWithRange:NSMakeRange(7,4)];
     
+    datePicked=YES;
+    
 }
 
 
 -(void)buttoncross2:(id)sender
 {
+    
+    _supervisorsignupscroller.scrollEnabled=YES;
+    
     [UIView animateWithDuration:0.4f
      // delay:0.1f
      // options:UIViewAnimationTransitionNone
                      animations:^{
                          
-                         [_supervisorsignupscroller setContentOffset:CGPointMake(0.0f,220.0f)];
+                        
+                         
+                         if([UIScreen mainScreen].bounds.size.height==568)
+                             
+                             [_supervisorsignupscroller setContentOffset:CGPointMake(0.0f,235) animated:YES];
+                         
+                         else if([UIScreen mainScreen].bounds.size.height==667)
+                             [_supervisorsignupscroller setContentOffset:CGPointMake(0.0f,160) animated:YES];
+                         
+                         else if([UIScreen mainScreen].bounds.size.height==480)
+                             [_supervisorsignupscroller setContentOffset:CGPointMake(0.0f,300) animated:YES];
+                         
+                         
+                         
                      }
                      completion:^(BOOL finished){
                          
                      }
      ];
     
-    _licencedaylabel.text=NULL;
-    _licencemonthlabel.text=NULL;
-    _licenceyearlabel.text=NULL;
+//    _licencedaylabel.text=NULL;
+//    _licencemonthlabel.text=NULL;
+//    _licenceyearlabel.text=NULL;
     
     self.navigationItem.rightBarButtonItem=nil;
     [myview removeFromSuperview];
@@ -630,13 +852,59 @@
 -(void)buttonInfo4:(id)sender
 {
     
-    
+    _supervisorsignupscroller.scrollEnabled=YES;
     
     
     [UIView animateWithDuration:0.4f
      // delay:0.1f
      // options:UIViewAnimationTransitionNone
                      animations:^{
+                         
+                         
+                         
+                         if(datePicked==NO)
+                         {
+                         
+                         
+                             NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
+                             
+                             NSInteger Day = [components day];
+                             NSInteger month = [components month];
+                             NSInteger year = [components year];
+                             
+                             strday=[NSString stringWithFormat:@"%ld",(long)Day];
+                             strmon=[NSString stringWithFormat:@"%ld",(long)month];
+                             [self monthString];
+                             stryear=[NSString stringWithFormat:@"%ld",(long)year];
+                             
+                             NSLog(@"Day: %@ Month %@ Year %@",strday,strmon,stryear);
+                             
+                             //                            // strday = [strday substringWithRange:NSMakeRange(4,2)];
+                             //                             strmon = [strmon substringWithRange:NSMakeRange(0,3)];
+                             //                             stryear = [stryear substringWithRange:NSMakeRange(7,4)];
+                             
+                             
+                              _licencedaylabel.font = [UIFont fontWithName:@"OpenSans" size:14];
+                              _licencedaylabel.text=strday;
+                             
+                             _licencemonthlabel.font = [UIFont fontWithName:@"OpenSans" size:14];
+                             _licencemonthlabel.text=strmon;
+                             
+                             _licenceyearlabel.font = [UIFont fontWithName:@"OpenSans" size:14];
+                             _licenceyearlabel.text=stryear;
+
+                             
+                             
+                         
+                         
+                         }
+                         
+                         
+                         
+                         else{
+                         
+                         
+                         
                          _licencedaylabel.font = [UIFont fontWithName:@"OpenSans" size:14];
                          _licencedaylabel.text=dobday;
                          
@@ -647,7 +915,27 @@
                          _licenceyearlabel.text=dobyear;
                          
                          chkingdata=dobmon;
-                         [_supervisorsignupscroller setContentOffset:CGPointMake(0.0f,220.0f)];
+                             
+                             
+                         }
+                         
+                         //
+                         
+                         
+                         if([UIScreen mainScreen].bounds.size.height==568)
+                             
+                             [_supervisorsignupscroller setContentOffset:CGPointMake(0.0f,235) animated:YES];
+                         
+                         else if([UIScreen mainScreen].bounds.size.height==667)
+                             [_supervisorsignupscroller setContentOffset:CGPointMake(0.0f,160) animated:YES];
+                         
+                         else if([UIScreen mainScreen].bounds.size.height==480)
+                             [_supervisorsignupscroller setContentOffset:CGPointMake(0.0f,300) animated:YES];
+                         
+                         
+                         
+                         
+                         
                      }
                      completion:^(BOOL finished){
                          [self monthchk];

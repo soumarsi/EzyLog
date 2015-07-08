@@ -25,6 +25,8 @@
     
     BOOL statePickerOpened;
     
+    BOOL datePicked;
+    
     UIButton *buttonForDatePicker;
     
     //buttons with picker
@@ -35,6 +37,7 @@
     
 }
 
+@property (strong, nonatomic) IBOutlet UIButton *sgnUpBtn;
 
 @property (strong, nonatomic) IBOutlet UIImageView *expDayBack;
 
@@ -54,6 +57,8 @@
 
 
 
+
+
 @property (strong, nonatomic) IBOutlet UIImageView *agreeTextFooter;
 @end
 
@@ -63,7 +68,15 @@
     [super viewDidLoad];
     
     
+    strday=@"";
+    strmon=@"";
+    stryear=@"";
+    
+    _signupscroller.delegate=self;
+    
     statePickerOpened=NO;
+    
+    datePicked=NO;
     
     flag1=0;
     
@@ -306,6 +319,8 @@
        
     
     [_signupscroller setContentOffset:CGPointMake(0.0f,buttonForDatePicker.frame.origin.y-30) animated:YES];
+       
+       _signupscroller.scrollEnabled=NO;
     
     
     
@@ -348,6 +363,8 @@
     strmon = [strmon substringWithRange:NSMakeRange(0,3)];
     stryear = [stryear substringWithRange:NSMakeRange(7,4)];
     
+    datePicked=YES;
+    
     //NSLog(@"Date....%@",strday);
     
     //[picker removeFromSuperview];
@@ -365,6 +382,8 @@
     strmon = [strmon substringWithRange:NSMakeRange(0,3)];
     stryear = [stryear substringWithRange:NSMakeRange(7,4)];
     
+    datePicked=YES;
+    
     
 }
 
@@ -375,6 +394,45 @@
      // delay:0.1f
      // options:UIViewAnimationTransitionNone
                      animations:^{
+                         
+                         
+                         if(datePicked==NO)
+                         {
+                             
+                             
+                             NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
+
+                             NSInteger Day = [components day];
+                             NSInteger month = [components month];
+                             NSInteger year = [components year];
+                             
+                             strday=[NSString stringWithFormat:@"%ld",(long)Day];
+                             strmon=[NSString stringWithFormat:@"%ld",(long)month];
+                             [self monthString];
+                             stryear=[NSString stringWithFormat:@"%ld",(long)year];
+                             
+                             NSLog(@"Day: %@ Month %@ Year %@",strday,strmon,stryear);
+                             
+//                            // strday = [strday substringWithRange:NSMakeRange(4,2)];
+//                             strmon = [strmon substringWithRange:NSMakeRange(0,3)];
+//                             stryear = [stryear substringWithRange:NSMakeRange(7,4)];
+                         
+                             
+                             _daylbl.font = [UIFont fontWithName:@"OpenSans" size:14];
+                             _daylbl.text=strday;
+                             
+                             _monthlbl.font = [UIFont fontWithName:@"OpenSans" size:14];
+                             _monthlbl.text=strmon;
+                             
+                             _yearlbl.font = [UIFont fontWithName:@"OpenSans" size:14];
+                             _yearlbl.text=stryear;
+
+                         
+                         
+                         }
+                         else
+                         {
+                         
                          _daylbl.font = [UIFont fontWithName:@"OpenSans" size:14];
                          _daylbl.text=strday;
                          
@@ -383,6 +441,8 @@
                          
                          _yearlbl.font = [UIFont fontWithName:@"OpenSans" size:14];
                          _yearlbl.text=stryear;
+                             
+                         }
                          
                          [_signupscroller setContentOffset:CGPointMake(0.0f,220.0f)];
                      }
@@ -400,6 +460,7 @@
     
     self.navigationItem.rightBarButtonItem=nil;
     [myview removeFromSuperview];
+    _signupscroller.scrollEnabled=YES;
     
 }
 
@@ -409,6 +470,46 @@
      // delay:0.1f
      // options:UIViewAnimationTransitionNone
                      animations:^{
+                         
+                         if(datePicked==NO)
+                         {
+                             
+                             
+                             NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
+                             
+                             NSInteger Day = [components day];
+                             NSInteger month = [components month];
+                             NSInteger year = [components year];
+                             
+                             strday=[NSString stringWithFormat:@"%ld",(long)Day];
+                             strmon=[NSString stringWithFormat:@"%ld",(long)month];
+                             [self monthString];
+                             stryear=[NSString stringWithFormat:@"%ld",(long)year];
+                             
+                             NSLog(@"Day: %@ Month %@ Year %@",strday,strmon,stryear);
+                             
+                             //                            // strday = [strday substringWithRange:NSMakeRange(4,2)];
+                             //                             strmon = [strmon substringWithRange:NSMakeRange(0,3)];
+                             //                             stryear = [stryear substringWithRange:NSMakeRange(7,4)];
+                             
+                             
+                             _day2lbl.font = [UIFont fontWithName:@"OpenSans" size:14];
+                             _day2lbl.text=strday;
+                             
+                             _month2lbl.font = [UIFont fontWithName:@"OpenSans" size:14];
+                             _month2lbl.text=strmon;
+                             
+                             _year2lbl.font = [UIFont fontWithName:@"OpenSans" size:14];
+                             _year2lbl.text=stryear;
+                             
+                              [_signupscroller setContentOffset:CGPointMake(0.0f,220.0f)];
+                             
+                             
+                             
+                         }
+                         else
+                         {
+                         
                          _day2lbl.font = [UIFont fontWithName:@"OpenSans" size:14];
                          _day2lbl.text=strday;
                          
@@ -419,6 +520,8 @@
                          _year2lbl.text=stryear;
                          check = strmon;
                          [_signupscroller setContentOffset:CGPointMake(0.0f,220.0f)];
+                             
+                         }
                      }
                      completion:^(BOOL finished){
                          
@@ -433,6 +536,7 @@
     
     self.navigationItem.rightBarButtonItem=nil;
     [myview removeFromSuperview];
+    _signupscroller.scrollEnabled=YES;
     
 }
 
@@ -459,6 +563,7 @@
     
     [btn removeFromSuperview];
     [btn1 removeFromSuperview];
+    _signupscroller.scrollEnabled=YES;
     
 }
 -(void)buttoncross2:(id)sender
@@ -484,13 +589,15 @@
     
     [btn removeFromSuperview];
     [btn1 removeFromSuperview];
+    _signupscroller.scrollEnabled=YES;
     
 }
 
 - (IBAction)OpenStateName:(id)sender
 {
     
-    statePickerOpened=YES;
+    
+    
     
     
     myarr=[NSMutableArray arrayWithObjects:@"CHICAGO",@"NEWYORK CITY",@"CALIFORNIA",@"MINIAPOLIS",@"LOSANGELS",@"LASVEGAS",@"SAN FRANSISCO",@"MIAMI",@"WASHINGTON DC",nil];
@@ -501,11 +608,16 @@
    // _signupscroller.scrollEnabled=NO;
     
     
-    myview = [[UIView alloc] initWithFrame:CGRectMake(0,938-(self.view.bounds.size.height/2.47),self.view.bounds.size.width,self.view.bounds.size.height/2.47)];
-    //[myview setBackgroundColor: [UIColor colorWithRed:(255.0f/255.0f) green:(255.0f/255.0f) blue:(255.0f/255.0f) alpha:1]];
+    if(statePickerOpened==NO)
+    {
     
-    myview.backgroundColor=[UIColor blackColor];
-    [_signupscroller addSubview:myview];
+    
+    myview = [[UIView alloc] initWithFrame:CGRectMake(0,self.view.bounds.size.height-(self.view.bounds.size.height/2.47),self.view.bounds.size.width,self.view.bounds.size.height/2.47)];
+    [myview setBackgroundColor: [UIColor colorWithRed:(255.0f/255.0f) green:(255.0f/255.0f) blue:(255.0f/255.0f) alpha:1]];
+    
+   // myview.backgroundColor=[UIColor blackColor];
+    [self.view addSubview:myview];
+    //[_signupscroller addSubview:myview];
     
     mypicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0,0,myview.bounds.size.width,self.view.bounds.size.height/2.47)];
     [mypicker setBackgroundColor: [UIColor colorWithRed:(245.0f/255.0f) green:(245.0f/255.0f) blue:(245.0f/255.0f) alpha:1]];
@@ -526,6 +638,7 @@
     
     
     //
+    /*
     if([[UIScreen mainScreen] bounds].size.height==667)
         
         [_signupscroller setContentOffset:CGPointMake(0.0f,myview.frame.origin.y-myview.bounds.size.height-67) animated:YES];
@@ -536,17 +649,22 @@
     
     else if([[UIScreen mainScreen] bounds].size.height==480)
         
-        [_signupscroller setContentOffset:CGPointMake(0.0f,myview.frame.origin.y-myview.bounds.size.height-32) animated:YES];
+        [_signupscroller setContentOffset:CGPointMake(0.0f,myview.frame.origin.y-myview.bounds.size.height-32) animated:YES];*/
     
     
-  //  [_signupscroller setContentOffset:CGPointMake(0.0f,myview.frame.origin.y-myview.bounds.size.height-32) animated:YES];
+  [_signupscroller setContentOffset:CGPointMake(0.0f,_sgnUpBtn.frame.origin.y-self.view.bounds.size.height/2.5) animated:YES];
+    _signupscroller.scrollEnabled=NO;
+        
+        
+        [btn addTarget:self action:@selector(buttonInfo2:) forControlEvents:UIControlEventTouchUpInside];
+        [btn1 addTarget:self action:@selector(buttonInfo3:) forControlEvents:UIControlEventTouchUpInside];
     
+        
+    }
 
     
+    statePickerOpened=YES;
     
-    
-    [btn addTarget:self action:@selector(buttonInfo2:) forControlEvents:UIControlEventTouchUpInside];
-    [btn1 addTarget:self action:@selector(buttonInfo3:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)buttonInfo2:(id)sender
@@ -568,7 +686,17 @@
                      animations:^{
                          _signupscroller.scrollEnabled=YES;
                          
-                         [_signupscroller setContentOffset:CGPointMake(0.0f,240.0f)];
+                         if([UIScreen mainScreen].bounds.size.height==568)
+                         
+                         [_signupscroller setContentOffset:CGPointMake(0.0f,[[UIScreen mainScreen]bounds ].size.height/1.32) animated:YES];
+                         
+                         
+                        else if([UIScreen mainScreen].bounds.size.height==667)
+                          [_signupscroller setContentOffset:CGPointMake(0.0f,331) animated:YES];
+                         
+                        else if([UIScreen mainScreen].bounds.size.height==480)
+                            [_signupscroller setContentOffset:CGPointMake(0.0f,518) animated:YES];
+
                      }
                      completion:^(BOOL finished){
                          
@@ -593,15 +721,24 @@
                      animations:^{
                          
                          _signupscroller.scrollEnabled=YES;
+                         if([UIScreen mainScreen].bounds.size.height==568)
+                             
+                             [_signupscroller setContentOffset:CGPointMake(0.0f,[[UIScreen mainScreen]bounds ].size.height/1.32) animated:YES];
                          
-                         [_signupscroller setContentOffset:CGPointMake(0.0f,240.0f)];
+                         
+                         else if([UIScreen mainScreen].bounds.size.height==667)
+                             [_signupscroller setContentOffset:CGPointMake(0.0f,331) animated:YES];
+                         
+                         else if([UIScreen mainScreen].bounds.size.height==480)
+                             [_signupscroller setContentOffset:CGPointMake(0.0f,518) animated:YES];
+                         
                      }
                      completion:^(BOOL finished){
                          
                      }
      ];
     self.navigationItem.rightBarButtonItem=nil;
-    _statelbl.text=NULL;
+    //_statelbl.text=NULL;
     
     [btn1 removeFromSuperview];
     [btn removeFromSuperview];
@@ -612,6 +749,15 @@
     
     statePickerOpened=NO;
     
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+
+   NSLog(@"scroll offset value....%f",_signupscroller.contentOffset.y) ;
+    
+    NSLog(@"Screen height...%f",self.view.bounds.size.height);
+
 }
 
 
@@ -639,106 +785,114 @@
 - (IBAction)SignUpclk:(id)sender
 {
     
-    ELSignUpViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Signature_Page"];
-    [self.navigationController pushViewController:obj animated:YES];
+//    ELSignUpViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Signature_Page"];
+//    [self.navigationController pushViewController:obj animated:YES];
     
     
-//    NSString *rawString = [_fname text];
-//    NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
-//    NSString *trimmed = [rawString stringByTrimmingCharactersInSet:whitespace];
-//    if ([trimmed length] < 1) {
-//        
-//        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"First Name  can't be blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//        [alert show];
-//        
-//        
-//    }
-//    
-//    
-//    else if ([_lname.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ].length < 1)
-//        
-//    {
-//        
-//        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Last Name  can't be blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//        [alert show];
-//        
-//        
-//    }
-//    
-//    else if (![self checkforNumeric:[_phno text]])
-//        
-//    {
-//        // NSString *numberinvalid=[NSString stringWithFormat:@"Phone must be 10 digit..\n You have Enter %lu digits",(unsigned long)[_phno.text length]];
-//        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Please enter valid Phone no" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//        [alert show];
-//        
-//        
-//    }
-//    else if ([_screennm.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ].length < 1)
-//        
-//    {
-//        
-//        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Screen Name can't be blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//        [alert show];
-//        
-//    }
-//    
-//    else  if (![ self NSStringIsValidEmail:[_email text]])
-//    {
-//        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Your email address is invalid" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//        [alert show];
-//        
-//        
-//    }
-//    
-//    else if ([_pass.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ].length < 1)
-//        
-//    {
-//        
-//        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Password can't be blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//        [alert show];
-//        
-//    }
-//    else if (strday==NULL)
-//    {
-//        
-//        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Provide DOB can't be blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//        [alert show];
-//    }
-//    
-//    else if ([_learnerpermitno.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ].length < 1)
-//        
-//    {
-//        
-//        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Learner Permit Number can't be blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//        [alert show];
-//        
-//    }
+    NSString *rawString = [_fname text];
+    NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    NSString *trimmed = [rawString stringByTrimmingCharactersInSet:whitespace];
+    if ([trimmed length] < 1) {
+        
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"First Name  can't be blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        
+        
+    }
+    
+    
+    else if ([_lname.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ].length < 1)
+        
+    {
+        
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Last Name  can't be blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        
+        
+    }
+    
+    else if (![self checkforNumeric:[_phno text]])
+        
+    {
+        // NSString *numberinvalid=[NSString stringWithFormat:@"Phone must be 10 digit..\n You have Enter %lu digits",(unsigned long)[_phno.text length]];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Please enter valid Phone no" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        
+        
+    }
+    else if ([_screennm.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ].length < 1)
+        
+    {
+        
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Screen Name can't be blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    
+    else  if (![ self NSStringIsValidEmail:[_email text]])
+    {
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Your email address is invalid" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        
+        
+    }
+    
+    else if ([_pass.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ].length < 1)
+        
+    {
+        
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Password can't be blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    else if ([_daylbl.text isEqual:@"Day"] || [_monthlbl.text isEqual:@"Month"] || [_yearlbl.text isEqual:@"Year"])//strday==NULL
+    {
+        
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"DOB field is incomplete" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    
+    else if ([_day2lbl.text isEqual:@"Day"] || [_month2lbl.text isEqual:@"Month"] || [_year2lbl.text isEqual:@"Year"])//strday==NULL
+    {
+        
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Expiry date field is incomplete" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    
+    
+    else if ([_learnerpermitno.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ].length < 1)
+        
+    {
+        
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Learner Permit Number can't be blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
 //    else if (check==NULL)
 //    {
 //        
 //        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Learner Permit Date can't be blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 //        [alert show];
 //    }
-//    else if ([_postcode.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ].length < 1)
-//    {
-//        
-//        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Please enter valid Postal Code" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//        [alert show];
-//    }
-//    else if (ww ==NULL)
-//    {
-//        
-//        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"State can't be blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//        [alert show];
-//    }
-//    
-//    
-//    else
-//    {
-//    
-//        [self Requstdata];
-//       }
+    else if ([_postcode.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ].length < 1)
+    {
+        
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Please enter valid Postal Code" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    else if (ww ==NULL)
+    {
+        
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"State can't be blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    
+    
+    else
+    {
+    
+        [self Requstdata];
+       }
     
     
 }
@@ -876,6 +1030,60 @@
         return FALSE;
     }
     return TRUE;
+}
+
+
+
+-(void)monthString
+{
+    if ([strmon isEqualToString:@"1"]) {
+        strmon=@"Jan";
+    }
+    else if ([strmon isEqualToString:@"2"])
+    {
+        strmon=@"Feb";
+    }
+    else if ([strmon isEqualToString:@"3"])
+    {
+        strmon=@"Mar";
+    }
+    else if ([strmon isEqualToString:@"4"])
+    {
+        strmon=@"Apr";
+    }
+    else if ([strmon isEqualToString:@"5"])
+    {
+        strmon=@"May";
+    }
+    else if ([strmon isEqualToString:@"6"])
+    {
+        strmon=@"Jun";
+    }
+    else if ([strmon isEqualToString:@"7"])
+    {
+        strmon=@"Jul";
+    }
+    else if ([strmon isEqualToString:@"8"])
+    {
+        strmon=@"Aug";
+    }
+    else if ([strmon isEqualToString:@"9"])
+    {
+        strmon=@"Sep";
+    }
+    else if ([strmon isEqualToString:@"10"])
+    {
+        strmon=@"Oct";
+    }
+    else if ([strmon isEqualToString:@"11"])
+    {
+        strmon=@"Nov";
+    }
+    else if ([strmon isEqualToString:@"12"])
+    {
+        strmon=@"Dec";
+    }
+    
 }
 
 

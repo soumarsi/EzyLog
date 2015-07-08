@@ -49,7 +49,6 @@
 		848C52421B2EE686003E57F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848C52401B2EE686003E57F1 /* Main.storyboard */; };
 		848C52441B2EE686003E57F1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848C52431B2EE686003E57F1 /* Images.xcassets */; };
 		848C52471B2EE686003E57F1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 848C52451B2EE686003E57F1 /* LaunchScreen.xib */; };
-		848C52531B2EE686003E57F1 /* EzyLogTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C52521B2EE686003E57F1 /* EzyLogTests.m */; };
 		848C52741B2EEF0F003E57F1 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 848C52631B2EEF0F003E57F1 /* OpenSans-Bold.ttf */; };
 		848C52751B2EEF0F003E57F1 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 848C52641B2EEF0F003E57F1 /* OpenSans-BoldItalic.ttf */; };
 		848C52761B2EEF0F003E57F1 /* OpenSans-CondBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 848C52651B2EEF0F003E57F1 /* OpenSans-CondBold.ttf */; };
@@ -74,16 +73,6 @@
 		A5B5BD221B43B1CB00AFEE96 /* DriveSetup2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5B5BD211B43B1CB00AFEE96 /* DriveSetup2ViewController.m */; };
 		A5B5BD251B4409D500AFEE96 /* DriveRecordingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5B5BD241B4409D500AFEE96 /* DriveRecordingViewController.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		848C524D1B2EE686003E57F1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 848C52281B2EE685003E57F1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 848C522F1B2EE685003E57F1;
-			remoteInfo = EzyLog;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		13E9E965F06B2593D667747C /* Pods-EzyLog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EzyLog.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EzyLog/Pods-EzyLog.debug.xcconfig"; sourceTree = "<group>"; };
@@ -165,7 +154,6 @@
 		848C52411B2EE686003E57F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		848C52431B2EE686003E57F1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		848C52461B2EE686003E57F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		848C524C1B2EE686003E57F1 /* EzyLogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EzyLogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		848C52511B2EE686003E57F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		848C52521B2EE686003E57F1 /* EzyLogTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EzyLogTests.m; sourceTree = "<group>"; };
 		848C52631B2EEF0F003E57F1 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
@@ -209,13 +197,6 @@
 				818BA8C81B3455AE00DDB330 /* QuartzCore.framework in Frameworks */,
 				81D665581B33DCEA00B8C3BC /* MapKit.framework in Frameworks */,
 				0F7DDCC374D11A8D0734066A /* libPods-EzyLog.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		848C52491B2EE686003E57F1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,7 +248,6 @@
 			isa = PBXGroup;
 			children = (
 				848C52301B2EE685003E57F1 /* EZYLOG.app */,
-				848C524C1B2EE686003E57F1 /* EzyLogTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -515,24 +495,6 @@
 			productReference = 848C52301B2EE685003E57F1 /* EZYLOG.app */;
 			productType = "com.apple.product-type.application";
 		};
-		848C524B1B2EE686003E57F1 /* EzyLogTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 848C52591B2EE686003E57F1 /* Build configuration list for PBXNativeTarget "EzyLogTests" */;
-			buildPhases = (
-				848C52481B2EE686003E57F1 /* Sources */,
-				848C52491B2EE686003E57F1 /* Frameworks */,
-				848C524A1B2EE686003E57F1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				848C524E1B2EE686003E57F1 /* PBXTargetDependency */,
-			);
-			name = EzyLogTests;
-			productName = EzyLogTests;
-			productReference = 848C524C1B2EE686003E57F1 /* EzyLogTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -545,10 +507,6 @@
 					848C522F1B2EE685003E57F1 = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = HVFEBCENV9;
-					};
-					848C524B1B2EE686003E57F1 = {
-						CreatedOnToolsVersion = 6.3.2;
-						TestTargetID = 848C522F1B2EE685003E57F1;
 					};
 				};
 			};
@@ -566,7 +524,6 @@
 			projectRoot = "";
 			targets = (
 				848C522F1B2EE685003E57F1 /* EzyLog */,
-				848C524B1B2EE686003E57F1 /* EzyLogTests */,
 			);
 		};
 /* End PBXProject section */
@@ -597,13 +554,6 @@
 				848C52781B2EEF0F003E57F1 /* OpenSans-CondLightItalic.ttf in Resources */,
 				848C527D1B2EEF0F003E57F1 /* OpenSans-LightItalic.ttf in Resources */,
 				848C52751B2EEF0F003E57F1 /* OpenSans-BoldItalic.ttf in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		848C524A1B2EE686003E57F1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,23 +641,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		848C52481B2EE686003E57F1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				848C52531B2EE686003E57F1 /* EzyLogTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		848C524E1B2EE686003E57F1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 848C522F1B2EE685003E57F1 /* EzyLog */;
-			targetProxy = 848C524D1B2EE686003E57F1 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		848C52401B2EE686003E57F1 /* Main.storyboard */ = {
@@ -746,8 +680,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: hih7 webtech pvt ltd (HVFEBCENV9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: hih7 webtech pvt ltd (HVFEBCENV9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -769,7 +703,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "14369aec-c8eb-4115-94b8-43f80e388ea0";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -791,8 +725,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: hih7 webtech pvt ltd (HVFEBCENV9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: hih7 webtech pvt ltd (HVFEBCENV9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -807,7 +741,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "14369aec-c8eb-4115-94b8-43f80e388ea0";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -818,7 +752,7 @@
 			baseConfigurationReference = 13E9E965F06B2593D667747C /* Pods-EzyLog.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: hih7 webtech pvt ltd (HVFEBCENV9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = EzyLog/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -831,45 +765,11 @@
 			baseConfigurationReference = 1C19A9F0BCD7BC79685A0818 /* Pods-EzyLog.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: hih7 webtech pvt ltd (HVFEBCENV9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = EzyLog/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = EZYLOG;
-			};
-			name = Release;
-		};
-		848C525A1B2EE686003E57F1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = EzyLogTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EzyLog.app/EzyLog";
-			};
-			name = Debug;
-		};
-		848C525B1B2EE686003E57F1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = EzyLogTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EzyLog.app/EzyLog";
 			};
 			name = Release;
 		};
@@ -890,15 +790,6 @@
 			buildConfigurations = (
 				848C52571B2EE686003E57F1 /* Debug */,
 				848C52581B2EE686003E57F1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		848C52591B2EE686003E57F1 /* Build configuration list for PBXNativeTarget "EzyLogTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				848C525A1B2EE686003E57F1 /* Debug */,
-				848C525B1B2EE686003E57F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

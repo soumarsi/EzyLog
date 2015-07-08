@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SupervisorSignupViewController : UIViewController<UITextFieldDelegate>
+@interface SupervisorSignupViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *supervisorsignupscroller;
 @property (strong, nonatomic) IBOutlet UITextField *fname;
 @property (strong, nonatomic) IBOutlet UITextField *lname;
