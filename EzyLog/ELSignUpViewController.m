@@ -29,6 +29,7 @@
     UIButton *btn1;
     
 }
+@property (strong, nonatomic) IBOutlet UIImageView *agreeTextFooter;
 @end
 
 @implementation ELSignUpViewController
@@ -176,30 +177,65 @@
 
 -(void)OpenDatePicker
 {
-    [_signupscroller setContentOffset:CGPointMake(0.0f,290.0f) animated:YES];
-    myview = [[UIView alloc] initWithFrame:CGRectMake(0,630,375,270)];
+    
+    
+    myview = [[UIView alloc] initWithFrame:CGRectMake(0,938-(self.view.bounds.size.height/2.47),self.view.bounds.size.width,self.view.bounds.size.height/2.47)];
+    
     [myview setBackgroundColor: [UIColor colorWithRed:(255.0f/255.0f) green:(255.0f/255.0f) blue:(255.0f/255.0f) alpha:1]];
-    //[myview setBackgroundColor:[UIColor lightGrayColor]];
     
-    UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(0,225,187,42)];
-    btn.backgroundColor=[UIColor colorWithRed:(100.0f/255.0f) green:(179.0f/255.0f) blue:(25.0f/255.0f) alpha:1];
-    [btn setTitle: @"OK" forState: UIControlStateNormal];
-    [myview addSubview:btn];
-    
-    UIButton *btn1=[[UIButton alloc]initWithFrame:CGRectMake(187,225,188,42)];
-    btn1.backgroundColor=[UIColor colorWithRed:(0.0f/255.0f) green:(0.0f/255.0f) blue:(0.0f/255.0f) alpha:1];
-    [btn1 setTitle: @"CANCEL" forState: UIControlStateNormal];
-    [myview addSubview:btn1];
-    
-    picker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,10,375,10)];
-    [myview addSubview:picker];
     [_signupscroller addSubview:myview];
+    
+    
+    
+   //[myview setBackgroundColor:[UIColor blackColor]];
+    
+    
+    picker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,0,self.view.bounds.size.width,myview.bounds.size.height-42)];
+    [myview addSubview:picker];
+    
     //[picker setBackgroundColor:[UIColor clearColor]];
-    [picker setBackgroundColor: [UIColor colorWithRed:(245.0f/255.0f) green:(245.0f/255.0f) blue:(245.0f/255.0f) alpha:1]];
+    //[picker setBackgroundColor: [UIColor colorWithRed:(245.0f/255.0f) green:(245.0f/255.0f) blue:(245.0f/255.0f) alpha:1]];
     
     picker.datePickerMode=UIDatePickerModeDate;
     //    picker.hidden=NO;
     picker.date=[NSDate date];
+    
+    
+    
+    btn=[[UIButton alloc]initWithFrame:CGRectMake(0,myview.bounds.size.height-42,self.view.bounds.size.width/2,42)];
+    
+    btn.backgroundColor=[UIColor colorWithRed:(100.0f/255.0f) green:(179.0f/255.0f) blue:(25.0f/255.0f) alpha:1];
+    
+    [btn setTitle: @"OK" forState: UIControlStateNormal];
+    [myview addSubview:btn];
+    
+    btn1=[[UIButton alloc]initWithFrame:CGRectMake(self.view.bounds.size.width/2,myview.frame.size.height-42,self.view.bounds.size.width/2,42)];
+    btn1.backgroundColor=[UIColor colorWithRed:(0.0f/255.0f) green:(0.0f/255.0f) blue:(0.0f/255.0f) alpha:1];
+    [btn1 setTitle: @"CANCEL" forState: UIControlStateNormal];
+    [myview addSubview:btn1];
+    
+    
+    if([[UIScreen mainScreen] bounds].size.height==667)
+    
+       [_signupscroller setContentOffset:CGPointMake(0.0f,myview.frame.origin.y-myview.bounds.size.height-67) animated:YES];
+
+    else if([[UIScreen mainScreen] bounds].size.height==568)
+        
+        [_signupscroller setContentOffset:CGPointMake(0.0f,myview.frame.origin.y-myview.bounds.size.height-48) animated:YES];
+    
+    else if([[UIScreen mainScreen] bounds].size.height==480)
+        
+        [_signupscroller setContentOffset:CGPointMake(0.0f,myview.frame.origin.y-myview.bounds.size.height-32) animated:YES];
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
     
     if(_day1btn.tag==1 || _month1btn.tag==1 || _year1btn.tag==1)
     {
@@ -376,20 +412,20 @@
     _signupscroller.scrollEnabled=NO;
     
     
-    myview = [[UIView alloc] initWithFrame:CGRectMake(0,720,375,270)];
+    myview = [[UIView alloc] initWithFrame:CGRectMake(0,720,self.view.bounds.size.width,self.view.bounds.size.height/2.47)];
     [myview setBackgroundColor: [UIColor colorWithRed:(255.0f/255.0f) green:(255.0f/255.0f) blue:(255.0f/255.0f) alpha:1]];
     [_signupscroller addSubview:myview];
     
-    mypicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0,10,375,280)];
+    mypicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0,10,myview.bounds.size.width,self.view.bounds.size.height/2.47)];
     [mypicker setBackgroundColor: [UIColor colorWithRed:(245.0f/255.0f) green:(245.0f/255.0f) blue:(245.0f/255.0f) alpha:1]];
     [myview addSubview:mypicker];//picker as sub view of selfView
     
-    btn=[[UIButton alloc]initWithFrame:CGRectMake(0,self.view.bounds.size.height-48,187,48)];//(0,228,187,48)
+    btn=[[UIButton alloc]initWithFrame:CGRectMake(0,self.view.bounds.size.height-48,self.view.bounds.size.width/2,48)];//(0,228,187,48)
     btn.backgroundColor=[UIColor colorWithRed:(100.0f/255.0f) green:(179.0f/255.0f) blue:(25.0f/255.0f) alpha:1];
     [btn setTitle: @"OK" forState: UIControlStateNormal];
     [self.view addSubview:btn];//myview
     
-    btn1=[[UIButton alloc]initWithFrame:CGRectMake(self.view.bounds.size.width-188,self.view.bounds.size.height-48,188,48)];//(187,228,188,48)
+    btn1=[[UIButton alloc]initWithFrame:CGRectMake(self.view.bounds.size.width/2,self.view.bounds.size.height-48,self.view.bounds.size.width/2,48)];//(187,228,188,48)
     btn1.backgroundColor=[UIColor colorWithRed:(0.0f/255.0f) green:(0.0f/255.0f) blue:(0.0f/255.0f) alpha:1];
     [btn1 setTitle: @"CANCEL" forState: UIControlStateNormal];
     [self.view addSubview:btn1];//myview

@@ -10,4 +10,8 @@
 
 @interface ELDriveSetUpViewController : UIViewController
 
+{
+    NSString *driver_id;
+}
+
 @end

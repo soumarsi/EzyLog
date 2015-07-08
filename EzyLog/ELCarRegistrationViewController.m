@@ -8,7 +8,20 @@
 
 #import "ELCarRegistrationViewController.h"
 
-@interface ELCarRegistrationViewController ()
+@interface ELCarRegistrationViewController ()<UITextFieldDelegate>
+
+
+@property (strong, nonatomic) IBOutlet UITextField *carText1;
+
+
+@property (strong, nonatomic) IBOutlet UITextField *carText2;
+
+
+@property (strong, nonatomic) IBOutlet UITextField *carText3;
+
+
+
+@property (strong, nonatomic) IBOutlet UITextField *carText4;
 
 @end
 
@@ -16,6 +29,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    _carText1.delegate=self;
+    _carText2.delegate=self;
+    _carText3.delegate=self;
+    _carText4.delegate=self;
+    
     UIColor *color = [UIColor colorWithRed:102.0f/255.0f green:102.0f/255.0f blue:102.0f/255.0f alpha:1.0f];
     self.carregno.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Car Registration Number" attributes:@{NSForegroundColorAttributeName: color}];
     self.carregno.delegate=self;
