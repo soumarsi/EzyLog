@@ -22,6 +22,11 @@
     NSString *ww;
     NSString *check;
     
+    
+    BOOL statePickerOpened;
+    
+    UIButton *buttonForDatePicker;
+    
     //buttons with picker
     
     UIButton *btn;
@@ -29,6 +34,26 @@
     UIButton *btn1;
     
 }
+
+
+@property (strong, nonatomic) IBOutlet UIImageView *expDayBack;
+
+@property (strong, nonatomic) IBOutlet UIImageView *expMnthBack;
+
+@property (strong, nonatomic) IBOutlet UIImageView *expYrBack;
+
+//
+
+@property (strong, nonatomic) IBOutlet UIImageView *dayBack;
+
+@property (strong, nonatomic) IBOutlet UIImageView *monthBack;
+
+@property (strong, nonatomic) IBOutlet UIImageView *yearBack;
+
+
+
+
+
 @property (strong, nonatomic) IBOutlet UIImageView *agreeTextFooter;
 @end
 
@@ -36,6 +61,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    statePickerOpened=NO;
+    
     flag1=0;
     
     mypicker.delegate=self;
@@ -81,6 +110,10 @@
 
 - (IBAction)DatePickerDayBtn:(id)sender
 {
+    
+    if(statePickerOpened==NO)
+    {
+    
     [_screennm resignFirstResponder];
     [_learnerpermitno resignFirstResponder];
     [_postcode resignFirstResponder];
@@ -91,7 +124,11 @@
     [picker resignFirstResponder];
     [myview removeFromSuperview];
     _day1btn.tag=1;
+        
+        buttonForDatePicker=(UIButton *)(id)sender;
     [self OpenDatePicker];
+        
+    }
     
     
 }
@@ -99,6 +136,10 @@
 
 - (IBAction)DatePickerMonthBtn:(id)sender
 {
+    if(statePickerOpened==NO)
+    {
+    
+    
     [_screennm resignFirstResponder];
     [_learnerpermitno resignFirstResponder];
     [_postcode resignFirstResponder];
@@ -109,11 +150,17 @@
     [picker resignFirstResponder];
     [myview removeFromSuperview];
     _month1btn.tag=1;
+        buttonForDatePicker=(UIButton *)(id)sender;
     [self OpenDatePicker];
+   }
 }
 
 - (IBAction)DatePickerYearBtn:(id)sender
 {
+    if(statePickerOpened==NO)
+    {
+    
+    
     [_screennm resignFirstResponder];
     [_learnerpermitno resignFirstResponder];
     [_postcode resignFirstResponder];
@@ -124,11 +171,18 @@
     [picker resignFirstResponder];
     [myview removeFromSuperview];
     _year1btn.tag=1;
+        buttonForDatePicker=(UIButton *)(id)sender;
     [self OpenDatePicker];
+        
+    }
 }
 
 - (IBAction)DatePickerDayBtn2:(id)sender
 {
+    if(statePickerOpened==NO)
+    {
+    
+    
     [_screennm resignFirstResponder];
     [_learnerpermitno resignFirstResponder];
     [_postcode resignFirstResponder];
@@ -139,12 +193,19 @@
     [picker resignFirstResponder];
     [myview removeFromSuperview];
     _day2btn.tag=1;
+        buttonForDatePicker=(UIButton *)(id)sender;
     [self OpenDatePicker];
+        
+        
+    }
     
     
 }
 - (IBAction)DatePickerMonthBtn2:(id)sender
 {
+    
+    if(statePickerOpened==NO)
+    {
     [_screennm resignFirstResponder];
     [_learnerpermitno resignFirstResponder];
     [_postcode resignFirstResponder];
@@ -155,11 +216,16 @@
     [picker resignFirstResponder];
     [myview removeFromSuperview];
     _month2btn.tag=1;
+        buttonForDatePicker=(UIButton *)(id)sender;
     [self OpenDatePicker];
+    }
     
 }
 - (IBAction)DatePickerYearBtn2:(id)sender
 {
+    
+    if(statePickerOpened==NO)
+    {
     [_screennm resignFirstResponder];
     [_learnerpermitno resignFirstResponder];
     [_postcode resignFirstResponder];
@@ -170,20 +236,27 @@
     [picker resignFirstResponder];
     [myview removeFromSuperview];
     _year2btn.tag=1;
+        buttonForDatePicker=(UIButton *)(id)sender;
     [self OpenDatePicker];
+    }
     
 }
 
 
 -(void)OpenDatePicker
 {
+   if(statePickerOpened==NO)
+   {
+       
+       NSLog(@"Open date picker...");
     
-    
-    myview = [[UIView alloc] initWithFrame:CGRectMake(0,938-(self.view.bounds.size.height/2.47),self.view.bounds.size.width,self.view.bounds.size.height/2.47)];
+    myview = [[UIView alloc] initWithFrame:CGRectMake(0,self.view.bounds.size.height-(self.view.bounds.size.height/2.47),self.view.bounds.size.width,self.view.bounds.size.height/2.47)];
     
     [myview setBackgroundColor: [UIColor colorWithRed:(255.0f/255.0f) green:(255.0f/255.0f) blue:(255.0f/255.0f) alpha:1]];
+       
+       [self.view addSubview:myview];
     
-    [_signupscroller addSubview:myview];
+   // [_signupscroller addSubview:myview];
     
     
     
@@ -214,7 +287,7 @@
     [btn1 setTitle: @"CANCEL" forState: UIControlStateNormal];
     [myview addSubview:btn1];
     
-    
+ /*
     if([[UIScreen mainScreen] bounds].size.height==667)
     
        [_signupscroller setContentOffset:CGPointMake(0.0f,myview.frame.origin.y-myview.bounds.size.height-67) animated:YES];
@@ -228,9 +301,11 @@
         [_signupscroller setContentOffset:CGPointMake(0.0f,myview.frame.origin.y-myview.bounds.size.height-32) animated:YES];
     
 
+   */
+       
+       
     
-    
-    
+    [_signupscroller setContentOffset:CGPointMake(0.0f,buttonForDatePicker.frame.origin.y-30) animated:YES];
     
     
     
@@ -255,6 +330,8 @@
         [btn1 addTarget:self action:@selector(buttoncross2:) forControlEvents:UIControlEventTouchUpInside];
         [btn addTarget:self action:@selector(buttonInfo4:) forControlEvents:UIControlEventTouchUpInside];
     }
+       
+   }
     
 }
 
@@ -373,12 +450,15 @@
                      }
      ];
     
-    _daylbl.text=NULL;
-    _monthlbl.text=NULL;
-    _yearlbl.text=NULL;
+//    _daylbl.text=NULL;
+//    _monthlbl.text=NULL;
+//    _yearlbl.text=NULL;
     
     self.navigationItem.rightBarButtonItem=nil;
     [myview removeFromSuperview];
+    
+    [btn removeFromSuperview];
+    [btn1 removeFromSuperview];
     
 }
 -(void)buttoncross2:(id)sender
@@ -395,43 +475,75 @@
                      }
      ];
     
-    _day2lbl.text=NULL;
-    _month2lbl.text=NULL;
-    _year2lbl.text=NULL;
+//    _day2lbl.text=NULL;
+//    _month2lbl.text=NULL;
+//    _year2lbl.text=NULL;
     
     self.navigationItem.rightBarButtonItem=nil;
     [myview removeFromSuperview];
+    
+    [btn removeFromSuperview];
+    [btn1 removeFromSuperview];
     
 }
 
 - (IBAction)OpenStateName:(id)sender
 {
+    
+    statePickerOpened=YES;
+    
+    
     myarr=[NSMutableArray arrayWithObjects:@"CHICAGO",@"NEWYORK CITY",@"CALIFORNIA",@"MINIAPOLIS",@"LOSANGELS",@"LASVEGAS",@"SAN FRANSISCO",@"MIAMI",@"WASHINGTON DC",nil];
-    [_signupscroller setContentOffset:CGPointMake(0.0f,390.0f) animated:YES];//390.0f
     
-    _signupscroller.scrollEnabled=NO;
+     // [_signupscroller setContentOffset:CGPointMake(0.0f,_signupscroller.contentSize.height-myview.bounds.size.height-32) animated:YES];
+
+    
+   // _signupscroller.scrollEnabled=NO;
     
     
-    myview = [[UIView alloc] initWithFrame:CGRectMake(0,720,self.view.bounds.size.width,self.view.bounds.size.height/2.47)];
-    [myview setBackgroundColor: [UIColor colorWithRed:(255.0f/255.0f) green:(255.0f/255.0f) blue:(255.0f/255.0f) alpha:1]];
+    myview = [[UIView alloc] initWithFrame:CGRectMake(0,938-(self.view.bounds.size.height/2.47),self.view.bounds.size.width,self.view.bounds.size.height/2.47)];
+    //[myview setBackgroundColor: [UIColor colorWithRed:(255.0f/255.0f) green:(255.0f/255.0f) blue:(255.0f/255.0f) alpha:1]];
+    
+    myview.backgroundColor=[UIColor blackColor];
     [_signupscroller addSubview:myview];
     
-    mypicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0,10,myview.bounds.size.width,self.view.bounds.size.height/2.47)];
+    mypicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0,0,myview.bounds.size.width,self.view.bounds.size.height/2.47)];
     [mypicker setBackgroundColor: [UIColor colorWithRed:(245.0f/255.0f) green:(245.0f/255.0f) blue:(245.0f/255.0f) alpha:1]];
     [myview addSubview:mypicker];//picker as sub view of selfView
     
-    btn=[[UIButton alloc]initWithFrame:CGRectMake(0,self.view.bounds.size.height-48,self.view.bounds.size.width/2,48)];//(0,228,187,48)
+    btn=[[UIButton alloc]initWithFrame:CGRectMake(0,myview.bounds.size.height-48,self.view.bounds.size.width/2,48)];//(0,228,187,48)
     btn.backgroundColor=[UIColor colorWithRed:(100.0f/255.0f) green:(179.0f/255.0f) blue:(25.0f/255.0f) alpha:1];
     [btn setTitle: @"OK" forState: UIControlStateNormal];
-    [self.view addSubview:btn];//myview
+    [myview addSubview:btn];//myview
     
-    btn1=[[UIButton alloc]initWithFrame:CGRectMake(self.view.bounds.size.width/2,self.view.bounds.size.height-48,self.view.bounds.size.width/2,48)];//(187,228,188,48)
+    btn1=[[UIButton alloc]initWithFrame:CGRectMake(self.view.bounds.size.width/2,myview.bounds.size.height-48,self.view.bounds.size.width/2,48)];//(187,228,188,48)
     btn1.backgroundColor=[UIColor colorWithRed:(0.0f/255.0f) green:(0.0f/255.0f) blue:(0.0f/255.0f) alpha:1];
     [btn1 setTitle: @"CANCEL" forState: UIControlStateNormal];
-    [self.view addSubview:btn1];//myview
+    [myview addSubview:btn1];//myview
     
     mypicker.delegate = self;
     mypicker.dataSource=self;
+    
+    
+    //
+    if([[UIScreen mainScreen] bounds].size.height==667)
+        
+        [_signupscroller setContentOffset:CGPointMake(0.0f,myview.frame.origin.y-myview.bounds.size.height-67) animated:YES];
+    
+    else if([[UIScreen mainScreen] bounds].size.height==568)
+        
+        [_signupscroller setContentOffset:CGPointMake(0.0f,myview.frame.origin.y-myview.bounds.size.height-48) animated:YES];
+    
+    else if([[UIScreen mainScreen] bounds].size.height==480)
+        
+        [_signupscroller setContentOffset:CGPointMake(0.0f,myview.frame.origin.y-myview.bounds.size.height-32) animated:YES];
+    
+    
+  //  [_signupscroller setContentOffset:CGPointMake(0.0f,myview.frame.origin.y-myview.bounds.size.height-32) animated:YES];
+    
+
+    
+    
     
     [btn addTarget:self action:@selector(buttonInfo2:) forControlEvents:UIControlEventTouchUpInside];
     [btn1 addTarget:self action:@selector(buttonInfo3:) forControlEvents:UIControlEventTouchUpInside];
@@ -439,6 +551,9 @@
 
 -(void)buttonInfo2:(id)sender
 {
+    
+    NSLog(@"Btn OK...");
+    
     NSUInteger num = [[mypicker dataSource] numberOfComponentsInPickerView:mypicker];
     //NSMutableString *text = [NSMutableString string];
     for(NSUInteger i =0;i<num;++i)
@@ -466,6 +581,8 @@
     
     [myview removeFromSuperview];
     
+    statePickerOpened=NO;
+    
 }
 
 -(void)buttonInfo3:(id)sender
@@ -491,6 +608,9 @@
 
     
     [myview removeFromSuperview];
+    
+    
+    statePickerOpened=NO;
     
 }
 
