@@ -8,6 +8,8 @@
 
 #import "ELSignUpViewController.h"
 #import "RS_JsonClass.h"
+#import "AppDelegate.h"
+#import "ELLearnerSignatureViewController.h"
 
 @interface ELSignUpViewController ()<UIPickerViewDataSource,UIPickerViewDelegate>
 {
@@ -1183,12 +1185,19 @@
              
               [UserData synchronize];
              
-             ELSignUpViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"supervisorregis"];
+             AppDelegate *app=[[UIApplication sharedApplication]delegate];
+             
+             app.userID=[NSString stringWithFormat:@"%@",[get_result objectForKey:@"id"]];
+             
+             
+             //ELLearnerSignatureViewController
+             
+             ELLearnerSignatureViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Signature_Page_learner"];
              [self.navigationController pushViewController:obj animated:YES];
          }
          else
          {
-             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:[_jsonResult valueForKey:@"status"] message:[_jsonResult valueForKey:@"message"] delegate:nil cancelButtonTitle:@"OK"
+             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:[result valueForKey:@"status"] message:[result valueForKey:@"message"] delegate:nil cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
              
              [alert show];

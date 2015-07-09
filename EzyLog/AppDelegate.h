@@ -11,6 +11,17 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
+
+@property(nonatomic,strong)NSString *userID;
+
+@property(nonatomic,strong)NSString *superID;
+
+@property(nonatomic,strong)NSString *carID;
+
+@property(nonatomic,strong)NSString *supName;
+
+
+
 @property (strong, nonatomic) UIWindow *window;
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;

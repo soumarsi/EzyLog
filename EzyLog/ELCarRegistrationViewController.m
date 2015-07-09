@@ -7,8 +7,22 @@
 //
 
 #import "ELCarRegistrationViewController.h"
+#import "ELDriveSummaryController.h"
+#import "ELDriveSummaryController.h"
+#import "RS_JsonClass.h"
+#import "AppDelegate.h"
 
-@interface ELCarRegistrationViewController ()<UITextFieldDelegate>
+@interface ELCarRegistrationViewController ()<UITextFieldDelegate,UIAlertViewDelegate>
+
+{
+
+     AppDelegate *app;
+
+    RS_JsonClass *globalOBJ;
+    
+    NSMutableArray *resultArray;
+
+}
 
 
 @property (strong, nonatomic) IBOutlet UITextField *carText1;
@@ -29,6 +43,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    app=[[UIApplication sharedApplication]delegate];
+    
+    resultArray=[[NSMutableArray alloc]init];
     
     
     _carText1.delegate=self;
@@ -55,10 +73,129 @@
 
 - (IBAction)registercar:(id)sender
 {
-    ELCarRegistrationViewController *login = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Drive_Summery"];
-    [self.navigationController pushViewController:login animated:YES];
+    
+    
+    
+     globalOBJ=[[RS_JsonClass alloc]init];
+    
+    NSString *urlstring=[NSString stringWithFormat:@"%@vehicle_registration.php",App_Domain_Url];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlstring]];
+    
+    [request setHTTPMethod:@"POST"];
+    
+    NSString *postData = [NSString stringWithFormat:@"car_registration_no=%@,%@,%@,%@&driver_id=%@",_carText1.text,_carText2.text,_carText3.text,_carText4.text,app.userID];
+    
+    [request setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    NSLog(@"%@",request);
+    
+    [request setHTTPBody:[postData dataUsingEncoding:NSUTF8StringEncoding]];
+    
 
-}
+    
+    [globalOBJ GlobalDict:request Globalstr:@"array" Withblock:^(id result, NSError *error) {
+        
+        
+        
+        if(result)
+        {
+            NSLog(@"Car reg details: %@",(NSArray *)result);
+        
+            resultArray=[result mutableCopy];
+            
+            NSMutableArray *successCar=[[NSMutableArray alloc]init];
+            
+            NSMutableArray *duplicateCar=[[NSMutableArray alloc]init];
+            
+            for (int i=0; i<resultArray.count; i++) {
+                
+                if([[[resultArray objectAtIndex:i] valueForKey:@"status"] isEqualToString:@"success"])
+                {
+                
+                    [successCar addObject:[[resultArray objectAtIndex:i] valueForKey:@"car_registration_no"]];
+                
+                }
+                
+                else if([[[resultArray objectAtIndex:i] valueForKey:@"status"] isEqualToString:@"duplicate entry"])
+                {
+                    
+                    [duplicateCar addObject:[[resultArray objectAtIndex:i] valueForKey:@"car_registration_no"]];
+                    
+                }
+
+                
+            }
+            
+            NSLog(@"Success car: %@",successCar);
+            NSLog(@"Duplicate car: %@",duplicateCar);
+            
+            NSString *sucCar=[successCar componentsJoinedByString:@","];
+
+            NSLog(@"Success car %@",sucCar);
+            
+            NSString *dupCar=[duplicateCar componentsJoinedByString:@","];
+            
+            NSLog(@"Cuplicate car %@",dupCar);
+            
+            
+            if(successCar.count>0 && duplicateCar.count==0)
+            {
+            
+            UIAlertView *carAlert=[[UIAlertView alloc]initWithTitle:@"Car Registration details" message:[NSString stringWithFormat:@"Succesfully registerd car no: %@",sucCar] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                
+                [carAlert show];
+                
+                ELDriveSummaryController *login = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Drive_Summery"];
+                [self.navigationController pushViewController:login animated:YES];
+                
+            }
+            
+            else if (successCar.count==0 && duplicateCar.count==0)
+            {
+            
+                UIAlertView *carAlert=[[UIAlertView alloc]initWithTitle:@"Car Registration details" message:[NSString stringWithFormat:@"You have not registered any car"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                
+                [carAlert show];
+                
+            
+            }
+            else if (successCar.count>0 && duplicateCar.count>0)
+            {
+                
+                UIAlertView *carAlert=[[UIAlertView alloc]initWithTitle:@"Car Registration details" message:[NSString stringWithFormat:@"Succesfully registerd car no: %@ & Duplicate car no: %@",sucCar,dupCar] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                
+                [carAlert show];
+                
+                ELDriveSummaryController *login = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Drive_Summery"];
+                [self.navigationController pushViewController:login animated:YES];
+                
+                
+            }
+            if(successCar.count==0 && duplicateCar.count>0)
+            {
+                
+                UIAlertView *carAlert=[[UIAlertView alloc]initWithTitle:@"Car Registration details" message:[NSString stringWithFormat:@"All the cars are already registered"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                
+                [carAlert show];
+                
+                ELDriveSummaryController *login = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Drive_Summery"];
+                [self.navigationController pushViewController:login animated:YES];
+                
+            }
+        
+        
+            
+        }
+        
+        
+        
+    }];
+    
+    
+    
+   }
+
+
 
 
 - (void)didReceiveMemoryWarning {

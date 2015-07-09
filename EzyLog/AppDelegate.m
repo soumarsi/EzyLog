@@ -14,6 +14,8 @@
 
 @implementation AppDelegate
 
+@synthesize userID,superID,carID,supName;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.

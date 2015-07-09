@@ -7,6 +7,7 @@
 //
 
 #import "ELLearnerSignatureViewController.h"
+#import "SupervisorSignupViewController.h"
 #import <CoreMotion/CoreMotion.h>
 #import "mySmoothLineView.h"
 
@@ -91,7 +92,7 @@
 
 - (IBAction)Signature_submit:(id)sender
 {
-    ELLearnerSignatureViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"supervisorregis"];
+    SupervisorSignupViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"supervisorregis"];
     [self.navigationController pushViewController:obj animated:YES];
 }
 

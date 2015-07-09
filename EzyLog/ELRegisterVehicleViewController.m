@@ -7,6 +7,8 @@
 //
 
 #import "ELRegisterVehicleViewController.h"
+#import "ELDriveSummaryController.h"
+#import "ELCarRegistrationViewController.h"
 
 @interface ELRegisterVehicleViewController ()
 
@@ -21,12 +23,12 @@
 
 - (IBAction)backtoprev:(id)sender
 {
-    ELRegisterVehicleViewController *login = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Drive_Summery"];
+    ELDriveSummaryController *login = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Drive_Summery"];
     [self.navigationController pushViewController:login animated:YES];
 }
 - (IBAction)moveforregister:(id)sender
 {
-    ELRegisterVehicleViewController *login = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"carregistration"];
+    ELCarRegistrationViewController *login = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"carregistration"];
     [self.navigationController pushViewController:login animated:YES];
 }
 

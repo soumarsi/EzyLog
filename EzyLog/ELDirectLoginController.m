@@ -8,8 +8,15 @@
 
 #import "ELDirectLoginController.h"
 #import "RS_JsonClass.h"
+#import "AppDelegate.h"
 
 @interface ELDirectLoginController () <UITextFieldDelegate>
+
+{
+
+    AppDelegate *app;
+
+}
 
 @end
 
@@ -17,6 +24,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    app=[[UIApplication sharedApplication]delegate];
+    
     // Do any additional setup after loading the view.
     
     UIColor *color = [UIColor colorWithRed:102.0f/255.0f green:102.0f/255.0f blue:102.0f/255.0f alpha:1.0f];
@@ -101,6 +111,11 @@
                          [UserData setObject:[get_result objectForKey:@"phone"] forKey:@"user_phone"];
                          
                          [UserData setObject:[get_result objectForKey:@"dob"] forKey:@"user_dob"];
+                         
+                         
+                         app.userID=[get_result objectForKey:@"id"];
+                        
+                         
                          
 //                         [UserData setObject:[get_result objectForKey:@"business"] forKey:@"user_business"];
 //                         [UserData setObject:[get_result objectForKey:@"about"] forKey:@"user_about"];

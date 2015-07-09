@@ -8,14 +8,19 @@
 
 #import "ELSupervisorSignatureViewController.h"
 #import "ELRegisterVehicleViewController.h"
+#import "SupervisorSignupViewController.h"
 #import <CoreMotion/CoreMotion.h>
 #import "mySmoothLineView.h"
 
 @interface ELSupervisorSignatureViewController ()
 
+@property (strong, nonatomic) IBOutlet UIButton *submitBtn;
+
 @end
 
 @implementation ELSupervisorSignatureViewController
+
+@synthesize submitBtn;
 
 - (BOOL)prefersStatusBarHidden
 {
@@ -24,6 +29,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    submitBtn.userInteractionEnabled=YES;
+    
     self.view.transform = CGAffineTransformMakeRotation(M_PI_2);
     [self.view setMultipleTouchEnabled:YES];
     
@@ -52,7 +61,7 @@
 
 - (IBAction)submit__register:(id)sender
 {
-    ELRegisterVehicleViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"registervehicle"];
+    SupervisorSignupViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Supervisor_Sign_up"];
     [self.navigationController pushViewController:obj animated:YES];
 }
 
@@ -60,6 +69,7 @@
 {
     ELRegisterVehicleViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"registervehicle"];
     [self.navigationController pushViewController:obj animated:YES];
+
 }
 
 

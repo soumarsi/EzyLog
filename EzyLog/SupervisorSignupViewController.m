@@ -10,6 +10,7 @@
 #import "ELSupervisorSignatureViewController.h"
 #import "RS_JsonClass.h"
 #import "ELDriveSetUpViewController.h"
+#import "AppDelegate.h"
 
 @interface SupervisorSignupViewController ()<NSURLConnectionDelegate>
 {
@@ -47,6 +48,11 @@
     
     //
     BOOL datePicked;
+    
+    //
+    
+    AppDelegate *app;
+    
 }
 
 @end
@@ -55,10 +61,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    app=[[UIApplication sharedApplication]delegate];
+    
     
     //
     
     datePicked=NO;
+    
+    
+        
+    NSLog(@"user id is %@...",app.userID);
+    
+    
     
     [_supervisorsignupscroller setContentSize:CGSizeMake([UIScreen mainScreen].bounds.size.width, 959.0f)];
     
@@ -157,141 +171,164 @@
 
 - (IBAction)Registerclk:(id)sender
 {
-    ELSupervisorSignatureViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"SuperSignature_Page"];
-    [self.navigationController pushViewController:obj animated:YES];
+    //ELSupervisorSignatureViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"SuperSignature_Page"];
+   // [self.navigationController pushViewController:obj animated:YES];
     [_insno resignFirstResponder];
     
     
-//    if ([self TarminateWhiteSpace:_fname.text].length==0)
-//    {
-//        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"you can't left First Name field blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-//        [alertreg show];
-//    }
-//    else if ([self TarminateWhiteSpace:_lname.text].length==0)
-//    {
-//        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"you can't left Last Name field blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-//        [alertreg show];
-//    }
-//    else if ([self Emailtest:_email.text])
-//    {
-//        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"Enter proper mail-id" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-//        [alertreg show];
-//    }
-//    else if (_postcode.text.length==0)
-//    {
-//        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"you can't left Post Code field blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-//        [alertreg show];
-//    }
-//    else if (dobday==NULL)
-//    {
-//        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"you can't left Date of Birth field blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-//        [alertreg show];
-//    }
-//    else if (_licenceno.text.length==0)
-//    {
-//        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"you can't left Licence Number field blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-//        [alertreg show];
-//    }
+    if ([self TarminateWhiteSpace:_fname.text].length==0)
+    {
+        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"you can't left First Name field blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alertreg show];
+    }
+    else if ([self TarminateWhiteSpace:_lname.text].length==0)
+    {
+        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"you can't left Last Name field blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alertreg show];
+    }
+    else if ([self Emailtest:_email.text])
+    {
+        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"Enter proper mail-id" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alertreg show];
+    }
+    else if (_postcode.text.length==0)
+    {
+        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"you can't left Post Code field blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alertreg show];
+    }
+    else if ([_dobday1.text isEqualToString:@""])
+    {
+        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"you can't left Date of Birth field blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alertreg show];
+    }
+    //_licencedaylabel
+    
+    else if ([_licencedaylabel.text isEqualToString:@""])
+    {
+        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"you can't left Expiry Date of Lisence field blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alertreg show];
+    }
+    
+    
+    
+    
+    else if (_licenceno.text.length==0)
+    {
+        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"you can't left Licence Number field blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alertreg show];
+    }
 //    else if (chkingdata==NULL)
 //    {
 //        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"you can't left Expiry date Licence field blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
 //        [alertreg show];
 //    }
-//    else if (buttontap==0)
-//    {
-//        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"Please select Supevisor Driving Instructor  yes or no" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-//        [alertreg show];
-//    }
-//    else if (_insno.text.length==0)
-//    {
-//        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"you can't left  Instructor number field blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-//        [alertreg show];
-//    }
-//    else
-//    {
-//        NSLog(@"%@",finaldate);
-//        RS_JsonClass *globalobj=[[RS_JsonClass alloc]init];
-//        //NSURL *url=[NSURL URLWithString:@"http://www.esolz.co.in/lab9/ezylog/iosapp/supervisor_registration.php?"];
-//        NSString *urlstring=[NSString stringWithFormat:@"http://www.esolz.co.in/lab9/ezylog/iosapp/supervisor_registration.php?"];
-//        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlstring]];
-//        [request setHTTPMethod:@"POST"];
-//        NSString *postData = [NSString stringWithFormat:@"first_name=%@&last_name=%@&dob=%@&email=%@&password=%d&post_code=%@&licence_no=%@&licence_expiry=%@&licenced_instructor=%@&instructor_no=%@",[_fname text],[_lname text],finaldate,[_email text],344343,[_postcode text],[_licenceno text],licence,licencedinst,[_insno text]];
-//        [request setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-//        
-//        [request setHTTPBody:[postData dataUsingEncoding:NSUTF8StringEncoding]];
-//        
-//        [globalobj GlobalDict:request Globalstr:@"array" Withblock:^(id result, NSError *error)
-//         {
-//             if(result)
-//             {
-//                 NSLog(@"result...%@",[result objectForKey:@"status"]);
-//                 if ([[result valueForKey:@"status"] isEqualToString:@"success"])
-//                 {
-//                     
-//                     
-//    //                 NSMutableDictionary *get_result=[[result objectForKey:@"details" ]mutableCopy];
-//                     
-//  //                   NSUserDefaults *UserData = [[NSUserDefaults alloc]init];
-////                     
-////                     [UserData setObject:[get_result objectForKey:@"id"] forKey:@"Login_User_id"];
-////                     
-////                     [UserData setObject:[get_result objectForKey:@"first_name"] forKey:@"User_name"];
-////                     [UserData setObject:[get_result objectForKey:@"phone"] forKey:@"user_phone"];
-////                     
-////                     [UserData setObject:[get_result objectForKey:@"state"] forKey:@"user_state"];
-////                     
-////                     [UserData synchronize];
-//                     
-//                     
-//                     
+    else if (buttontap==0)
+    {
+        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"Please select Supevisor Driving Instructor  yes or no" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alertreg show];
+    }
+    else if (_insno.text.length==0)
+    {
+        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"you can't left  Instructor number field blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alertreg show];
+    }
+    else
+    {
+        NSLog(@"%@",finaldate);
+        RS_JsonClass *globalobj=[[RS_JsonClass alloc]init];
+        //NSURL *url=[NSURL URLWithString:@"http://www.esolz.co.in/lab9/ezylog/iosapp/supervisor_registration.php?"];
+        NSString *urlstring=[NSString stringWithFormat:@"http://www.esolz.co.in/lab9/ezylog/iosapp/supervisor_registration.php?"];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlstring]];
+        [request setHTTPMethod:@"POST"];
+        NSString *postData = [NSString stringWithFormat:@"driver_id=%@&first_name=%@&last_name=%@&dob=%@&email=%@&password=%d&post_code=%@&licence_no=%@&licence_expiry=%@&licenced_instructor=%@&instructor_no=%@",app.userID,[_fname text],[_lname text],finaldate,[_email text],344343,[_postcode text],[_licenceno text],licence,licencedinst,[_insno text]];
+        [request setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+        
+        [request setHTTPBody:[postData dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        [globalobj GlobalDict:request Globalstr:@"array" Withblock:^(id result, NSError *error)
+         {
+             if(result)
+             {
+                 NSLog(@"result...%@",[result objectForKey:@"status"]);
+                 if ([[result valueForKey:@"status"] isEqualToString:@"success"])
+                 {
+                     
+                     
+                     NSMutableDictionary *get_result=[[result objectForKey:@"details" ]mutableCopy];
+                     
+                     NSUserDefaults *UserData = [[NSUserDefaults alloc]init];
+                     
+                     [UserData setObject:[get_result objectForKey:@"id"] forKey:@"Login_User_id"];
+                     
+                     [UserData setObject:[get_result objectForKey:@"first_name"] forKey:@"User_name"];
+                     [UserData setObject:[get_result objectForKey:@"phone"] forKey:@"user_phone"];
+                     
+                     [UserData setObject:[get_result objectForKey:@"state"] forKey:@"user_state"];
+                     
+                     [UserData synchronize];
+                     
+                     
+                     app.superID=[get_result objectForKey:@"id"];
+                     
+                     NSLog(@"Supervisor ID...%@",app.superID);
+                     
+                     
 //                     ELDriveSetUpViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Drive_Setup"];
 //                     [self.navigationController pushViewController:obj animated:YES];
-//                 }
-//                 else
-//                 {
-//                     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:[result valueForKey:@"status"] message:[result valueForKey:@"message"] delegate:nil cancelButtonTitle:@"OK"
-//                                                          otherButtonTitles:nil];
-//                     
-//                     [alert show];
-//                 }
-//             }
-//         }];
-//
-//
+                     
+                     
+                     
+                     
+                     ELSupervisorSignatureViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"SuperSignature_Page"];
+                      [self.navigationController pushViewController:obj animated:YES];
+                     
+                     
+                 }
+                 else
+                 {
+                     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:[result valueForKey:@"status"] message:[result valueForKey:@"message"] delegate:nil cancelButtonTitle:@"OK"
+                                                          otherButtonTitles:nil];
+                     
+                     [alert show];
+                 }
+             }
+         }];
+
+
 //    
-////        NSString *post =[[NSString alloc] initWithFormat:@"first_name=%@&last_name=%@&dob=%@&email=%@&password=%d&post_code=%@&licence_no=%@&licence_expiry=%@&licenced_instructor=%@&instructor_no=%@",[_fname text],[_lname text],finaldate,[_email text],344343,[_postcode text],[_licenceno text],licence,licencedinst,[_insno text]];
-////        NSLog(@"PostData: %@",post);
-////        
-////        request = [NSMutableURLRequest requestWithURL:url];
-////    
-////        connection = [[NSURLConnection alloc ]initWithRequest:request delegate:self];
-////    
-////    
-////    
-////        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-////    
-////    
-////    
-////        NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
-////    
-////    
-////    
-////    // NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-////    
-////        [request setURL:url];
-////    
-////        [request setHTTPMethod:@"POST"];
-////    
-////        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-////    
-////        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-////    
-////        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-////    
-////        [request setHTTPBody:postData];
+//        NSString *post =[[NSString alloc] initWithFormat:@"first_name=%@&last_name=%@&dob=%@&email=%@&password=%d&post_code=%@&licence_no=%@&licence_expiry=%@&licenced_instructor=%@&instructor_no=%@",[_fname text],[_lname text],finaldate,[_email text],344343,[_postcode text],[_licenceno text],licence,licencedinst,[_insno text]];
+//        NSLog(@"PostData: %@",post);
 //        
+//        request = [NSMutableURLRequest requestWithURL:url];
+//    
+//        connection = [[NSURLConnection alloc ]initWithRequest:request delegate:self];
+//    
+//    
+//    
+//        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+//    
+//    
+//    
+//        NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+//    
+//    
+//    
+//    // NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+//    
+//        [request setURL:url];
+//    
+//        [request setHTTPMethod:@"POST"];
+//    
+//        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+//    
+//        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+//    
+//        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//    
+//        [request setHTTPBody:postData];
 //        
-//    }
+        
+    }
     
 
     
@@ -621,14 +658,14 @@
                              //                             stryear = [stryear substringWithRange:NSMakeRange(7,4)];
                              
                              
-                             _licencedaylabel.font = [UIFont fontWithName:@"OpenSans" size:14];
-                             _licencedaylabel.text=strday;
+                             _dobday1.font = [UIFont fontWithName:@"OpenSans" size:14];
+                             _dobday1.text=strday;
                              
-                             _licencemonthlabel.font = [UIFont fontWithName:@"OpenSans" size:14];
-                             _licencemonthlabel.text=strmon;
+                             _dobmonth1.font = [UIFont fontWithName:@"OpenSans" size:14];
+                             _dobmonth1.text=strmon;
                              
-                             _licenceyearlabel.font = [UIFont fontWithName:@"OpenSans" size:14];
-                             _licenceyearlabel.text=stryear;
+                             _dobyear1.font = [UIFont fontWithName:@"OpenSans" size:14];
+                             _dobyear1.text=stryear;
                              
                              
                              
@@ -896,7 +933,7 @@
                              _licenceyearlabel.text=stryear;
 
                              
-                             
+                             NSLog(@"Lisence Exp Day: %@ Month %@ Year %@",_licencedaylabel.text,_licencemonthlabel.text,_licenceyearlabel.text);
                          
                          
                          }
