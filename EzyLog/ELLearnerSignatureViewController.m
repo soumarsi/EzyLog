@@ -13,6 +13,14 @@
 
 @interface ELLearnerSignatureViewController ()
 
+{
+  
+    BOOL fiveCheck;
+
+}
+
+@property (strong, nonatomic) IBOutlet UIImageView *signatureBox;
+
 @end
 
 @implementation ELLearnerSignatureViewController
@@ -22,24 +30,46 @@
     return YES;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.transform = CGAffineTransformMakeRotation(M_PI_2);
+    
+     self.view.transform = CGAffineTransformMakeRotation(M_PI_2);
+    
     [self.view setMultipleTouchEnabled:YES];
+    
     
     [signView removeFromSuperview];
     // Do any additional setup after loading the view.
-    if(self.view.frame.size.width==320)
+    if(self.view.frame.size.height==320 || fiveCheck== YES)
     {
-    signView= [[ mySmoothLineView alloc] initWithFrame:CGRectMake(108,123,353,89)];
-    [signView setBackgroundColor:[UIColor clearColor]];
-    [self.view addSubview: signView];
+        NSLog(@"Iphone 5 ....");
+        
+//    signView= [[ mySmoothLineView alloc] initWithFrame:CGRectMake(108,123,353,89)];
+        
+         signView= [[ mySmoothLineView alloc] initWithFrame:CGRectMake(_signatureBox.frame.origin.x+33,128,423,78)];
+        
+       // signView=[[mySmoothLineView alloc]initWithFrame:_signatureBox.frame];
+        
+        [signView setBackgroundColor:[UIColor clearColor]];
+        
+        [self.view addSubview: signView];
+        
+        fiveCheck=YES;
     }
     else
     {
-        signView= [[ mySmoothLineView alloc] initWithFrame:CGRectMake(82,150,483,96)];
+         NSLog(@"Iphone 5 s....");
+        
+        
+        signView= [[ mySmoothLineView alloc] initWithFrame:CGRectMake(82,150,493,88)];
+        
+        
+       // signView=[[mySmoothLineView alloc]initWithFrame:_signatureBox.frame];
+        
         [signView setBackgroundColor:[UIColor clearColor]];
+        
         [self.view addSubview: signView];
     }
     
@@ -75,6 +105,7 @@
 
 
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -98,7 +129,40 @@
 
 - (IBAction)Cleare_Screen:(id)sender
 {
-    [self viewDidLoad];
+    [self.view setMultipleTouchEnabled:YES];
+    
+    [signView removeFromSuperview];
+    
+    
+    if(self.view.frame.size.height==320 || fiveCheck==YES)
+    {
+        NSLog(@"Iphone 5 ....");
+        
+        //    signView= [[ mySmoothLineView alloc] initWithFrame:CGRectMake(108,123,353,89)];
+        
+        signView=[[ mySmoothLineView alloc] initWithFrame:CGRectMake(_signatureBox.frame.origin.x+33,128,423,78)];
+        
+        // signView=[[mySmoothLineView alloc]initWithFrame:_signatureBox.frame];
+        
+        [signView setBackgroundColor:[UIColor clearColor]];
+        
+        [self.view addSubview: signView];
+    }
+    else
+    {
+        NSLog(@"Iphone 5 s....");
+        
+        
+        signView= [[ mySmoothLineView alloc] initWithFrame:CGRectMake(82,150,493,88)];
+        
+        
+       // signView=[[mySmoothLineView alloc]initWithFrame:_signatureBox.frame];
+        
+        [signView setBackgroundColor:[UIColor clearColor]];
+        
+        [self.view addSubview: signView];
+    }
+
 
 }
 @end

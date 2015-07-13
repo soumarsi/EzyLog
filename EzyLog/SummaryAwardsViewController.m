@@ -25,6 +25,7 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *nextBtn_imgview;
 
+@property (strong, nonatomic) IBOutlet UIScrollView *bottomScroll;
 
 
 @end
@@ -39,6 +40,8 @@
     menuslide = 0;
     flag=YES;
     [self.summaryscroll setContentSize:CGSizeMake(750.0f,92.0f)];
+    
+    _bottomScroll.scrollEnabled=NO;
     // Do any additional setup after loading the view.
     
     UITapGestureRecognizer *trophyRoom = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToTrophy:)];
@@ -54,6 +57,12 @@
     [_nextBtn_imgview addGestureRecognizer:trophyRoom];
     
     
+    
+    
+    
+    
+    
+    
 }
 
 
@@ -63,44 +72,57 @@
     {
         flag=NO;
       leftview = [LeftMenu LeftView];
-       leftview.SlideDelegate = self; 
-        [UIView animateWithDuration:0.9 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0.6
-                            options:1 animations:^{
+       leftview.SlideDelegate = self;
+        
+        leftview.frame = CGRectMake(0, 0,self.view.frame.size.width*.7, self.mainview.frame.size.height);
+
+        
+        [UIView animateWithDuration:0.5 animations:^{
+
 
     leftview.frame = CGRectMake(0, 0,self.view.frame.size.width*.7, self.mainview.frame.size.height);
             
     _mainview.frame=CGRectMake(([UIScreen mainScreen].bounds.size.width*0.7f),_mainview.frame.origin.y,_mainview.frame.size.width,_mainview.frame.size.height);
                      [self.view addSubview:leftview];
+            
+            }];
                             
-                            }
-         
-                         completion:^(BOOL finished)
-         {
-             
-             
-             
-         }];
-        
-        
-        
         
     }
     else
     {
         flag=YES;
+        
+        
         [UIView animateWithDuration:0.5 animations:^{
+            
             
             
             [_mainview setFrame:CGRectMake(0,0,[[UIScreen mainScreen] bounds].size.width,[[UIScreen mainScreen] bounds].size.height)];
             
             leftview.frame = CGRectMake(-leftview.frame.size.width, 0,[[UIScreen mainScreen] bounds].size.width/2, self.view.frame.size.height);
             
+
             
-        } completion:^(BOOL finished) {
             
-            [leftview removeFromSuperview];
-            [UIView commitAnimations];
+            
         }];
+        
+        
+        
+//        [UIView animateWithDuration:0.5 animations:^{
+//            
+//        
+//            [_mainview setFrame:CGRectMake(0,0,[[UIScreen mainScreen] bounds].size.width,[[UIScreen mainScreen] bounds].size.height)];
+//            
+//            leftview.frame = CGRectMake(-leftview.frame.size.width, 0,[[UIScreen mainScreen] bounds].size.width/2, self.view.frame.size.height);
+//            
+        
+//        } completion:^(BOOL finished) {
+//            
+////            [leftview removeFromSuperview];
+////            [UIView commitAnimations];
+//        }];
         
         menuslide = 0;
     }
@@ -235,7 +257,7 @@
     
     }
     
-    if(indexPath.row==1)
+ /*   if(indexPath.row==1)
     {
         
          ELtrophyrewardroomViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"roadview"];
@@ -244,7 +266,7 @@
         
         
         
-    }
+    } */
         
         
 }

@@ -355,6 +355,12 @@ static CLLocationSpeed const kMpsToMph = 2.2369;
     [self.routeLocations addObjectsFromArray:locations];
 
     for (CLLocation *location in locations) {
+        NSLog(@"Current location being updated...");
+        NSLog(@"Location data latitude... %f",location.coordinate.latitude);
+        
+        NSLog(@"Location data longitude... %f",location.coordinate.longitude);
+       
+        
         [self handleLocationUpdate:location];
     }
 }

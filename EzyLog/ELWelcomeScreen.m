@@ -8,6 +8,8 @@
 
 #import "ELWelcomeScreen.h"
 #import "ELLoginController.h"
+#import "ELDriveSummaryController.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface ELWelcomeScreen ()
 
@@ -28,8 +30,36 @@
 }
 - (IBAction)getstartedclk:(id)sender
 {
+    
+    
+    NSUserDefaults *userData=[NSUserDefaults standardUserDefaults];
+    
+    NSLog(@"Status facebook: %lu",(long)[userData valueForKey:@"status"]);
+    
+    
+//    if ([FBSession activeSession].state== FBSessionStateOpen ||
+//        [FBSession activeSession].state== FBSessionStateOpenTokenExtended )
+    
+    if((long)[userData valueForKey:@"status"])
+    {
+        
+        
+        
+        
+        ELDriveSummaryController *driveVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Drive_Summery"];
+        [self.navigationController pushViewController:driveVC animated:YES];
+
+        
+        
+    }
+    
+    else
+    {
+    
     ELLoginController *login = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"logindriver"];
     [self.navigationController pushViewController:login animated:YES];
+        
+    }
 }
 
 - (IBAction)tourtheappclk:(id)sender

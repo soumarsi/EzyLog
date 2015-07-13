@@ -8,6 +8,8 @@
 
 #import "ELLoginController.h"
 #import "ELDirectLoginController.h"
+#import <FacebookSDK/FacebookSDK.h>
+#import "AppDelegate.h"
 
 @interface ELLoginController ()
 
@@ -20,13 +22,76 @@
     // Do any additional setup after loading the view.
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+
+    [super viewWillAppear:animated];
+    
+//    NSUserDefaults *userData=[NSUserDefaults standardUserDefaults];
+//    
+//    NSLog(@"user data....fb state %@",[userData valueForKey:@"state"]);
+//    
+//    if ([userData objectForKey:@"session"]) {
+//        UIAlertView *facebookAlert=[[UIAlertView alloc]initWithTitle:@"Message" message:@"You are already logged in" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//        [facebookAlert show];
+//    }
+    
+    
+
+}
+
+
+
+- (IBAction)facebookLogIn:(id)sender
+{
+    
+    
+    
+    if ([FBSession activeSession].state != FBSessionStateOpen &&
+       [FBSession activeSession].state != FBSessionStateOpenTokenExtended )
+
+
+    {
+        //[self UserInformation];
+        
+        NSLog(@"Facebook logging in....");
+        
+        AppDelegate *appDelegate=[[UIApplication sharedApplication]delegate];
+        
+        [appDelegate openActiveSessionWithPermissions:@[@"public_profile", @"email"] allowLoginUI:YES];
+
+        
+        
+    }
+//    else
+//    {
+//        NSLog(@"Already logged in...");
+//        
+//        
+//        UIAlertView *facebookAlert=[[UIAlertView alloc]initWithTitle:@"Message" message:@"You are already logged in" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//        [facebookAlert show];
+//        
+//        // Close an existing session.
+//        
+//        [[FBSession activeSession] closeAndClearTokenInformation];
+//        
+//        // Update the UI.
+//        NSLog(@"close of existing session");
+//
+//        
+//    }
+    
+}
+
+
 
 - (IBAction)backTapped:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -36,7 +101,9 @@
     ELDirectLoginController *login = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"directlogin"];
     [self.navigationController pushViewController:login animated:YES];
 }
-- (IBAction)SignUpclk:(id)sender {
+
+- (IBAction)SignUpclk:(id)sender
+{
     ELLoginController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Sign_Up"];
     [self.navigationController pushViewController:obj animated:YES];
 

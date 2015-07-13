@@ -8,6 +8,8 @@
 
 #import "ELDriveSummaryController.h"
 #import "ELActivityLogViewController.h"
+#import "ELWelcomeScreen.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface ELDriveSummaryController ()<SlideDelegate>
 {
@@ -96,7 +98,15 @@
    else if(sender==5)
     {
         NSLog(@"########%ld",(long)sender);
-        ELActivityLogViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"welcome"];
+        
+         [[FBSession activeSession] closeAndClearTokenInformation];
+        
+        NSUserDefaults *userData=[NSUserDefaults standardUserDefaults];
+        
+        [userData removeObjectForKey:@"status"];
+        
+        
+        ELWelcomeScreen *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"welcome"];
         [self.navigationController pushViewController:obj animated:YES];
     }
    else if(sender==100)

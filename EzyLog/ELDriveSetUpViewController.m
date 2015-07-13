@@ -60,6 +60,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    NSUserDefaults *driveDetails=[NSUserDefaults standardUserDefaults];
+    
     //
     supPickOpen=NO;
     carPickOpen=NO;
@@ -131,7 +134,9 @@
     carPickOpen=NO;
 
     
-    [pickerbackView removeFromSuperview];
+   // [pickerbackView removeFromSuperview];
+    
+    pickerbackView.hidden=YES;
     
 }
 

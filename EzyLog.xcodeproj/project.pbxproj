@@ -66,7 +66,9 @@
 		848C52821B2EEF0F003E57F1 /* Oswald-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 848C52721B2EEF0F003E57F1 /* Oswald-Light.ttf */; };
 		848C52831B2EEF0F003E57F1 /* Oswald-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 848C52731B2EEF0F003E57F1 /* Oswald-Regular.ttf */; };
 		8F93CD671B46C218006F6BB0 /* ELPrivacyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F93CD661B46C218006F6BB0 /* ELPrivacyViewController.m */; };
+		8FA5363A1B513274004DF2F0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FA536391B513273004DF2F0 /* CoreLocation.framework */; };
 		8FA9AB971B4A3A260060346B /* ELSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FA9AB961B4A3A260060346B /* ELSettingsViewController.m */; };
+		8FD3801F1B4F8B6F0096AB1C /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FD3801E1B4F8B6F0096AB1C /* FacebookSDK.framework */; };
 		A56EF02E1B4A89C30085EF77 /* Follower.m in Sources */ = {isa = PBXBuildFile; fileRef = A56EF02B1B4A89C30085EF77 /* Follower.m */; };
 		A56EF02F1B4A89C30085EF77 /* MetricView.m in Sources */ = {isa = PBXBuildFile; fileRef = A56EF02D1B4A89C30085EF77 /* MetricView.m */; };
 		A56EF0321B4A8BB40085EF77 /* UIView+Facade.m in Sources */ = {isa = PBXBuildFile; fileRef = A56EF0311B4A8BB40085EF77 /* UIView+Facade.m */; };
@@ -175,8 +177,10 @@
 		8C55A9CC3318C193F8CC1747 /* libPods-EzyLog.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EzyLog.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F93CD651B46C218006F6BB0 /* ELPrivacyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELPrivacyViewController.h; sourceTree = "<group>"; };
 		8F93CD661B46C218006F6BB0 /* ELPrivacyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELPrivacyViewController.m; sourceTree = "<group>"; };
+		8FA536391B513273004DF2F0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		8FA9AB951B4A3A260060346B /* ELSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELSettingsViewController.h; sourceTree = "<group>"; };
 		8FA9AB961B4A3A260060346B /* ELSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELSettingsViewController.m; sourceTree = "<group>"; };
+		8FD3801E1B4F8B6F0096AB1C /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		A56EF02A1B4A89C30085EF77 /* Follower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Follower.h; sourceTree = "<group>"; };
 		A56EF02B1B4A89C30085EF77 /* Follower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Follower.m; sourceTree = "<group>"; };
 		A56EF02C1B4A89C30085EF77 /* MetricView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetricView.h; sourceTree = "<group>"; };
@@ -194,7 +198,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FA5363A1B513274004DF2F0 /* CoreLocation.framework in Frameworks */,
 				818BA8C81B3455AE00DDB330 /* QuartzCore.framework in Frameworks */,
+				8FD3801F1B4F8B6F0096AB1C /* FacebookSDK.framework in Frameworks */,
 				81D665581B33DCEA00B8C3BC /* MapKit.framework in Frameworks */,
 				0F7DDCC374D11A8D0734066A /* libPods-EzyLog.a in Frameworks */,
 			);
@@ -235,6 +241,7 @@
 		848C52271B2EE685003E57F1 = {
 			isa = PBXGroup;
 			children = (
+				8FD3801E1B4F8B6F0096AB1C /* FacebookSDK.framework */,
 				818BA8C71B3455AE00DDB330 /* QuartzCore.framework */,
 				848C52321B2EE685003E57F1 /* EzyLog */,
 				848C524F1B2EE686003E57F1 /* EzyLogTests */,
@@ -446,6 +453,7 @@
 		8E26D2981EB14E3D43FB2FB8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8FA536391B513273004DF2F0 /* CoreLocation.framework */,
 				8C55A9CC3318C193F8CC1747 /* libPods-EzyLog.a */,
 			);
 			name = Frameworks;
@@ -506,7 +514,7 @@
 				TargetAttributes = {
 					848C522F1B2EE685003E57F1 = {
 						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = HVFEBCENV9;
+						DevelopmentTeam = K22GQFS8BW;
 					};
 				};
 			};
@@ -680,8 +688,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: hih7 webtech pvt ltd (HVFEBCENV9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: hih7 webtech pvt ltd (HVFEBCENV9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -700,10 +708,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "14369aec-c8eb-4115-94b8-43f80e388ea0";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -725,8 +733,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: hih7 webtech pvt ltd (HVFEBCENV9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: hih7 webtech pvt ltd (HVFEBCENV9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -739,9 +747,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "14369aec-c8eb-4115-94b8-43f80e388ea0";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -752,12 +760,18 @@
 			baseConfigurationReference = 13E9E965F06B2593D667747C /* Pods-EzyLog.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: hih7 webtech pvt ltd (HVFEBCENV9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = EzyLog/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = EZYLOG;
-				PROVISIONING_PROFILE = "14369aec-c8eb-4115-94b8-43f80e388ea0";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -766,12 +780,18 @@
 			baseConfigurationReference = 1C19A9F0BCD7BC79685A0818 /* Pods-EzyLog.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: hih7 webtech pvt ltd (HVFEBCENV9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = EzyLog/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = EZYLOG;
-				PROVISIONING_PROFILE = "14369aec-c8eb-4115-94b8-43f80e388ea0";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

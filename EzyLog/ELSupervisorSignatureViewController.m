@@ -14,7 +14,17 @@
 
 @interface ELSupervisorSignatureViewController ()
 
+
+{
+
+    BOOL fiveCheck;
+    
+}
+
 @property (strong, nonatomic) IBOutlet UIButton *submitBtn;
+
+
+@property (strong, nonatomic) IBOutlet UIImageView *signatureBox;
 
 @end
 
@@ -38,15 +48,19 @@
     
     [signView removeFromSuperview];
     // Do any additional setup after loading the view.
-    if(self.view.frame.size.width==320)
+    if(self.view.frame.size.height==320 || fiveCheck==YES)
     {
-        signView= [[ mySmoothLineView alloc] initWithFrame:CGRectMake(108,123,353,89)];
+//        signView= [[ mySmoothLineView alloc] initWithFrame:CGRectMake(108,123,353,89)];
+        
+        signView= [[ mySmoothLineView alloc] initWithFrame:CGRectMake(_signatureBox.frame.origin.x+35,121,419,75)];
+
         [signView setBackgroundColor:[UIColor clearColor]];
         [self.view addSubview: signView];
+        fiveCheck=YES;
     }
     else
     {
-        signView= [[ mySmoothLineView alloc] initWithFrame:CGRectMake(82,150,483,96)];
+        signView= [[ mySmoothLineView alloc] initWithFrame:CGRectMake(82,142,492,87)];
         [signView setBackgroundColor:[UIColor clearColor]];
         [self.view addSubview: signView];
     }
@@ -56,7 +70,32 @@
 
 - (IBAction)clearscreen:(id)sender
 {
-    [self viewDidLoad];
+    
+    
+    [self.view setMultipleTouchEnabled:YES];
+    
+    [signView removeFromSuperview];
+    // Do any additional setup after loading the view.
+    if(self.view.frame.size.height==320 || fiveCheck==YES)
+    {
+        //        signView= [[ mySmoothLineView alloc] initWithFrame:CGRectMake(108,123,353,89)];
+        
+        signView= [[ mySmoothLineView alloc] initWithFrame:CGRectMake(_signatureBox.frame.origin.x+8,121,418,75)];
+        
+        [signView setBackgroundColor:[UIColor clearColor]];
+        [self.view addSubview: signView];
+        //fiveCheck=YES;
+    }
+    else
+    {
+        signView= [[ mySmoothLineView alloc] initWithFrame:CGRectMake(82,142,492,87)];
+        [signView setBackgroundColor:[UIColor clearColor]];
+        [self.view addSubview: signView];
+    }
+
+    
+    
+    
 }
 
 - (IBAction)submit__register:(id)sender

@@ -42,6 +42,8 @@
 - (IBAction)I_Agree_action:(id)sender
 {
     DriveSetup2ViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"drive_recording_page"];
+    
     [self.navigationController pushViewController:obj animated:YES];
+    
 }
 @end

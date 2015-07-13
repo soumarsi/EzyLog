@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "ELDriveSummaryController.h"
+#import "ELLearnerSignatureViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,16 +19,193 @@
 @synthesize userID,superID,carID,supName;
 
 
+
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+   NSString *uniqueIdentifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
     
+    NSLog(@"Device unique id no is: %@",uniqueIdentifier);
+    
+     
     NSLog(@"Height: %f",[[UIScreen mainScreen] bounds].size.height);
     
      NSLog(@"Width: %f",[[UIScreen mainScreen] bounds].size.width);
     
+    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        NSLog(@"iOS 8 Requesting permission for push notifications..."); // iOS 8
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:
+                                                UIUserNotificationTypeAlert | UIUserNotificationTypeBadge |
+                                                UIUserNotificationTypeSound categories:nil];
+        [UIApplication.sharedApplication registerUserNotificationSettings:settings];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    } else {
+        NSLog(@"iOS 7 Registering device for push notifications..."); // iOS 7 and earlier
+        [UIApplication.sharedApplication registerForRemoteNotificationTypes:
+         UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge |
+         UIRemoteNotificationTypeSound];
+    }
+
+    
     return YES;
+    
+    
 }
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    
+    UIApplicationState state = [application applicationState];
+    
+    
+    if (state == UIApplicationStateActive)
+    {
+        
+        NSLog(@"received a notification while active...");
+        
+    }
+    else if ( application.applicationState == UIApplicationStateInactive || application.applicationState == UIApplicationStateBackground  )
+    {
+        //opened from a push notification when the app was on background
+        NSLog(@"i received a notification...");
+        NSLog(@"Message: %@",[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]);
+        NSLog(@"whole data: %@",userInfo);
+    }
+    
+}
+
+
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+    [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"deviceToken"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSLog(@"-->> TOKEN:%@",token);
+}
+
+
+
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{
+    NSLog(@"Registering device for push notifications..."); // iOS 8
+    [application registerForRemoteNotifications];
+}
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier
+forRemoteNotification:(NSDictionary *)notification completionHandler:(void(^)())completionHandler
+{
+    NSLog(@"Received push notification: %@, identifier: %@", notification, identifier); // iOS 8 s
+    completionHandler();
+}
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    // Respond to any push notification registration errors here.
+    NSLog(@"Failed to get token, error: %@", error);
+}
+
+
+
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+}
+
+
+-(void)openActiveSessionWithPermissions:(NSArray *)permissions allowLoginUI:(BOOL)allowLoginUI
+{
+    [FBSession openActiveSessionWithReadPermissions:permissions
+                                       allowLoginUI:allowLoginUI
+                                  completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+                                      
+/*                                                                              [[FBRequest requestForMe] startWithCompletionHandler:
+                                           ^(FBRequestConnection *connection,
+                                             NSDictionary<FBGraphUser> *user,
+                                             NSError *error) {
+                                               if (!error) {
+                                                  // NSString *firstName = user.first_name;
+                                                  // NSString *lastName = user.last_name;
+                                                   
+                                                   NSString *facebookId = user.id;
+                                                   
+                                                  // NSString *email = [user objectForKey:@"email"];
+                                                 //  NSString *imageUrl = [[NSString alloc] initWithFormat: @"http://graph.facebook.com/%@/picture?type=large", facebookId];
+                                                   
+                                                   
+                                                   
+                                                   
+                                                   
+                                                   
+                                                   NSUserDefaults *userData=[NSUserDefaults standardUserDefaults];
+                                                   
+                                                   // [userData setObject:session forKey:@"session"];
+                                                   [userData setObject:[NSNumber numberWithInteger:status] forKey:@"status"];
+                                                   [userData setObject:facebookId forKey:@"fbID"];
+                                                   
+                                                   [userData synchronize];
+                                                   
+                                                   NSLog(@"Status facebook: %lu",(long)[userData valueForKey:@"status"]);
+                                                    NSLog(@"Status facebook: %@",[userData valueForKey:@"fbID"]);
+
+                                                   
+                                               }
+                                           }];
+                                      
+                                     
+                                     
+ */
+                                      
+                                      
+                                      [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, FBGraphObject *result, NSError *error) {
+                                          if (result && !error) {
+                                            
+                                              
+                                              
+                                              NSUserDefaults *userData=[NSUserDefaults standardUserDefaults];
+                                              
+                                              // [userData setObject:session forKey:@"session"];
+                                              [userData setObject:[NSNumber numberWithInteger:status] forKey:@"status"];
+                                              [userData setObject:result[@"id"] forKey:@"fbID"];
+                                              
+                                              [userData synchronize];
+                                              
+                                              NSLog(@"Status facebook: %lu",(long)[userData valueForKey:@"status"]);
+                                              NSLog(@"Status facebook: %@",[userData valueForKey:@"fbID"]);
+                                              
+                                              
+                                          } else {
+                                              NSLog(@"Error!");
+                                          }
+                                      }];
+                                      
+                                      
+                                      
+                                     
+                                      
+                                      if(!error)
+                                      {
+                                          
+                                          UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+                                      
+                                          ELDriveSummaryController *driveVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Drive_Summery"];
+                                          [navigationController pushViewController:driveVC animated:YES];
+                                      
+                                      
+                                      }
+                                      
+                                      
+                                      // Create a new notification, add the sessionStateInfo dictionary to it and post it.
+                                      
+                                      
+                                  }];
+}
+
+
+
+
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

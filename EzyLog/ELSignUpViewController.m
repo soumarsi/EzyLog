@@ -930,25 +930,25 @@
     {
         [picker resignFirstResponder];
         [myview removeFromSuperview];
-        [self.signupscroller setContentOffset:CGPointMake(0.0f,0.0f) animated:YES];
+        [self.signupscroller setContentOffset:CGPointMake(0.0f,100.0f) animated:YES];
     }
     if(textField==self.lname)
     {
         [picker resignFirstResponder];
         [myview removeFromSuperview];
-        [self.signupscroller setContentOffset:CGPointMake(0.0f,0.0f) animated:YES];
+        [self.signupscroller setContentOffset:CGPointMake(0.0f,100.0f) animated:YES];
     }
     if(textField==self.phno)
     {
         [picker resignFirstResponder];
         [myview removeFromSuperview];
-        [self.signupscroller setContentOffset:CGPointMake(0.0f,0.0f) animated:YES];
+        [self.signupscroller setContentOffset:CGPointMake(0.0f,100.0f) animated:YES];
     }
     if(textField==self.screennm)
     {
         [picker resignFirstResponder];
         [myview removeFromSuperview];
-        [self.signupscroller setContentOffset:CGPointMake(0.0f,0.0f) animated:YES];
+        [self.signupscroller setContentOffset:CGPointMake(0.0f,100.0f) animated:YES];
     }
     if(textField==self.email)
     {
