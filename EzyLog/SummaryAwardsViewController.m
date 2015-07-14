@@ -75,18 +75,22 @@
        leftview.SlideDelegate = self;
         
         leftview.frame = CGRectMake(0, 0,self.view.frame.size.width*.7, self.mainview.frame.size.height);
-
+//
         
         [UIView animateWithDuration:0.5 animations:^{
 
 
     leftview.frame = CGRectMake(0, 0,self.view.frame.size.width*.7, self.mainview.frame.size.height);
             
-    _mainview.frame=CGRectMake(([UIScreen mainScreen].bounds.size.width*0.7f),_mainview.frame.origin.y,_mainview.frame.size.width,_mainview.frame.size.height);
-                     [self.view addSubview:leftview];
+//    _mainview.frame=CGRectMake(([UIScreen mainScreen].bounds.size.width*0.7f),_mainview.frame.origin.y,_mainview.frame.size.width,_mainview.frame.size.height);
+//                     [self.view addSubview:leftview];
             
             }];
-                            
+        
+        _mainview.frame=CGRectMake(([UIScreen mainScreen].bounds.size.width*0.7f),_mainview.frame.origin.y,_mainview.frame.size.width,_mainview.frame.size.height);
+        [self.view addSubview:leftview];
+
+        
         
     }
     else

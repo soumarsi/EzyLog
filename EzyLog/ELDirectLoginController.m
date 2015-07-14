@@ -18,12 +18,19 @@
 
 }
 
+
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+
 @end
 
 @implementation ELDirectLoginController
 
+@synthesize spinner;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    spinner.hidden=YES;
     
     app=[[UIApplication sharedApplication]delegate];
     
@@ -77,7 +84,11 @@
         }
         else
         {
-            _login_btn.userInteractionEnabled=NO;
+            spinner.hidden=NO;
+            
+            [spinner startAnimating];
+            
+            //_login_btn.userInteractionEnabled=NO;
             
             [_id_txt resignFirstResponder];
             [_password_txt resignFirstResponder];
@@ -89,6 +100,9 @@
             [request setHTTPMethod:@"POST"];
             
             NSString *postData = [NSString stringWithFormat:@"email=%@&password=%@",_id_txt.text,_password_txt.text];
+            
+            NSLog(@"User ID: %@",_id_txt.text);
+            NSLog(@"Password... %@",_password_txt.text);
             
             [request setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
             
@@ -114,8 +128,10 @@
                          
                          
                          app.userID=[get_result objectForKey:@"id"];
-                        
                          
+                         NSLog(@"User id in appdelegate: %@",app.userID);
+                        
+                         [spinner stopAnimating];
                          
 //                         [UserData setObject:[get_result objectForKey:@"business"] forKey:@"user_business"];
 //                         [UserData setObject:[get_result objectForKey:@"about"] forKey:@"user_about"];
@@ -129,6 +145,8 @@
                      }
                      else
                      {
+                         spinner.hidden=YES;
+                         
                          UIAlertView *Alert = [[UIAlertView alloc]initWithTitle:nil message:@"Login Failed" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                          [Alert show];
                          

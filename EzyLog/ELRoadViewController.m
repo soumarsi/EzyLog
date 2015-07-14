@@ -66,8 +66,16 @@
 
 }
 
+@property (strong, nonatomic) IBOutlet UIButton *parkBtn1;
+
+@property (strong, nonatomic) IBOutlet UIButton *parkBtn2;
 
 
+@property (strong, nonatomic) IBOutlet UILabel *view3Lbl;
+
+@property (strong, nonatomic) IBOutlet UILabel *view2Lbl;
+
+@property (strong, nonatomic) IBOutlet UILabel *view1Lbl;
 
 
 
@@ -276,6 +284,7 @@
     
     if([tappedBtn isEqual:_sealedBtn])
     {
+        _view3Lbl.text=@"Sealed";
     
         _unsealedBtn.hidden=YES;
         _homeBtn.hidden=YES;
@@ -286,7 +295,7 @@
     }
     else     if([tappedBtn isEqual:_unsealedBtn])
     {
-        
+        _view3Lbl.text=@"Unsealed";
         _sealedBtn.hidden=YES;
         _homeBtn.hidden=YES;
         _busyBtn.hidden=YES;
@@ -296,6 +305,7 @@
     }
     else     if([tappedBtn isEqual:_homeBtn])
     {
+        _view3Lbl.text=@"Quiet";
         
         _sealedBtn.hidden=YES;
         _unsealedBtn.hidden=YES;
@@ -306,7 +316,7 @@
     }
     else     if([tappedBtn isEqual:_busyBtn])
     {
-        
+        _view3Lbl.text=@"Busy";
         _sealedBtn.hidden=YES;
         _homeBtn.hidden=YES;
         _unsealedBtn.hidden=YES;
@@ -316,6 +326,8 @@
     }
     else     if([tappedBtn isEqual:_multiLaneBtn])
     {
+        
+        _view3Lbl.text=@"Multi-Lane";
         
         _sealedBtn.hidden=YES;
         _homeBtn.hidden=YES;
@@ -360,13 +372,14 @@
     if([tappedBtn isEqual:_twoCarBtn])
     {
         
+        _view2Lbl.text=@"Light Traffic";
         _fourCarBtn.hidden=YES;
         _sixCarBtn.hidden=YES;
         
     }
     else     if([tappedBtn isEqual:_fourCarBtn])
     {
-        
+        _view2Lbl.text=@"Medium Traffic";
         _twoCarBtn.hidden=YES;
         _sixCarBtn.hidden=YES;
         
@@ -374,7 +387,7 @@
     }
     else     if([tappedBtn isEqual:_sixCarBtn])
     {
-        
+        _view2Lbl.text=@"Heavy Traffic";
         _twoCarBtn.hidden=YES;
         _fourCarBtn.hidden=YES;
         
@@ -434,6 +447,24 @@
 //    }];
     
 
+    UIButton *tapped=(UIButton *)(id)sender;
+    
+    if([tapped isEqual:_parkBtn1])
+    {
+        _parkBtn2.hidden=YES;
+        
+        _view1Lbl.text=@" Parking Practiced";
+        
+        
+        
+    }
+    else if ([tapped isEqual:_parkBtn2])
+    {
+        _parkBtn1.hidden=YES;
+         _view1Lbl.text=@"No Parking Practiced";
+        
+    }
+    
      [self performSelector:@selector(parkAction) withObject:nil afterDelay:1.5];
     
     

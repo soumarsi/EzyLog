@@ -24,6 +24,10 @@
 
 }
 
+//bottom view labels...
+
+
+
 @property (strong, nonatomic) IBOutlet UIButton *carBtn;
 
 
@@ -51,17 +55,28 @@
 
 @property(nonatomic,strong)NSMutableArray *get_result_arr;
 
+@property(nonatomic,strong)NSMutableArray *get_result_car;
+
+@property(nonatomic,strong)NSMutableArray *get_result_sup;
+
 @end
 
 @implementation ELDriveSetUpViewController
 
-@synthesize get_result_dic,get_result_arr,pickCancelBtn,pickerbackView,pickSelectBtn,superBtn,superVisorPicker;
+@synthesize get_result_dic,get_result_arr,pickCancelBtn,pickerbackView,pickSelectBtn,superBtn,superVisorPicker,get_result_car,get_result_sup;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     
+    
+    
     NSUserDefaults *driveDetails=[NSUserDefaults standardUserDefaults];
+    
+    
+    [self CarList];
+    
+    [self superList];
     
     //
     supPickOpen=NO;
@@ -77,15 +92,19 @@
     
     superVisorPicker.dataSource=self;
     
-    get_result_arr=[[NSMutableArray alloc]init];
+   // get_result_arr=[[NSMutableArray alloc]init];
+    
+    get_result_sup=[[NSMutableArray alloc]init];
+    
+    get_result_car=[[NSMutableArray alloc]init];
     
     get_result_dic=[[NSMutableDictionary alloc]init];
     
    
     
-    [superBtn addTarget:self action:@selector(superList) forControlEvents:UIControlEventTouchUpInside];
+    [superBtn addTarget:self action:@selector(superPickOpen) forControlEvents:UIControlEventTouchUpInside];
     
-    [_carBtn addTarget:self action:@selector(CarList) forControlEvents:UIControlEventTouchUpInside];
+    [_carBtn addTarget:self action:@selector(carPickOpen) forControlEvents:UIControlEventTouchUpInside];
     
     [pickSelectBtn addTarget:self action:@selector(selectPickValue) forControlEvents:UIControlEventTouchUpInside];
     
@@ -104,8 +123,24 @@
     
     if(supPickOpen==YES)
     {
-        NSLog(@"Super name is %@",pickerValue);
+       // NSLog(@"Super name is %@",pickerValue);
+        
+        if(![_carRegLbl.text isEqualToString:pickerValue])
+        {
         _superNameLbl.text=pickerValue;
+        
+        if([_superNameLbl.text length]<1)
+        {
+            NSLog(@"Super picker value not selected.....");
+            _superNameLbl.text=[NSString stringWithFormat:@"%@ %@",[[get_result_sup objectAtIndex:0] valueForKey:@"first_name"],[[get_result_sup objectAtIndex:0] valueForKey:@"last_name"]];
+        }
+            
+        }
+        
+        NSLog(@"Super name is %@",[NSString stringWithFormat:@"%@ %@",[[get_result_sup objectAtIndex:0] valueForKey:@"first_name"],[[get_result_sup objectAtIndex:0] valueForKey:@"last_name"]]);
+        
+        pickerValue=@"";
+
     
     }
     else if(carPickOpen==YES)
@@ -115,6 +150,10 @@
 
         
         _carRegLbl.text=pickerValue;
+        
+        if([_carRegLbl.text length]<1)
+            _carRegLbl.text=[get_result_car[0] objectForKey:@"car_registration_no"];
+
     
     }
         
@@ -123,7 +162,7 @@
     
     carPickOpen=NO;
     
-    NSLog(@"Lisence number for selected supervisor is %@",pickerValue);
+   // NSLog(@"Lisence number for selected supervisor is %@",pickerValue);
 
 }
 
@@ -140,6 +179,36 @@
     
 }
 
+
+-(void)carPickOpen
+{
+
+    
+    if(get_result_car.count>0)
+    {
+        
+        pickerbackView.hidden=NO;
+        
+        carPickOpen=YES;
+        
+        [superVisorPicker reloadAllComponents];
+        
+        
+        
+    }
+    
+    else
+    {
+        
+        UIAlertView *supAlert=[[UIAlertView alloc]initWithTitle:@"Message" message:@"No vehicle found" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        
+        [supAlert show];
+        
+    }
+
+    
+
+}
 
 
 
@@ -158,6 +227,8 @@
     
     [request setHTTPMethod:@"POST"];
     
+    app=[[UIApplication sharedApplication] delegate];
+    
     NSLog(@"Driver id is %@",app.userID);
     
     NSString *postData = [NSString stringWithFormat:@"driver_id=%@",app.userID];//,app.userID
@@ -175,7 +246,7 @@
         
         //   NSLog(@"Result....%@",result);
         
-        get_result_arr=[[NSMutableArray alloc]init];
+        get_result_car=[[NSMutableArray alloc]init];
         
         get_result_dic=[[NSMutableDictionary alloc]init];
 
@@ -183,31 +254,31 @@
         
         get_result_dic=[[result objectForKey:@"data"]mutableCopy];
         
-        get_result_arr=[[get_result_dic objectForKey:@"vehicle"] mutableCopy];
+        get_result_car=[[get_result_dic objectForKey:@"vehicle"] mutableCopy];
         
         NSLog(@"Car array......%@",get_result_arr);
         
-        if(get_result_arr.count>0)
-        {
-        
-        pickerbackView.hidden=NO;
-            
-            carPickOpen=YES;
-        
-        [superVisorPicker reloadAllComponents];
-            
-            
-            
-        }
-        
-        else
-        {
-            
-            UIAlertView *supAlert=[[UIAlertView alloc]initWithTitle:@"Message" message:@"No vehicle found" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            
-            [supAlert show];
-            
-        }
+//        if(get_result_car.count>0)
+//        {
+//        
+//        pickerbackView.hidden=NO;
+//            
+//            carPickOpen=YES;
+//        
+//        [superVisorPicker reloadAllComponents];
+//            
+//            
+//            
+//        }
+//        
+//        else
+//        {
+//            
+//            UIAlertView *supAlert=[[UIAlertView alloc]initWithTitle:@"Message" message:@"No vehicle found" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//            
+//            [supAlert show];
+//            
+//        }
 
         
         
@@ -220,7 +291,32 @@
 }
 
 
+-(void)superPickOpen
+{
 
+    if(get_result_sup.count>0)
+    {
+        
+        pickerbackView.hidden=NO;
+        
+        supPickOpen=YES;
+        
+        [superVisorPicker reloadAllComponents];
+        
+    }
+    
+    else
+    {
+        
+        UIAlertView *supAlert=[[UIAlertView alloc]initWithTitle:@"Message" message:@"No supervisor found" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        
+        [supAlert show];
+        
+    }
+
+    
+
+}
 
 
 -(void)superList
@@ -254,35 +350,35 @@
         
      //   NSLog(@"Result....%@",result);
       
-      get_result_arr=[[NSMutableArray alloc]init];
+      get_result_sup=[[NSMutableArray alloc]init];
       
       get_result_dic=[[NSMutableDictionary alloc]init];
       
         get_result_dic=[[result objectForKey:@"data"]mutableCopy];
         
-        get_result_arr=[[get_result_dic objectForKey:@"supervisor"] mutableCopy];
+        get_result_sup=[[get_result_dic objectForKey:@"supervisor"] mutableCopy];
         
-        NSLog(@"Supervisor array......%@",get_result_arr);
+       // NSLog(@"Supervisor array......%@",get_result_arr);
       
-      if(get_result_arr.count>0)
-      {
-      
-      pickerbackView.hidden=NO;
-          
-          supPickOpen=YES;
-      
-      [superVisorPicker reloadAllComponents];
-          
-      }
-      
-      else
-      {
-      
-          UIAlertView *supAlert=[[UIAlertView alloc]initWithTitle:@"Message" message:@"No supervisor found" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-          
-          [supAlert show];
-      
-      }
+//      if(get_result_arr.count>0)
+//      {
+//      
+//      pickerbackView.hidden=NO;
+//          
+//          supPickOpen=YES;
+//      
+//      [superVisorPicker reloadAllComponents];
+//          
+//      }
+//      
+//      else
+//      {
+//      
+//          UIAlertView *supAlert=[[UIAlertView alloc]initWithTitle:@"Message" message:@"No supervisor found" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//          
+//          [supAlert show];
+//      
+//      }
       
         
         
@@ -303,7 +399,12 @@
 
     NSLog(@"Number of rows is %lu",(long)get_result_arr.count);
     
-    return get_result_arr.count;
+    if( supPickOpen==YES)
+        return get_result_sup.count;
+    else if(carPickOpen==YES)
+         return get_result_car.count;
+    
+    else return 0;
 
 }
 
@@ -319,9 +420,9 @@
     if(supPickOpen==YES)
     {
     
-    NSString *superName=[NSString stringWithFormat:@"%@ %@",[[get_result_arr objectAtIndex:row] valueForKey:@"first_name"],[[get_result_arr objectAtIndex:row] valueForKey:@"last_name"]];
+    NSString *superName=[NSString stringWithFormat:@"%@ %@",[[get_result_sup objectAtIndex:row] valueForKey:@"first_name"],[[get_result_sup objectAtIndex:row] valueForKey:@"last_name"]];
     
-    NSLog(@"Lisenece no......: %@",[[get_result_arr objectAtIndex:row] valueForKey:@"licence_no"]);
+    NSLog(@"Lisenece no......: %@",[[get_result_sup objectAtIndex:row] valueForKey:@"licence_no"]);
 
     return superName;
         
@@ -331,7 +432,7 @@
     {
     
     
-    return [get_result_arr[row] objectForKey:@"car_registration_no"];
+    return [get_result_car[row] objectForKey:@"car_registration_no"];
         
     }
     else
@@ -345,18 +446,18 @@
 
     if(supPickOpen==YES)
     {
-        pickerValue=[NSString stringWithFormat:@"%@ %@",[[get_result_arr objectAtIndex:row] valueForKey:@"first_name"],[[get_result_arr objectAtIndex:row] valueForKey:@"last_name"]];
+        pickerValue=[NSString stringWithFormat:@"%@ %@",[[get_result_sup objectAtIndex:row] valueForKey:@"first_name"],[[get_result_sup objectAtIndex:row] valueForKey:@"last_name"]];
         
         app.supName=pickerValue;
         
-        app.superID=[[get_result_arr objectAtIndex:row] valueForKey:@"id"];
+        app.superID=[[get_result_sup objectAtIndex:row] valueForKey:@"id"];
         
     }
     else if(carPickOpen==YES)
     {
-        pickerValue=[get_result_arr[row] objectForKey:@"car_registration_no"];
+        pickerValue=[get_result_car[row] objectForKey:@"car_registration_no"];
         
-        app.carID=[get_result_arr[row] objectForKey:@"car_id"];
+        app.carID=[get_result_car[row] objectForKey:@"car_id"];
         
     }
     

@@ -63,7 +63,47 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
+    
+     if([textField isEqual:_carText3] || [textField isEqual:_carText2] || [textField isEqual:_carText4])
+     {
+     
+         [UIView animateWithDuration:0.1 animations:^{
+
+         self.view.frame=[[UIScreen mainScreen] bounds];
+             
+              }];
+     
+     
+     }
+    
+    
+    
     return YES;
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+
+    if([textField isEqual:_carText3] || [textField isEqual:_carText2] || [textField isEqual:_carText4])
+    {
+    
+    [UIView animateWithDuration:0.8 animations:^{
+        
+        
+        CGRect viewFrame=self.view.frame;
+   
+        viewFrame.origin.y-=20;
+        
+        if([textField isEqual:_carText4])
+        
+          viewFrame.origin.y-=60;
+        
+        self.view.frame=viewFrame;
+        
+    }];
+        
+    }
+
 }
 
 - (IBAction)backtoprev:(id)sender

@@ -459,7 +459,7 @@
                      }
      ];
     
-    
+    datePicked=NO;
     self.navigationItem.rightBarButtonItem=nil;
     [myview removeFromSuperview];
     _signupscroller.scrollEnabled=YES;
@@ -535,7 +535,7 @@
                      }
      ];
     
-    
+    datePicked=NO;
     self.navigationItem.rightBarButtonItem=nil;
     [myview removeFromSuperview];
     _signupscroller.scrollEnabled=YES;
@@ -559,6 +559,8 @@
 //    _daylbl.text=NULL;
 //    _monthlbl.text=NULL;
 //    _yearlbl.text=NULL;
+    
+    datePicked=NO;
     
     self.navigationItem.rightBarButtonItem=nil;
     [myview removeFromSuperview];
@@ -586,6 +588,8 @@
 //    _month2lbl.text=NULL;
 //    _year2lbl.text=NULL;
     
+    
+    datePicked=NO;
     self.navigationItem.rightBarButtonItem=nil;
     [myview removeFromSuperview];
     
@@ -796,7 +800,7 @@
     NSString *trimmed = [rawString stringByTrimmingCharactersInSet:whitespace];
     if ([trimmed length] < 1) {
         
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"First Name  can't be blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"You must enter a first name" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
         
         
@@ -807,7 +811,7 @@
         
     {
         
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Last Name  can't be blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"You must enter a last name" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
         
         
@@ -817,7 +821,7 @@
         
     {
         // NSString *numberinvalid=[NSString stringWithFormat:@"Phone must be 10 digit..\n You have Enter %lu digits",(unsigned long)[_phno.text length]];
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Please enter valid Phone no" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"Please enter valid Phone no" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
         
         
@@ -826,14 +830,14 @@
         
     {
         
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Screen Name can't be blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"You must enter a screen name" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
         
     }
     
     else  if (![ self NSStringIsValidEmail:[_email text]])
     {
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Your email address is invalid" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"Enter a valid email address" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
         
         
@@ -843,21 +847,21 @@
         
     {
         
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Password can't be blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"You must enter a password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
         
     }
     else if ([_daylbl.text isEqual:@"Day"] || [_monthlbl.text isEqual:@"Month"] || [_yearlbl.text isEqual:@"Year"])//strday==NULL
     {
         
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"DOB field is incomplete" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"DOB field is incomplete" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
     }
     
     else if ([_day2lbl.text isEqual:@"Day"] || [_month2lbl.text isEqual:@"Month"] || [_year2lbl.text isEqual:@"Year"])//strday==NULL
     {
         
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Expiry date field is incomplete" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"Expiry date field is incomplete" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
     }
     
@@ -866,7 +870,7 @@
         
     {
         
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Learner Permit Number can't be blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"Please enter a Learner Permit number" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
         
     }
@@ -879,13 +883,13 @@
     else if ([_postcode.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ].length < 1)
     {
         
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"Please enter valid Postal Code" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"You must enter a valid postal code" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
     }
     else if (ww ==NULL)
     {
         
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert!" message:@"State can't be blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"You must enter your state" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
     }
     

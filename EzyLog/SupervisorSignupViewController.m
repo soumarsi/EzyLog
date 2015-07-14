@@ -53,6 +53,8 @@
     
     AppDelegate *app;
     
+    
+    BOOL noInstructor;
 }
 
 @end
@@ -65,6 +67,8 @@
     
     
     //
+    
+    noInstructor=NO;
     
     datePicked=NO;
     
@@ -227,10 +231,13 @@
         UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"Please select Supevisor Driving Instructor  yes or no" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
         [alertreg show];
     }
-    else if (_insno.text.length==0)
+    else if ([licencedinst isEqualToString:@"Y"])
     {
+        
         UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"you can't left  Instructor number field blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
         [alertreg show];
+            
+       
     }
     else
     {
@@ -618,6 +625,7 @@
 //    _dobmonth1.text=NULL;
 //    _dobyear1.text=NULL;
     
+    datePicked=NO;
     self.navigationItem.rightBarButtonItem=nil;
     [myview removeFromSuperview];
     [picker resignFirstResponder];
@@ -713,7 +721,7 @@
                      }
      ];
     
-    
+    datePicked=NO;
     self.navigationItem.rightBarButtonItem=nil;
     [picker resignFirstResponder];
     [myview removeFromSuperview];
@@ -883,6 +891,7 @@
 //    _licencemonthlabel.text=NULL;
 //    _licenceyearlabel.text=NULL;
     
+    datePicked=NO;
     self.navigationItem.rightBarButtonItem=nil;
     [myview removeFromSuperview];
     
@@ -916,7 +925,7 @@
                              [self monthString];
                              stryear=[NSString stringWithFormat:@"%ld",(long)year];
                              
-                             NSLog(@"Day: %@ Month %@ Year %@",strday,strmon,stryear);
+                             NSLog(@"Lisence.....Day: %@ Month %@ Year %@",strday,strmon,stryear);
                              
                              //                            // strday = [strday substringWithRange:NSMakeRange(4,2)];
                              //                             strmon = [strmon substringWithRange:NSMakeRange(0,3)];
@@ -982,6 +991,8 @@
                          NSLog(@"%@",licence);
                      }
      ];
+    
+    datePicked=NO;
     self.navigationItem.rightBarButtonItem=nil;
     [myview removeFromSuperview];
     

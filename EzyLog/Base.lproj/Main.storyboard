@@ -241,15 +241,15 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="listing" id="3aS-Pd-55z">
-                                        <rect key="frame" x="13" y="375" width="295" height="45"/>
+                                        <rect key="frame" x="13" y="371" width="295" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightarrow" id="Up3-yc-QCk">
-                                        <rect key="frame" x="289" y="391" width="8" height="13"/>
+                                        <rect key="frame" x="289" y="387" width="8" height="13"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SETTINGS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ppz-4t-O5i">
-                                        <rect key="frame" x="31" y="375" width="240" height="45"/>
+                                        <rect key="frame" x="31" y="371" width="240" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="18"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -299,7 +299,7 @@
                                         </connections>
                                     </button>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" id="LNh-tZ-sPm">
-                                        <rect key="frame" x="0.0" y="341" width="320" height="228"/>
+                                        <rect key="frame" x="0.0" y="340" width="320" height="228"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="AN2-gl-0ze">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="228"/>
@@ -1134,7 +1134,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Jd6-pj-qll">
-                                                <rect key="frame" x="-1.9999898909912985" y="2" width="114" height="21"/>
+                                                <rect key="frame" x="-1.9999864374875398" y="2" width="114" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                                 <color key="textColor" red="0.31764705879999999" green="0.32156862749999998" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1307,6 +1307,10 @@
                                             <action selector="backTapped:" destination="2cA-8t-h5n" eventType="touchUpInside" id="HSw-1X-Z1T"/>
                                         </connections>
                                     </button>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="IJ3-5C-jh2">
+                                        <rect key="frame" x="150" y="333" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -1320,6 +1324,7 @@
                         <outlet property="id_txt" destination="oVh-kp-Ecl" id="iOd-bL-dzm"/>
                         <outlet property="login_btn" destination="bgI-yy-d4l" id="nDW-Ox-m32"/>
                         <outlet property="password_txt" destination="TQi-HH-vKF" id="gAI-JD-jtp"/>
+                        <outlet property="spinner" destination="IJ3-5C-jh2" id="Xmi-qf-fLx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cjy-Xp-a7F" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2470,14 +2475,14 @@
                                                     <action selector="trafficBtn:" destination="eRJ-2r-XzR" eventType="touchUpInside" id="6TK-mJ-5gU"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Light,Medium or Heavy Traffic?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2OX-KC-vXD">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Light,Medium or Heavy Traffic?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2OX-KC-vXD">
                                                 <rect key="frame" x="48" y="2" width="230" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="16"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="two_car" id="yS4-MJ-fMF">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tow_car_deselect" id="yS4-MJ-fMF">
                                                 <rect key="frame" x="48" y="27" width="40" height="36"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             </imageView>
@@ -2498,35 +2503,35 @@
                                         <rect key="frame" x="-3" y="121" width="326" height="71"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="park" id="m0Y-ij-6VO">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="parking" id="m0Y-ij-6VO">
                                                 <rect key="frame" x="67" y="27" width="66" height="36"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uGW-uV-fHG">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uGW-uV-fHG">
                                                 <rect key="frame" x="67" y="27" width="66" height="36"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                                <state key="normal">
+                                                <state key="normal" image="park">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="parkBtn:" destination="eRJ-2r-XzR" eventType="touchUpInside" id="OwT-KM-zjG"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Did you practice Parking?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YUI-wy-ZR6">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Did you practice Parking?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YUI-wy-ZR6">
                                                 <rect key="frame" x="67" y="2" width="188" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="16"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="not_park" id="uqY-Zz-hNY">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="not_parking_grey" id="uqY-Zz-hNY">
                                                 <rect key="frame" x="178" y="27" width="69" height="36"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="zTR-X7-oId">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zTR-X7-oId">
                                                 <rect key="frame" x="178" y="27" width="69" height="36"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                                <state key="normal">
+                                                <state key="normal" image="not_park">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -2548,7 +2553,7 @@
                                                 <rect key="frame" x="81" y="30" width="20" height="36"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dhome" id="nxj-Kr-kId">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="quiet_deselect" id="nxj-Kr-kId">
                                                 <rect key="frame" x="140" y="30" width="50" height="36"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             </imageView>
@@ -2610,7 +2615,7 @@
                                                     <action selector="signalBtn:" destination="eRJ-2r-XzR" eventType="touchUpInside" id="koD-kf-PY6"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unsealed,Sealed,Quiet,Busy,Multi-Lane" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="040-o1-gkb">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unsealed,Sealed,Quiet,Busy,Multi-Lane" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="040-o1-gkb">
                                                 <rect key="frame" x="20" y="1" width="290" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="16"/>
@@ -2739,6 +2744,8 @@
                         <outlet property="mapDrive" destination="2ol-L4-fDB" id="tDO-O0-CFL"/>
                         <outlet property="mapview" destination="2ol-L4-fDB" id="cBQ-R3-39i"/>
                         <outlet property="multiLaneBtn" destination="v8e-eK-azZ" id="0OQ-8n-KmM"/>
+                        <outlet property="parkBtn1" destination="uGW-uV-fHG" id="gcZ-H7-XAD"/>
+                        <outlet property="parkBtn2" destination="zTR-X7-oId" id="gxS-Rf-CxI"/>
                         <outlet property="parkingView" destination="5e8-ad-9XL" id="bec-Vw-IgV"/>
                         <outlet property="sealedBtn" destination="aRp-nT-BoF" id="Lgj-SY-qOm"/>
                         <outlet property="signalView" destination="9qf-ZO-HIv" id="6dC-gw-Te3"/>
@@ -2749,6 +2756,9 @@
                         <outlet property="trafficView" destination="B3B-iC-Njx" id="i4t-Lf-rda"/>
                         <outlet property="twoCarBtn" destination="ZyG-5z-0UJ" id="yat-cc-bRm"/>
                         <outlet property="unsealedBtn" destination="Fow-9d-wT0" id="TkM-0e-NTi"/>
+                        <outlet property="view1Lbl" destination="YUI-wy-ZR6" id="KyX-C3-tzd"/>
+                        <outlet property="view2Lbl" destination="2OX-KC-vXD" id="q1i-qx-U3G"/>
+                        <outlet property="view3Lbl" destination="040-o1-gkb" id="hXO-4J-bQY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pme-g3-mHf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4308,7 +4318,9 @@
         <image name="nav_bar" width="540" height="93"/>
         <image name="navbar" width="540" height="93"/>
         <image name="not_park" width="200" height="117"/>
+        <image name="not_parking_grey" width="200" height="117"/>
         <image name="park" width="200" height="117"/>
+        <image name="parking" width="200" height="117"/>
         <image name="phone" width="47" height="41"/>
         <image name="platinum" width="80" height="77"/>
         <image name="power" width="40" height="45"/>
@@ -4317,6 +4329,7 @@
         <image name="progresscar" width="36" height="15"/>
         <image name="progressgreen" width="59" height="5"/>
         <image name="quiet" width="152" height="108"/>
+        <image name="quiet_deselect" width="152" height="108"/>
         <image name="red" width="74" height="76"/>
         <image name="redtick" width="74" height="76"/>
         <image name="reg_later_text" width="240" height="55"/>
@@ -4343,6 +4356,7 @@
         <image name="timer_icon" width="93" height="104"/>
         <image name="tour_app_text" width="240" height="55"/>
         <image name="tour_back" width="540" height="960"/>
+        <image name="tow_car_deselect" width="153" height="109"/>
         <image name="trophy" width="81" height="81"/>
         <image name="trophy_bar" width="540" height="50"/>
         <image name="two_car" width="153" height="109"/>
