@@ -27,6 +27,7 @@
     
     //NSURL *url = [NSURL URLWithString:parameter];
     //NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    
     connection = [[NSURLConnection alloc] initWithRequest:parameter delegate:self];
     
     check  = parametercheck;
