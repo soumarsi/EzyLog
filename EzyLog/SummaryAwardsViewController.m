@@ -11,8 +11,12 @@
 #import "DrivingDistanceAwardViewController.h"
 #import "ELRoadViewController.h"
 #import "ELtrophyrewardroomViewController.h"
-
+#import "SupervisorSignupViewController.h"
+#import "ELActivityLogViewController.h"
+#import "ELDriveSummaryController.h"
+#import "ELWelcomeScreen.h"
 #import "ELSettingsViewController.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface SummaryAwardsViewController ()<SlideDelegate,UIGestureRecognizerDelegate>
 {
@@ -138,30 +142,39 @@
     if(sender==0)
     {
         NSLog(@"########%ld",(long)sender);
-        SummaryAwardsViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Drive_Summery"];
+        ELDriveSummaryController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Drive_Summery"];
         [self.navigationController pushViewController:obj animated:YES];
     }
    else if(sender==1)
     {
         NSLog(@"########%ld",(long)sender);
-        SummaryAwardsViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"activity"];
+        ELActivityLogViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"activity"];
         [self.navigationController pushViewController:obj animated:YES];
     }
     
    else if(sender==4)
     {
         NSLog(@"########%ld",(long)sender);
-        ELSettingsViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"settings"];
+        SupervisorSignupViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"supervisorregis"];
         [self.navigationController pushViewController:obj animated:YES];
     }
-//   else if(sender==5)
-//    {
-//        NSLog(@"########%ld",(long)sender);
-//        ELSettingsViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"settings"];
-//        [self.navigationController pushViewController:obj animated:YES];
-//    }
+   else if(sender==5)
+   {
+       NSLog(@"########%ld",(long)sender);
+       
+       [[FBSession activeSession] closeAndClearTokenInformation];
+       
+       NSUserDefaults *userData=[NSUserDefaults standardUserDefaults];
+       
+       [userData removeObjectForKey:@"status"];
+       
+       
+       ELWelcomeScreen *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"welcome"];
+       [self.navigationController pushViewController:obj animated:YES];
+   }
     else if(sender==100)
     {
+        NSLog(@"Btn tag ...100....");
         
         SummaryAwardsViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"summaryawards"];
         [self.navigationController pushViewController:obj animated:YES];

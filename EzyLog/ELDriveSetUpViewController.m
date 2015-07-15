@@ -152,7 +152,11 @@
         _carRegLbl.text=pickerValue;
         
         if([_carRegLbl.text length]<1)
-            _carRegLbl.text=[get_result_car[0] objectForKey:@"car_registration_no"];
+        {
+           // _carRegLbl.text=[get_result_car[0] objectForKey:@"car_registration_no"];
+            
+           _carRegLbl.text=[NSString stringWithFormat:@"Car 1: %@",[get_result_car[0] objectForKey:@"car_registration_no"]];
+        }
 
     
     }
@@ -432,7 +436,10 @@
     {
     
     
-    return [get_result_car[row] objectForKey:@"car_registration_no"];
+    return [NSString stringWithFormat:@"Car %d: %@",row+1,[get_result_car[row] objectForKey:@"car_registration_no"]];
+        
+        
+        //[get_result_car[row] objectForKey:@"car_registration_no"];
         
     }
     else
@@ -455,7 +462,7 @@
     }
     else if(carPickOpen==YES)
     {
-        pickerValue=[get_result_car[row] objectForKey:@"car_registration_no"];
+        pickerValue=[NSString stringWithFormat:@"Car %d: %@",row+1,[get_result_car[row] objectForKey:@"car_registration_no"]];
         
         app.carID=[get_result_car[row] objectForKey:@"car_id"];
         

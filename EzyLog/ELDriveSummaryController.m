@@ -10,6 +10,8 @@
 #import "ELActivityLogViewController.h"
 #import "ELWelcomeScreen.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "SupervisorSignupViewController.h"
+#import "SummaryAwardsViewController.h"
 
 @interface ELDriveSummaryController ()<SlideDelegate>
 {
@@ -78,22 +80,30 @@
     if(sender==0)
     {
         NSLog(@"########%ld",(long)sender);
-        ELActivityLogViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Drive_Summery"];
+        ELDriveSummaryController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Drive_Summery"];
         [self.navigationController pushViewController:obj animated:YES];
     }
- else if(sender==1)
-  {
-      NSLog(@"########%ld",(long)sender);
-      ELActivityLogViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"activity"];
-      [self.navigationController pushViewController:obj animated:YES];
-  }
-    
-   else if(sender==4)
+    else if(sender==1)
     {
         NSLog(@"########%ld",(long)sender);
-        ELActivityLogViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Drive_Setup"];
+        ELActivityLogViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"activity"];
         [self.navigationController pushViewController:obj animated:YES];
     }
+    
+    else if(sender==4)
+    {
+        NSLog(@"########%ld",(long)sender);
+        SupervisorSignupViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"supervisorregis"];
+        [self.navigationController pushViewController:obj animated:YES];
+    }
+    else if(sender==100)
+    {
+        NSLog(@"Btn tag ...100....");
+        
+        SummaryAwardsViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"summaryawards"];
+        [self.navigationController pushViewController:obj animated:YES];
+    }
+
     
    else if(sender==5)
     {
@@ -109,12 +119,6 @@
         ELWelcomeScreen *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"welcome"];
         [self.navigationController pushViewController:obj animated:YES];
     }
-   else if(sender==100)
-   {
-       
-       ELActivityLogViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"summaryawards"];
-       [self.navigationController pushViewController:obj animated:YES];
-   }
 
 }
 

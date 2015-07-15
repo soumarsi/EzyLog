@@ -17,6 +17,7 @@
 @protocol TGGlobal <NSObject>
 
 @optional
+
 typedef void(^Urlresponceblock)(id result, NSError *error);
 
 @end
