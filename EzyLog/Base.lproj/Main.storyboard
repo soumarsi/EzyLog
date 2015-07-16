@@ -1134,7 +1134,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Jd6-pj-qll">
-                                                <rect key="frame" x="-1.9999933417070208" y="2" width="114" height="21"/>
+                                                <rect key="frame" x="-1.9999944480769396" y="2" width="114" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                                 <color key="textColor" red="0.31764705879999999" green="0.32156862749999998" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -2545,19 +2545,19 @@
                                         <rect key="frame" x="-2" y="435" width="335" height="71"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sealed_deselect" id="LaZ-bd-eg7">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Unsld_de" id="LaZ-bd-eg7">
                                                 <rect key="frame" x="20" y="30" width="20" height="36"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unsealed_deselect" id="avh-6P-ag1">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sld_de" id="avh-6P-ag1">
                                                 <rect key="frame" x="81" y="30" width="20" height="36"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="quiet_deselect" id="nxj-Kr-kId">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Qt_de" id="nxj-Kr-kId">
                                                 <rect key="frame" x="140" y="30" width="50" height="36"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="busy_deselect" id="R3O-6p-kJU">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bsy_de" id="R3O-6p-kJU">
                                                 <rect key="frame" x="212" y="30" width="37" height="36"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             </imageView>
@@ -2568,7 +2568,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aRp-nT-BoF">
                                                 <rect key="frame" x="20" y="30" width="20" height="36"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="unsealed">
+                                                <state key="normal" image="Unsld">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -2578,7 +2578,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Fow-9d-wT0">
                                                 <rect key="frame" x="81" y="30" width="20" height="36"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="sealed">
+                                                <state key="normal" image="Sld">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -2588,7 +2588,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tBa-us-lB6">
                                                 <rect key="frame" x="140" y="30" width="50" height="36"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="quiet">
+                                                <state key="normal" image="Qt">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -2598,7 +2598,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2ig-w3-4Od">
                                                 <rect key="frame" x="212" y="30" width="37" height="36"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="busy">
+                                                <state key="normal" image="bsy">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -2636,7 +2636,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="ixN-UW-gLU" userLabel="drive_base_view">
-                                <rect key="frame" x="0.0" y="-192" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue_mode" id="jdx-zj-ElG">
@@ -4234,6 +4234,12 @@
     <resources>
         <image name="AVG_icon" width="36" height="36"/>
         <image name="End_drive_icon" width="163" height="163"/>
+        <image name="Qt" width="132" height="110"/>
+        <image name="Qt_de" width="132" height="110"/>
+        <image name="Sld" width="156" height="109"/>
+        <image name="Sld_de" width="156" height="109"/>
+        <image name="Unsld" width="138" height="109"/>
+        <image name="Unsld_de" width="138" height="109"/>
         <image name="agree_text" width="540" height="90"/>
         <image name="agreetext" width="540" height="121"/>
         <image name="back" width="38" height="25"/>
@@ -4247,8 +4253,8 @@
         <image name="blue_mode" width="540" height="960"/>
         <image name="boyimg" width="149" height="150"/>
         <image name="bronze" width="80" height="77"/>
-        <image name="busy" width="113" height="111"/>
-        <image name="busy_deselect" width="56" height="55"/>
+        <image name="bsy" width="136" height="109"/>
+        <image name="bsy_de" width="136" height="109"/>
         <image name="celebrity" width="81" height="81"/>
         <image name="clock" width="40" height="40"/>
         <image name="clock2" width="24" height="27"/>
@@ -4328,8 +4334,6 @@
         <image name="progressblack" width="294" height="5"/>
         <image name="progresscar" width="36" height="15"/>
         <image name="progressgreen" width="59" height="5"/>
-        <image name="quiet" width="152" height="108"/>
-        <image name="quiet_deselect" width="152" height="108"/>
         <image name="red" width="74" height="76"/>
         <image name="redtick" width="74" height="76"/>
         <image name="reg_later_text" width="240" height="55"/>
@@ -4338,8 +4342,6 @@
         <image name="register_another_text" width="456" height="60"/>
         <image name="register_text" width="456" height="60"/>
         <image name="rightarrow" width="12" height="20"/>
-        <image name="sealed" width="62" height="109"/>
-        <image name="sealed_deselect" width="31" height="54"/>
         <image name="secend_self" width="581" height="32"/>
         <image name="settings2" width="27" height="26"/>
         <image name="share_text" width="265" height="55"/>
@@ -4361,8 +4363,6 @@
         <image name="trophy_bar" width="540" height="50"/>
         <image name="two_car" width="153" height="109"/>
         <image name="uncle sam" width="81" height="81"/>
-        <image name="unsealed" width="62" height="109"/>
-        <image name="unsealed_deselect" width="31" height="54"/>
         <image name="upper_overlay" width="540" height="122"/>
         <image name="vertical_line" width="1" height="80"/>
         <image name="warning_steering_bg" width="488" height="515"/>

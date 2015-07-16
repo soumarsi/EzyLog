@@ -284,7 +284,7 @@
     
     if([tappedBtn isEqual:_sealedBtn])
     {
-        _view3Lbl.text=@"Sealed";
+        _view3Lbl.text=@"I drove in Sealed Street";
     
         _unsealedBtn.hidden=YES;
         _homeBtn.hidden=YES;
@@ -295,7 +295,7 @@
     }
     else     if([tappedBtn isEqual:_unsealedBtn])
     {
-        _view3Lbl.text=@"Unsealed";
+        _view3Lbl.text=@"I drove in Unsealed street";
         _sealedBtn.hidden=YES;
         _homeBtn.hidden=YES;
         _busyBtn.hidden=YES;
@@ -305,7 +305,7 @@
     }
     else     if([tappedBtn isEqual:_homeBtn])
     {
-        _view3Lbl.text=@"Quiet";
+        _view3Lbl.text=@"I drove in Quiet street";
         
         _sealedBtn.hidden=YES;
         _unsealedBtn.hidden=YES;
@@ -316,7 +316,7 @@
     }
     else     if([tappedBtn isEqual:_busyBtn])
     {
-        _view3Lbl.text=@"Busy";
+        _view3Lbl.text=@"I drove in Busy street";
         _sealedBtn.hidden=YES;
         _homeBtn.hidden=YES;
         _unsealedBtn.hidden=YES;
@@ -327,7 +327,7 @@
     else     if([tappedBtn isEqual:_multiLaneBtn])
     {
         
-        _view3Lbl.text=@"Multi-Lane";
+        _view3Lbl.text=@"I drove in Multi-Lane street";//Multi-Lane
         
         _sealedBtn.hidden=YES;
         _homeBtn.hidden=YES;
@@ -372,14 +372,14 @@
     if([tappedBtn isEqual:_twoCarBtn])
     {
         
-        _view2Lbl.text=@"Light Traffic";
+        _view2Lbl.text=@"I drove in light traffic";
         _fourCarBtn.hidden=YES;
         _sixCarBtn.hidden=YES;
         
     }
     else     if([tappedBtn isEqual:_fourCarBtn])
     {
-        _view2Lbl.text=@"Medium Traffic";
+        _view2Lbl.text=@"I drove in medium Traffic";
         _twoCarBtn.hidden=YES;
         _sixCarBtn.hidden=YES;
         
@@ -387,7 +387,7 @@
     }
     else     if([tappedBtn isEqual:_sixCarBtn])
     {
-        _view2Lbl.text=@"Heavy Traffic";
+        _view2Lbl.text=@"I drove in heavy Traffic";
         _twoCarBtn.hidden=YES;
         _fourCarBtn.hidden=YES;
         
@@ -453,7 +453,7 @@
     {
         _parkBtn2.hidden=YES;
         
-        _view1Lbl.text=@" Parking Practiced";
+        _view1Lbl.text=@"I practiced my parking";
         
         
         
@@ -461,7 +461,7 @@
     else if ([tapped isEqual:_parkBtn2])
     {
         _parkBtn1.hidden=YES;
-         _view1Lbl.text=@"No Parking Practiced";
+         _view1Lbl.text=@"I didn't practice parking";
         
     }
     
