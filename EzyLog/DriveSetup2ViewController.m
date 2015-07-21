@@ -10,13 +10,33 @@
 
 @interface DriveSetup2ViewController ()
 
+{
+
+    NSTimer *countDown;
+
+}
+
+@property (strong, nonatomic) IBOutlet UIButton *iAgreeBtn;
+
+@property (strong, nonatomic) IBOutlet UIVisualEffectView *timerBackView;
+
+
+@property (strong, nonatomic) IBOutlet UILabel *countLbl;
+
+
+
+
 @end
 
 @implementation DriveSetup2ViewController
 
+@synthesize iAgreeBtn,timerBackView,countLbl;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    timerBackView.hidden=YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,9 +61,78 @@
 
 - (IBAction)I_Agree_action:(id)sender
 {
+    
+    NSLog(@"I agree tapped.....");
+    
+    
+    
+    
+    timerBackView.hidden=NO;
+    
+    timerBackView.layer.cornerRadius=timerBackView.frame.size.width/2;
+    
+    timerBackView.clipsToBounds=YES;
+
+    
+   [self performSelector:@selector(countDown) withObject:nil afterDelay:1.0];
+    
+}
+
+
+-(void)countDown
+{
+    
+    if([countLbl.text isEqualToString:@"3"])
+    {
+    
+      countLbl.text=@"2";
+        
+        [self performSelector:@selector(countDown) withObject:nil afterDelay:1];
+        
+    
+    }
+    else
+        if([countLbl.text isEqualToString:@"2"])
+        {
+            
+            countLbl.text=@"1";
+            
+            [self performSelector:@selector(countDown) withObject:nil afterDelay:1];
+            
+            
+        }
+    else
+        if([countLbl.text isEqualToString:@"1"])
+        {
+            countLbl.adjustsFontSizeToFitWidth=YES;
+            
+            countLbl.text=@"GO";
+            
+            
+            [self performSelector:@selector(goToDrivePage) withObject:nil afterDelay:1.2];
+            
+            
+        }
+
+
+    
+    
+    
+    
+}
+
+-(void)goToDrivePage
+{
+
+    timerBackView.hidden=YES;
+
     DriveSetup2ViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"drive_recording_page"];
     
     [self.navigationController pushViewController:obj animated:YES];
-    
+
+
+
 }
+
+
 @end

@@ -86,6 +86,8 @@
         {
             spinner.hidden=NO;
             
+            spinner.color=[UIColor greenColor];
+            
             [spinner startAnimating];
             
             //_login_btn.userInteractionEnabled=NO;

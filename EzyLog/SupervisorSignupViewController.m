@@ -181,34 +181,34 @@
     
     if ([self TarminateWhiteSpace:_fname.text].length==0)
     {
-        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"you can't left First Name field blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"You can't leave the First Name blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
         [alertreg show];
     }
     else if ([self TarminateWhiteSpace:_lname.text].length==0)
     {
-        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"you can't left Last Name field blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"You can't leave the Last Name blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
         [alertreg show];
     }
     else if ([self Emailtest:_email.text])
     {
-        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"Enter proper mail-id" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"Please enter a valid email" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
         [alertreg show];
     }
     else if (_postcode.text.length==0)
     {
-        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"you can't left Post Code field blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"You can't leave the Postcode blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
         [alertreg show];
     }
     else if ([_dobday1.text isEqualToString:@""])
     {
-        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"you can't left Date of Birth field blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"You can't leave the date of birth blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
         [alertreg show];
     }
     //_licencedaylabel
     
     else if ([_licencedaylabel.text isEqualToString:@""])
     {
-        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"you can't left Expiry Date of Lisence field blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"You can't leave the expiry date blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
         [alertreg show];
     }
     
@@ -217,7 +217,7 @@
     
     else if (_licenceno.text.length==0)
     {
-        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"you can't left Licence Number field blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"You can't leave the licence number blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
         [alertreg show];
     }
 //    else if (chkingdata==NULL)
@@ -235,7 +235,7 @@
         if([_insno.text length]<1)
         {
         
-            UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"you can't left  Instructor number field blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+            UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"You can't leave the Instructor Number blank" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
             [alertreg show];
             
             
@@ -296,7 +296,7 @@
                      }
                      else
                      {
-                         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:[result valueForKey:@"status"] message:[result valueForKey:@"message"] delegate:nil cancelButtonTitle:@"OK"
+                         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Sorry" message:@"Registration failed" delegate:nil cancelButtonTitle:@"OK"
                                                               otherButtonTitles:nil];
                          
                          [alert show];

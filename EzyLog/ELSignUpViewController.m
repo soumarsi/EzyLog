@@ -800,7 +800,7 @@
     NSString *trimmed = [rawString stringByTrimmingCharactersInSet:whitespace];
     if ([trimmed length] < 1) {
         
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"You must enter a first name" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"You can't leave the First Name blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
         
         
@@ -811,7 +811,7 @@
         
     {
         
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"You must enter a last name" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"You can't leave the Last Name blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
         
         
@@ -821,7 +821,7 @@
         
     {
         // NSString *numberinvalid=[NSString stringWithFormat:@"Phone must be 10 digit..\n You have Enter %lu digits",(unsigned long)[_phno.text length]];
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"Please enter valid Phone no" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"Pleas enter a valid phone number" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
         
         
@@ -830,14 +830,14 @@
         
     {
         
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"You must enter a screen name" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"You can't leave the Screen Name blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
         
     }
     
     else  if (![ self NSStringIsValidEmail:[_email text]])
     {
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"Enter a valid email address" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"Please enter a valid email" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
         
         
@@ -847,21 +847,21 @@
         
     {
         
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"You must enter a password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"Please enter a valid Password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
         
     }
     else if ([_daylbl.text isEqual:@"Day"] || [_monthlbl.text isEqual:@"Month"] || [_yearlbl.text isEqual:@"Year"])//strday==NULL
     {
         
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"DOB field is incomplete" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"You can't leave the date of birth blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
     }
     
     else if ([_day2lbl.text isEqual:@"Day"] || [_month2lbl.text isEqual:@"Month"] || [_year2lbl.text isEqual:@"Year"])//strday==NULL
     {
         
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"Expiry date field is incomplete" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"You can't leave the Expiry Date blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
     }
     
@@ -870,7 +870,7 @@
         
     {
         
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"Please enter a Learner Permit number" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"You can't leave the Permit Number blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
         
     }
@@ -883,13 +883,13 @@
     else if ([_postcode.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ].length < 1)
     {
         
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"You must enter a valid postal code" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"You can't leave the Postcode blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
     }
     else if (ww ==NULL)
     {
         
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"You must enter your state" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"You can't leave the State blank" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
     }
     
@@ -898,14 +898,17 @@
     {
     
         [self Requstdata];
-       }
+        
+    }
     
     
 }
-- (IBAction)loginclk:(id)sender {
-    ELSignUpViewController *login = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"directlogin"];
-    [self.navigationController pushViewController:login animated:YES];
-}
+
+//- (IBAction)loginclk:(id)sender {
+//    ELSignUpViewController *login = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"directlogin"];
+//    [self.navigationController pushViewController:login animated:YES];
+//}
+
 - (IBAction)backclk:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
     
@@ -1201,7 +1204,7 @@
          }
          else
          {
-             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:[result valueForKey:@"status"] message:[result valueForKey:@"message"] delegate:nil cancelButtonTitle:@"OK"
+             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Sorry" message:@"Registration failed" delegate:nil cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
              
              [alert show];

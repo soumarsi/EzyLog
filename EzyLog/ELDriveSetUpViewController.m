@@ -478,8 +478,39 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)Startclk:(id)sender {
-    ELDriveSetUpViewController *login = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Drivesetup2_Page"];
-    [self.navigationController pushViewController:login animated:YES];
+    
+    if([_superNameLbl.text length]<1 || [_superNameLbl.text isEqualToString:@"SUPERVISOR"])
+    {
+     
+        UIAlertView *supernameAlert=[[UIAlertView alloc]initWithTitle:@"Please note:" message:@"Please select a supervisor for the drive" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        
+        [supernameAlert show];
+    
+    
+    }
+    else
+        if([_carRegLbl.text length]<1 || [_carRegLbl.text isEqualToString:@"CAR VEHICLE"])
+        {
+            
+            UIAlertView *carAlert=[[UIAlertView alloc]initWithTitle:@"Please note:" message:@"Please select a car for the drive" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            
+            [carAlert show];
+            
+            
+        }
+    else
+    {
+    
+    
+        ELDriveSetUpViewController *login = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Drivesetup2_Page"];
+        [self.navigationController pushViewController:login animated:YES];
+
+        
+        
+    
+    }
+    
+    
 }
 
 //- (IBAction)registercarclk:(id)sender

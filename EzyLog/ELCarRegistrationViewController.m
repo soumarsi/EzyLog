@@ -181,7 +181,9 @@
             if(successCar.count>0 && duplicateCar.count==0)
             {
             
-            UIAlertView *carAlert=[[UIAlertView alloc]initWithTitle:@"Car Registration details" message:[NSString stringWithFormat:@"Succesfully registerd car no: %@",sucCar] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            UIAlertView *carAlert=[[UIAlertView alloc]initWithTitle:@"Please note:" message:[NSString stringWithFormat:@"You have successfully registered the following car(s): %@",sucCar] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                
+                //Please note: You have successfully registered the following car(s):
                 
                 [carAlert show];
                 
@@ -193,7 +195,7 @@
             else if (successCar.count==0 && duplicateCar.count==0)
             {
             
-                UIAlertView *carAlert=[[UIAlertView alloc]initWithTitle:@"Car Registration details" message:[NSString stringWithFormat:@"You have not registered any car"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                UIAlertView *carAlert=[[UIAlertView alloc]initWithTitle:@"Please note:" message:[NSString stringWithFormat:@"You have not registered any car"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 
                 [carAlert show];
                 
@@ -202,7 +204,7 @@
             else if (successCar.count>0 && duplicateCar.count>0)
             {
                 
-                UIAlertView *carAlert=[[UIAlertView alloc]initWithTitle:@"Car Registration details" message:[NSString stringWithFormat:@"Succesfully registerd car no: %@ & Duplicate car no: %@",sucCar,dupCar] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                UIAlertView *carAlert=[[UIAlertView alloc]initWithTitle:@"Please note:" message:[NSString stringWithFormat:@"You have successfully registered the following car(s): %@",sucCar] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 
                 [carAlert show];
                 
@@ -214,7 +216,7 @@
             if(successCar.count==0 && duplicateCar.count>0)
             {
                 
-                UIAlertView *carAlert=[[UIAlertView alloc]initWithTitle:@"Car Registration details" message:[NSString stringWithFormat:@"All the cars are already registered"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                UIAlertView *carAlert=[[UIAlertView alloc]initWithTitle:@"Please note:" message:[NSString stringWithFormat:@"All the cars are already registered"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 
                 [carAlert show];
                 

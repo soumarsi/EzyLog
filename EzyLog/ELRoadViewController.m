@@ -59,8 +59,33 @@
     
     AppDelegate *app;
     
+    //Strings to store which button pressed
+    
+    NSString *parkingStrng,*trafficStrng,*roadStrng;
+    
+    //Drive ID after end drive...
+    
+    NSString *driveID;
     
     
+    NSArray *total,*day,*night;
+    
+    int t,d,n;
+    
+    
+    //timer variables
+    
+    IBOutlet UILabel *hourLbl;
+    
+    
+    IBOutlet UILabel *minLbl;
+    
+    
+    IBOutlet UILabel *secLbl;
+    
+    float hour,min,sec;
+    
+
     
 
 
@@ -124,6 +149,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    hour=.00;
+    min=.00;
+    //min=.59;
+    sec=.00;
+    
+    total=[[NSArray alloc]init];
+    day=[[NSArray alloc]init];
+    night=[[NSArray alloc]init];
+    
+    t=d=n=0;
     
     dayHours=@"";
     nightHours=@"";
@@ -218,6 +255,12 @@
     self.maskView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.8];
     [self.driver_map addSubview:self.maskView];
     
+    
+    
+    //timer start
+    
+     [self startTimer];
+    
 
     
 }
@@ -240,7 +283,9 @@
     
     NSString *strCurrentTime = [dateFormatter stringFromDate:[NSDate date]];
     
-    NSLog(@"current time: %.2f",[strCurrentTime floatValue]);
+   // NSLog(@" Beginning current time: %.2f",[strCurrentTime floatValue]);
+    
+    NSLog(@" Beginning current time: %f",[strCurrentTime floatValue]);
     
     if ([strCurrentTime floatValue] >= 18.00 || [strCurrentTime floatValue]  <= 6.00){
         NSLog(@"It's night time");
@@ -291,6 +336,8 @@
         _busyBtn.hidden=YES;
         _multiLaneBtn.hidden=YES;
         
+        roadStrng=@"S";
+        
     
     }
     else     if([tappedBtn isEqual:_unsealedBtn])
@@ -300,6 +347,8 @@
         _homeBtn.hidden=YES;
         _busyBtn.hidden=YES;
         _multiLaneBtn.hidden=YES;
+        
+        roadStrng=@"U";
         
         
     }
@@ -312,6 +361,8 @@
         _busyBtn.hidden=YES;
         _multiLaneBtn.hidden=YES;
         
+        roadStrng=@"Q";
+        
         
     }
     else     if([tappedBtn isEqual:_busyBtn])
@@ -321,6 +372,8 @@
         _homeBtn.hidden=YES;
         _unsealedBtn.hidden=YES;
         _multiLaneBtn.hidden=YES;
+        
+        roadStrng=@"B";
         
         
     }
@@ -333,6 +386,8 @@
         _homeBtn.hidden=YES;
         _busyBtn.hidden=YES;
         _unsealedBtn.hidden=YES;
+        
+        roadStrng=@"M";
         
         
     }
@@ -349,6 +404,41 @@
 -(void)signalAction
 {
 
+    
+    globalOBJ=[[RS_JsonClass alloc]init];
+    
+    NSString *urlstring=[NSString stringWithFormat:@"%@end_drive.php",App_Domain_Url];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlstring]];
+    
+    [request setHTTPMethod:@"POST"];
+    
+    NSLog(@"Driver id is %@",app.userID);
+    
+    NSString *postData = [NSString stringWithFormat:@"drive_id=%@&parking=%@&traffic=%@&road_condition=%@",driveID,parkingStrng,trafficStrng,roadStrng];//,app.userID
+    
+    NSLog(@"Post data....%@",postData);
+    
+    [request setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    NSLog(@"%@",request);
+    
+    [request setHTTPBody:[postData dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [globalOBJ GlobalDict:request Globalstr:@"array" Withblock:^(id result, NSError *error) {
+        
+        
+        if(result)
+        {
+        
+            NSLog(@"Result after ending drive.....%@",result);
+        
+        }
+        
+        
+        
+    }];
+
+    
 
     
     UIStoryboard *story=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -376,12 +466,16 @@
         _fourCarBtn.hidden=YES;
         _sixCarBtn.hidden=YES;
         
+        trafficStrng=@"L";
+        
     }
     else     if([tappedBtn isEqual:_fourCarBtn])
     {
         _view2Lbl.text=@"I drove in medium Traffic";
         _twoCarBtn.hidden=YES;
         _sixCarBtn.hidden=YES;
+        
+        trafficStrng=@"M";
         
         
     }
@@ -390,6 +484,8 @@
         _view2Lbl.text=@"I drove in heavy Traffic";
         _twoCarBtn.hidden=YES;
         _fourCarBtn.hidden=YES;
+        
+        trafficStrng=@"H";
         
         
     }
@@ -425,27 +521,7 @@
 - (IBAction)parkBtn:(id)sender
 {
     
-    
-//    //Animation appearence
-//    
-//     [UIView animateWithDuration:0.8 animations:^
-//     {
-//         _parkingView.hidden=YES;
-//         
-//         //_trafficView.hidden=NO;
-//
-//         
-//         _trafficView.frame=mainFrame;
-//         
-//         
-//         
-//     } completion:^(BOOL finished)
-//    {
-//        [UIView animateWithDuration:3.0 animations:^
-//         {
-//                     }];
-//    }];
-    
+ 
 
     UIButton *tapped=(UIButton *)(id)sender;
     
@@ -455,6 +531,8 @@
         
         _view1Lbl.text=@"I practiced my parking";
         
+        parkingStrng=@"T";
+        
         
         
     }
@@ -462,6 +540,8 @@
     {
         _parkBtn1.hidden=YES;
          _view1Lbl.text=@"I didn't practice parking";
+        
+        parkingStrng=@"F";
         
     }
     
@@ -496,11 +576,6 @@
 }
 
 
-- (IBAction)animation:(id)sender
-{
-
-}
-
 - (void)followerDidUpdate:(Follower *)follower
 {
     dispatch_async(dispatch_get_main_queue(), ^(){
@@ -513,7 +588,12 @@
     
     _total_time.text = [follower routeDurationString];
     
-    _driver_hours_driven.text = [follower routeDurationString];
+   //_driver_hours_driven.text = [follower routeDurationString];
+        
+       // [self startTimer];
+        
+        secLbl.adjustsFontSizeToFitWidth=YES;
+        
     
     _total_distance.text = [NSString stringWithFormat:@"%.2f mi", [follower totalDistanceWithUnit:DistanceUnitMiles]];
     
@@ -525,6 +605,91 @@
 //    self.maxAltitudeView.valueLabel.text = [NSString stringWithFormat:@"%.0f ft", [follower maximumAltitudeWithUnit:DistanceUnitFeet]];
         
     });
+
+}
+
+
+-(void)startTimer
+{
+
+     NSArray *secArr=[[NSArray alloc]init];
+     NSArray *minArr=[[NSArray alloc]init];
+     NSArray *hourArr=[[NSArray alloc]init];
+    
+    
+    
+    sec+=.01;
+    
+    NSString *tempSec=[NSString stringWithFormat:@"%.2f",sec];
+    
+    sec=[tempSec floatValue];
+    
+    NSLog(@"Sec: %@",tempSec);
+    
+    if([tempSec isEqualToString:@"0.60"])
+    {
+        sec=.00;
+        
+        min+=.01;
+        
+        NSString *tempMin=[NSString stringWithFormat:@"%.2f",min];
+        
+        min=[tempMin floatValue];
+        
+        
+        
+        if([tempMin isEqualToString:@"0.60"])
+        {
+        
+            NSLog(@"Minute............: %@",tempMin);
+        
+            min=.00;
+            
+            hour+=.01;
+            
+            hourArr=[[NSString stringWithFormat:@"%.2f",hour] componentsSeparatedByString:@"."];
+            
+             hourLbl.text=[hourArr objectAtIndex:1];
+            
+            minArr=[[NSString stringWithFormat:@"%.2f",min] componentsSeparatedByString:@"."];
+            
+            minLbl.text=[minArr objectAtIndex:1];
+            
+            secArr=[[NSString stringWithFormat:@"%.2f",sec] componentsSeparatedByString:@"."];
+            secLbl.text=[secArr objectAtIndex:1];
+
+        
+        }
+
+        else
+        {
+            
+       // minArr=[[NSString stringWithFormat:@"%.2f",min] componentsSeparatedByString:@"."];
+        
+        secArr=[[NSString stringWithFormat:@"%.2f",sec] componentsSeparatedByString:@"."];
+        
+       // minLbl.text=[minArr objectAtIndex:1];
+        
+            secLbl.text=[secArr objectAtIndex:1];
+        }
+        
+    }
+    else
+    {
+    
+        minArr=[[NSString stringWithFormat:@"%.2f",min] componentsSeparatedByString:@"."];
+        
+        minLbl.text=[minArr objectAtIndex:1];
+   
+        
+    secArr=[[NSString stringWithFormat:@"%.2f",sec] componentsSeparatedByString:@"."];
+    
+    secLbl.text=[secArr objectAtIndex:1];
+        
+    }
+    
+    [self performSelector:@selector(startTimer) withObject:nil afterDelay:1.0];
+
 
 }
 
@@ -542,9 +707,6 @@
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
     if (_tracking) {
         
-//        NSLog(@"Location data latitude... %.2f",userLocation.location.coordinate.latitude);
-//        
-//        NSLog(@"Location data longitude... %.2f",userLocation.location.coordinate.longitude);
         
         if([startLat isEqualToString:@"0"] && [startLong isEqualToString:@"0"])
         {
@@ -566,27 +728,7 @@
 }
 
 
-#pragma mark - Utils
 
-/*- (UILabel *)newLabelWithColor:(UIColor *)color {
-    UILabel *label = [UILabel new];
-    label.textColor = [UIColor whiteColor];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.backgroundColor = [UIColor redColor];
-    return label;
-}
-*/
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)End_drive_action:(id)sender
 {
@@ -626,23 +768,46 @@
     
     NSLog(@"current time: %.2f",[endTime floatValue]);
     
-    totalHours=[NSString stringWithFormat:@"%f",[endTime floatValue]-[startTime floatValue]];
+    totalHours=[NSString stringWithFormat:@"%.2f",[endTime floatValue]-[startTime floatValue]];
 
     NSLog(@"Driving hours.... %f",[totalHours floatValue]);
     
     
     if ([startTime floatValue] >= 18.00)
     {
+        NSLog(@"Night drive.....");
+        
         if ([endTime floatValue]>=6.00) {
             
             double dif=12-([startTime floatValue]-18.00)+[endTime floatValue]-6.00;
             
-            dayHours=[NSString stringWithFormat:@"%f",[endTime floatValue]-6.00];
-            nightHours=[NSString stringWithFormat:@"%f",12-([startTime floatValue]-18.00)];
+            dayHours=[NSString stringWithFormat:@"%.2f",[endTime floatValue]-6.00];
+            nightHours=[NSString stringWithFormat:@"%.2f",12-([startTime floatValue]-18.00)];
+            
+            //day
+            
+            day=[dayHours componentsSeparatedByString:@"."];
+            d=(int)([day[0]integerValue]*60)+(int)[day[1]integerValue];
+            dayHours=[NSString stringWithFormat:@"%d",d];
+            
+            
+            //night
+            
+            night=[nightHours componentsSeparatedByString:@"."];
+            n=(int)([night[0]integerValue]*60)+(int)[night[1]integerValue];
+            dayHours=[NSString stringWithFormat:@"%d",n];
+
             
             
             
-            totalHours=[NSString stringWithFormat:@"%f",dif];
+           //total
+            totalHours=[NSString stringWithFormat:@"%.2f",dif];
+            
+            total=[totalHours componentsSeparatedByString:@"."];
+            
+            t=(int)([total[0] integerValue]*60)+(int)[total[1]integerValue];
+            
+            totalHours=[NSString stringWithFormat:@"%d",t];
             
         }
         else
@@ -650,7 +815,14 @@
         
             double dif=[endTime floatValue]-[startTime floatValue];
             
-            totalHours=[NSString stringWithFormat:@"%f",dif];
+            totalHours=[NSString stringWithFormat:@"%.2f",dif];
+            
+            total=[totalHours componentsSeparatedByString:@"."];
+            
+            t=(int)([total[0] integerValue]*60)+(int)[total[1]integerValue];
+            
+            totalHours=[NSString stringWithFormat:@"%d",t];
+
             
             nightHours=totalHours;
         
@@ -658,18 +830,44 @@
 
         
     }
-    else if([startTime floatValue]>=6.00)
+    else if([startTime floatValue]>=6.00 && [startTime floatValue]<=18.00)
     {
+        NSLog(@"Day drive .....");
+        
         
         if ([endTime floatValue]>=18.00) {
             
             double dif=12-([startTime floatValue]-6.00)+[endTime floatValue]-18.00;
             
-            totalHours=[NSString stringWithFormat:@"%f",dif];
+            totalHours=[NSString stringWithFormat:@"%.2f",dif];
             
-            dayHours=[NSString stringWithFormat:@"%f",12-([startTime floatValue]-6.00)];
+            dayHours=[NSString stringWithFormat:@"%.2f",12-([startTime floatValue]-6.00)];
             
-            nightHours=[NSString stringWithFormat:@"%f",[endTime floatValue]-18.00];
+            nightHours=[NSString stringWithFormat:@"%.2f",[endTime floatValue]-18.00];
+            
+            //total
+            total=[totalHours componentsSeparatedByString:@"."];
+            
+            t=(int)([total[0] integerValue]*60)+(int)[total[1]integerValue];
+            
+            totalHours=[NSString stringWithFormat:@"%d",t];
+            
+            
+            //day
+            
+            day=[dayHours componentsSeparatedByString:@"."];
+            d=(int)([day[0]integerValue]*60)+(int)[day[1]integerValue];
+            dayHours=[NSString stringWithFormat:@"%d",d];
+            
+            
+            //night
+            
+            night=[nightHours componentsSeparatedByString:@"."];
+            n=(int)([night[0]integerValue]*60)+(int)[night[1]integerValue];
+            dayHours=[NSString stringWithFormat:@"%d",n];
+
+
+            
             
         }
         else
@@ -677,20 +875,34 @@
             
             double dif=[endTime floatValue]-[startTime floatValue];
             
-            totalHours=[NSString stringWithFormat:@"%f",dif];
+            totalHours=[NSString stringWithFormat:@"%.2f",dif];
+            
+            total=[totalHours componentsSeparatedByString:@"."];
+            
+            t=(int)([total[0] integerValue]*60)+(int)[total[1]integerValue];
+            
+            totalHours=[NSString stringWithFormat:@"%d",t];
             
             dayHours=totalHours;
             
         }
+        
+        NSLog(@"You have drived total....> %@",totalHours);
 
         
     }
     
+    if(![driveDistance isEqualToString:@""])
     
+          [self fireURL];
+    else
+    {
     
+        UIAlertView *driveAlert=[[UIAlertView alloc]initWithTitle:@"Message" message:@"You have not completed any drive." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     
-    
-    [self fireURL];
+        [driveAlert show];
+        
+    }
     
     
 }
@@ -703,9 +915,6 @@
     
     globalOBJ=[[RS_JsonClass alloc]init];
     
-    
-    // driver_id=@"1";
-    
     NSString *urlstring=[NSString stringWithFormat:@"%@drive_summary.php",App_Domain_Url];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlstring]];
@@ -715,6 +924,8 @@
     NSLog(@"Driver id is %@",app.userID);
     
     NSString *postData = [NSString stringWithFormat:@"driver_id=%@&supervisor_id=%@&car_id=%@&total_drive_hr=%@&drive_day_hr=%@&drive_night_hr=%@&drive_km=%@&avg_speed=%@&start_lat=%@&start_long=%@&end_lat=%@&end_long=%@",driverID,supID,carID,totalHours,dayHours,nightHours,driveDistance,driveSpeed,startLat,startLong,endLat,endLong];//,app.userID
+    
+    NSLog(@"Post data....%@",postData);
     
     [request setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     NSLog(@"%@",request);
@@ -729,6 +940,10 @@
         {
         
             NSLog(@"Result....%@",result);
+            
+            driveID=[NSString stringWithFormat:@"%@",[result valueForKey:@"id"]];
+            
+            NSLog(@"**--DRIVE ID--** %@",driveID);
         
         }
         
