@@ -13,10 +13,39 @@
 #import "SupervisorSignupViewController.h"
 #import "SummaryAwardsViewController.h"
 
+#import "RS_JsonClass.h"
+#import "AppDelegate.h"
+
 @interface ELDriveSummaryController ()<SlideDelegate>
 {
     BOOL menuslide;
     LeftMenu *leftview;
+    
+    //Dynamic drive data(s)....
+    
+    IBOutlet UILabel *driveHourLbl;
+    
+    
+    IBOutlet UILabel *totalNoDrive;
+    
+    
+    IBOutlet UILabel *dayHourLbl;
+    
+    
+    IBOutlet UILabel *nightHourLbl;
+    
+    IBOutlet UILabel *monthYearLbl;
+    
+    
+    RS_JsonClass *globalOBJ;
+    
+    NSMutableArray *resultArr;
+    
+    AppDelegate *app;
+    
+    
+    
+    
 }
 
 @end
@@ -31,6 +60,83 @@
     // Do any additional setup after loading the view.
     
     menuslide = 0;
+    
+    resultArr=[[NSMutableArray alloc]init];
+    
+    globalOBJ=[[RS_JsonClass alloc]init];
+    
+    app=[[UIApplication sharedApplication]delegate];
+    
+    [self getData];
+    
+    
+    
+    
+    
+}
+
+-(void)getData
+{
+
+
+    globalOBJ=[[RS_JsonClass alloc]init];
+    
+    NSString *urlstring=[NSString stringWithFormat:@"%@total_drives.php",App_Domain_Url];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlstring]];
+    
+    [request setHTTPMethod:@"POST"];
+    
+    NSLog(@"Driver id is %@",app.userID);
+    
+    NSString *postData = [NSString stringWithFormat:@"driver_id=%@",app.userID];//,app.userID
+    
+    NSLog(@"Post data....%@",postData);
+    
+    [request setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    NSLog(@"%@",request);
+    
+    [request setHTTPBody:[postData dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [globalOBJ GlobalDict:request Globalstr:@"array" Withblock:^(id result, NSError *error) {
+        
+        
+        if(result)
+        {
+        
+        
+            resultArr=(NSMutableArray *)[result mutableCopy];
+            
+            NSLog(@"Drive summary array..... %@",resultArr);
+            
+            driveHourLbl.text=[NSString stringWithFormat:@"%.2f",[[[resultArr valueForKey:@"details"] valueForKey:@"final_drive_duration"] floatValue]/60 ];
+            totalNoDrive.text=[NSString stringWithFormat:@"%@",[[resultArr valueForKey:@"details"] valueForKey:@"total_drives"]];
+            dayHourLbl.text=[NSString stringWithFormat:@"%.2f",[[[resultArr valueForKey:@"details"] valueForKey:@"final_drive_day_duration"] floatValue]/60 ];
+            if([dayHourLbl.text length]==4)
+                dayHourLbl.text=[NSString stringWithFormat:@"0%@", [NSString stringWithFormat:@"%.2f",[[[resultArr valueForKey:@"details"] valueForKey:@"final_drive_day_duration"] floatValue]/60 ]];
+            
+            
+            
+            nightHourLbl.text=[NSString stringWithFormat:@"%.2f",[[[resultArr valueForKey:@"details"] valueForKey:@"final_drive_night_duration"] floatValue]/60 ];
+            if([nightHourLbl.text length]==4)
+                nightHourLbl.text=[NSString stringWithFormat:@"0%@", [NSString stringWithFormat:@"%.2f",[[[resultArr valueForKey:@"details"] valueForKey:@"final_drive_night_duration"] floatValue]/60 ]];
+            
+            
+            monthYearLbl.text=[[resultArr valueForKey:@"details"] valueForKey:@"month"];
+            
+            NSLog(@"Night label text length %ld",[nightHourLbl.text length]);
+            
+            
+            
+        
+        }
+        
+        
+        
+    }];
+
+    
+
 }
 
 - (IBAction)leftmenuclk:(id)sender

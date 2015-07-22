@@ -177,7 +177,6 @@
             <string>Oswald-Regular</string>
             <string>Oswald-Regular</string>
             <string>Oswald-Regular</string>
-            <string>Oswald-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1139,7 +1138,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Jd6-pj-qll">
-                                                <rect key="frame" x="-1.9999925713793782" y="2" width="114" height="21"/>
+                                                <rect key="frame" x="-1.9999926598164939" y="2" width="114" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                                 <color key="textColor" red="0.31764705879999999" green="0.32156862749999998" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1898,9 +1897,14 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="dayHourLbl" destination="duD-5E-RcP" id="8fu-ro-eWR"/>
+                        <outlet property="driveHourLbl" destination="8ff-Cf-ve5" id="nqM-tV-Krg"/>
                         <outlet property="leftmenubutton" destination="6he-HQ-AdP" id="Zct-MJ-3Ac"/>
                         <outlet property="mainview" destination="nK6-BO-8xd" id="KZM-qL-UP4"/>
+                        <outlet property="monthYearLbl" destination="tLz-1e-GdX" id="8Tz-5V-b6b"/>
                         <outlet property="moremenubutton" destination="Pwl-aG-Owg" id="eCl-ZU-cmA"/>
+                        <outlet property="nightHourLbl" destination="g3p-PT-ZTT" id="sgI-aU-nUh"/>
+                        <outlet property="totalNoDrive" destination="MgC-M3-ohn" id="5LZ-9i-u3s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KqS-sC-IND" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1947,7 +1951,7 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ACTIVITY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QAF-UD-GyP">
-                                                <rect key="frame" x="120" y="26" width="86" height="21"/>
+                                                <rect key="frame" x="117" y="26" width="86" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1967,11 +1971,11 @@
                                                     <action selector="leftmenuclk:" destination="gGF-L6-Rfp" eventType="touchUpInside" id="pqv-Ta-bcw"/>
                                                 </connections>
                                             </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dplusbtn" id="Mz1-0C-MnE">
+                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dplusbtn" id="Mz1-0C-MnE">
                                                 <rect key="frame" x="257" y="27" width="19" height="19"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VWK-ZH-UfY">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VWK-ZH-UfY">
                                                 <rect key="frame" x="241" y="18" width="45" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 <state key="normal">
@@ -2014,8 +2018,8 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="135" sectionHeaderHeight="22" sectionFooterHeight="22" id="0ja-Ff-SHl">
-                                        <rect key="frame" x="0.0" y="100" width="320" height="467"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="135" sectionHeaderHeight="22" sectionFooterHeight="22" id="0ja-Ff-SHl">
+                                        <rect key="frame" x="0.0" y="60" width="320" height="508"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
@@ -2026,8 +2030,8 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="135"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today, April 12, 2015" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0Zt-uF-kD7">
-                                                            <rect key="frame" x="8" y="9" width="170" height="21"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today, April 12, 2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0Zt-uF-kD7">
+                                                            <rect key="frame" x="19" y="9" width="170" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
                                                             <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
@@ -2037,19 +2041,19 @@
                                                             <rect key="frame" x="297" y="12" width="9" height="14"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                         </imageView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dcar" id="Rwt-7d-h2z">
+                                                        <imageView userInteractionEnabled="NO" tag="4" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dcar" id="Rwt-7d-h2z">
                                                             <rect key="frame" x="201" y="79" width="48" height="33"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                         </imageView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dhome" id="str-v8-b8y">
+                                                        <imageView userInteractionEnabled="NO" tag="5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dhome" id="str-v8-b8y">
                                                             <rect key="frame" x="262" y="79" width="48" height="33"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                         </imageView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dcarpark" id="Rit-1x-gl9">
+                                                        <imageView userInteractionEnabled="NO" tag="3" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dcarpark" id="Rit-1x-gl9">
                                                             <rect key="frame" x="139" y="79" width="48" height="33"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="03.15" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8da-Pl-iYU">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="03.15" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8da-Pl-iYU">
                                                             <rect key="frame" x="19" y="43" width="107" height="50"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="48"/>
@@ -2064,14 +2068,14 @@
                                                             <rect key="frame" x="233" y="47" width="19" height="19"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12.5 KMS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fkP-O7-8p2">
+                                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12.5 KMS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fkP-O7-8p2">
                                                             <rect key="frame" x="169" y="47" width="57" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" name="Oswald-Bold" family="Oswald" pointSize="15"/>
                                                             <color key="textColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="45.0 KPH" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7Ts-kw-nkM">
+                                                        <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="45.0 KPH" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7Ts-kw-nkM">
                                                             <rect key="frame" x="254" y="47" width="63" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" name="Oswald-Bold" family="Oswald" pointSize="15"/>
@@ -2090,25 +2094,27 @@
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOURS DRIVEN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Aew-ah-WaV">
-                                                            <rect key="frame" x="23" y="96" width="102" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" name="Oswald-Bold" family="Oswald" pointSize="14"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOURS DRIVEN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Aew-ah-WaV">
+                                                            <rect key="frame" x="19" y="96" width="107" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" name="Oswald-Bold" family="Oswald" pointSize="17"/>
                                                             <color key="textColor" red="0.39607843139999999" green="0.69411764710000001" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                 </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="avrgSpeedLbl" destination="7Ts-kw-nkM" id="KBi-BW-J2A"/>
+                                                    <outlet property="dateLbl" destination="0Zt-uF-kD7" id="JKE-6B-Jrt"/>
+                                                    <outlet property="driveDistanceLbl" destination="fkP-O7-8p2" id="z2d-v0-6Ld"/>
+                                                    <outlet property="hoursLbl" destination="8da-Pl-iYU" id="qQ8-KO-7pF"/>
+                                                    <outlet property="parkImageView" destination="Rit-1x-gl9" id="BWh-xj-WQS"/>
+                                                    <outlet property="roadImageView" destination="str-v8-b8y" id="hnB-IK-nIf"/>
+                                                    <outlet property="trafficImageView" destination="Rwt-7d-h2z" id="gvP-tH-VLM"/>
+                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="03.15" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nXO-JJ-GaD">
-                                        <rect key="frame" x="165" y="69" width="42" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="14"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -2749,10 +2755,6 @@
                                         <state key="normal" image="End_drive_icon">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <connections>
-                                            <action selector="End_Drive_Action:" destination="aHZ-ET-JCb" eventType="touchUpInside" id="A9D-cN-RcP"/>
-                                            <action selector="End_drive_action:" destination="eRJ-2r-XzR" eventType="touchUpInside" id="AWH-QV-Sd9"/>
-                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="END DRIVE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="stU-p2-H0Z">
                                         <rect key="frame" x="80" y="529" width="161" height="32"/>
@@ -2810,6 +2812,7 @@
                         <outlet property="driver_distance_driven" destination="Jao-wb-gQl" id="YRG-K2-6oF"/>
                         <outlet property="driver_hours_driven" destination="HjF-9M-RJh" id="iuM-ry-PLF"/>
                         <outlet property="driver_map" destination="2ol-L4-fDB" id="s3e-jr-PQs"/>
+                        <outlet property="endDriveButton" destination="8AM-sW-nc2" id="YAP-gw-blu"/>
                         <outlet property="fourCarBtn" destination="zKD-B4-xI3" id="6IQ-9W-2Pg"/>
                         <outlet property="homeBtn" destination="tBa-us-lB6" id="0rm-IN-COp"/>
                         <outlet property="hourLbl" destination="zXE-Vx-pgo" id="Dd8-tJ-5kD"/>

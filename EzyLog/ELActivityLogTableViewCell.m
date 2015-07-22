@@ -10,6 +10,10 @@
 
 @implementation ELActivityLogTableViewCell
 
+@synthesize hoursLbl,driveDistanceLbl,avrgSpeedLbl,parkImageView,trafficImageView,roadImageView,dateLbl;
+
+
+
 - (void)awakeFromNib {
     // Initialization code
 }

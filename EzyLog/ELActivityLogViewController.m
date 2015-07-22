@@ -12,11 +12,31 @@
 #import "SupervisorSignupViewController.h"
 #import "ELWelcomeScreen.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "RS_JsonClass.h"
+#import "AppDelegate.h"
 
 @interface ELActivityLogViewController ()<SlideDelegate>
 {
     BOOL menuslide;
     LeftMenu *leftview;
+    
+    // Variables for populating Activity table
+    
+   
+    
+    
+    RS_JsonClass *globalOBJ;
+    
+    NSMutableArray *activityResult;
+    
+    AppDelegate *app;
+    
+    NSString *strmon;
+    
+    
+    
+    
+    //A
 }
 @end
 
@@ -28,7 +48,68 @@
     self.activitytabview.dataSource=self;
     menuslide = 0;
     // Do any additional setup after loading the view.
+    
+    globalOBJ=[[RS_JsonClass alloc]init];
+    activityResult=[[NSMutableArray alloc]init];
+    app=[[UIApplication sharedApplication]delegate];
+    
+    [self getData];
+    
 }
+
+
+-(void)getData
+{
+
+  
+
+    globalOBJ=[[RS_JsonClass alloc]init];
+    
+    NSString *urlstring=[NSString stringWithFormat:@"%@all_drives.php",App_Domain_Url];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlstring]];
+    
+    [request setHTTPMethod:@"POST"];
+    
+    NSLog(@"Driver id is %@",app.userID);
+    
+    NSString *postData = [NSString stringWithFormat:@"driver_id=%@",app.userID];//,app.userID
+    
+    NSLog(@"Post data....%@",postData);
+    
+    [request setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    NSLog(@"%@",request);
+    
+    [request setHTTPBody:[postData dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [globalOBJ GlobalDict:request Globalstr:@"array" Withblock:^(id result, NSError *error) {
+        
+        
+        if(result)
+        {
+        
+        
+           // NSLog(@"Totale drives result.... %@",result);
+            
+            activityResult=(NSMutableArray *)[result objectForKey:@"details"];
+            
+             NSLog(@"Totale drives result.... %@",activityResult);
+            
+            [_activitytabview reloadData];
+        
+        
+        }
+        
+        
+    }];
+
+    
+
+}
+
+
+
+
 
 - (IBAction)leftmenuclk:(id)sender
 {
@@ -122,12 +203,57 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    NSLog(@"Activity table rows.... %ld",activityResult.count);
+    
+    return activityResult.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ELActivityLogTableViewCell *cell=(ELActivityLogTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"activitylog"];
+    
+    NSArray *dateCompArr=[[NSArray alloc]init];
+    
+    dateCompArr=[[[activityResult objectAtIndex:indexPath.row] valueForKey:@"date"]componentsSeparatedByString:@"-"];
+    
+    strmon=[dateCompArr objectAtIndex:1];
+    [self monthString];
+    
+    cell.dateLbl.text=[NSString stringWithFormat:@"%@ %@,%@",strmon,dateCompArr[2],dateCompArr[0]];
+    
+    
+    cell.hoursLbl.text=[NSString stringWithFormat:@"%.2f",[[[activityResult objectAtIndex:indexPath.row] valueForKey:@"total_drive_hr"] floatValue]/60];
+    
+    if([cell.hoursLbl.text length]==4)
+        cell.hoursLbl.text=[NSString stringWithFormat:@"0%@",[NSString stringWithFormat:@"%.2f",[[[activityResult objectAtIndex:indexPath.row] valueForKey:@"total_drive_hr"] floatValue]/60]];
+    
+    cell.hoursLbl.adjustsFontSizeToFitWidth=YES;
+    
+    cell.driveDistanceLbl.text=[NSString stringWithFormat:@"%.2f KMS",[[[activityResult objectAtIndex:indexPath.row] valueForKey:@"drive_km"] floatValue]];
+    cell.driveDistanceLbl.adjustsFontSizeToFitWidth=YES;
+    
+    cell.avrgSpeedLbl.text=[NSString stringWithFormat:@"%.2f KPH",[[[activityResult objectAtIndex:indexPath.row] valueForKey:@"avg_speed"] floatValue]];
+    
+    cell.parkImageView.image=[UIImage imageNamed:[NSString stringWithFormat:@"%@.png",[[activityResult objectAtIndex:indexPath.row] valueForKey:@"parking"]]];
+    
+     cell.trafficImageView.image=[UIImage imageNamed:[NSString stringWithFormat:@"%@_traffic.png",[[activityResult objectAtIndex:indexPath.row] valueForKey:@"traffic"]]];
+    
+     cell.roadImageView.image=[UIImage imageNamed:[NSString stringWithFormat:@"%@_road.png",[[activityResult objectAtIndex:indexPath.row] valueForKey:@"road_condition"]]];
+    
+    
+//    UILabel *driveHoursLbl=(UILabel *)[cell viewWithTag:0];
+//    
+//    driveHoursLbl.text=[NSString stringWithFormat:@"%.2f",[[[activityResult objectAtIndex:indexPath.row] valueForKey:@"total_drive_hr"] floatValue]/60];
+    
+//    UILabel *distanceLbl=(UILabel *)[cell viewWithTag:1];
+//    distanceLbl.text=[NSString stringWithFormat:@"%@ KMS",[[activityResult objectAtIndex:indexPath.row] valueForKey:@"drive_km"] ];
+    
+//    UILabel *speedLbl=(UILabel *)[cell viewWithTag:2];
+//    speedLbl.text=[NSString stringWithFormat:@"%@ KPH",[[activityResult objectAtIndex:indexPath.row] valueForKey:@"avg_speed"] ];
+    
+    
+    
+    
     return  cell;
 }
 
@@ -137,6 +263,62 @@
     [self.navigationController pushViewController:obj animated:YES];
  
 }
+
+
+
+-(void)monthString
+{
+    if ([strmon isEqualToString:@"01"]) {
+        strmon=@"January";
+    }
+    else if ([strmon isEqualToString:@"02"])
+    {
+        strmon=@"February";
+    }
+    else if ([strmon isEqualToString:@"03"])
+    {
+        strmon=@"March";
+    }
+    else if ([strmon isEqualToString:@"04"])
+    {
+        strmon=@"April";
+    }
+    else if ([strmon isEqualToString:@"05"])
+    {
+        strmon=@"May";
+    }
+    else if ([strmon isEqualToString:@"06"])
+    {
+        strmon=@"June";
+    }
+    else if ([strmon isEqualToString:@"07"])
+    {
+        strmon=@"July";
+    }
+    else if ([strmon isEqualToString:@"08"])
+    {
+        strmon=@"August";
+    }
+    else if ([strmon isEqualToString:@"09"])
+    {
+        strmon=@"September";
+    }
+    else if ([strmon isEqualToString:@"10"])
+    {
+        strmon=@"October";
+    }
+    else if ([strmon isEqualToString:@"11"])
+    {
+        strmon=@"November";
+    }
+    else if ([strmon isEqualToString:@"12"])
+    {
+        strmon=@"December";
+    }
+    
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

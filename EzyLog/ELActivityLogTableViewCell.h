@@ -10,4 +10,28 @@
 
 @interface ELActivityLogTableViewCell : UITableViewCell
 
+
+ //Labels
+
+
+ @property (strong, nonatomic) IBOutlet UILabel *dateLbl;
+    
+ @property(nonatomic,strong)   IBOutlet UILabel *hoursLbl;
+    
+ @property(nonatomic,strong)    IBOutlet UILabel *driveDistanceLbl;
+    
+ @property(nonatomic,strong)   IBOutlet UILabel *avrgSpeedLbl;
+
+    
+//Imageview(s)
+
+ @property(nonatomic,strong)   IBOutlet UIImageView *parkImageView;
+
+ @property(nonatomic,strong)  IBOutlet UIImageView *trafficImageView;
+
+ @property(nonatomic,strong)   IBOutlet UIImageView *roadImageView;
+    
+    
+
+
 @end

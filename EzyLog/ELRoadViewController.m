@@ -14,7 +14,7 @@
 #import "AppDelegate.h"
 #import "RS_JsonClass.h"
 
-@interface ELRoadViewController ()<MKMapViewDelegate,CLLocationManagerDelegate>
+@interface ELRoadViewController ()<MKMapViewDelegate,CLLocationManagerDelegate,UIGestureRecognizerDelegate>
 
 {
     RS_JsonClass *globalOBJ;
@@ -86,6 +86,11 @@
     float hour,min,sec;
     
 
+    IBOutlet UIButton *endDriveButton;
+    
+    UILongPressGestureRecognizer *longPress;
+    
+    BOOL driveEnded;
     
 
 
@@ -150,6 +155,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    driveEnded=NO;
     
     hour=.00;
     min=.00;
@@ -254,6 +261,22 @@
     self.maskView = [UIView new];
     self.maskView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.8];
     [self.driver_map addSubview:self.maskView];
+    
+    
+    //long press gesture for End Drive button
+    
+    
+    UILongPressGestureRecognizer *gesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(endDriveFunction:)];
+    
+    gesture.delegate=self;
+    
+    gesture.minimumPressDuration =2.0;
+    
+    [endDriveButton addGestureRecognizer:gesture];
+    
+   // gesture.allowableMovement = 600;
+    
+    
     
     
     
@@ -590,6 +613,8 @@
     
    //_driver_hours_driven.text = [follower routeDurationString];
         
+        NSLog(@">>>>>>>>>>>>  %@  >>>>>>>>>",[follower routeDurationString]);
+        
        // [self startTimer];
         
         secLbl.adjustsFontSizeToFitWidth=YES;
@@ -688,6 +713,8 @@
         
     }
     
+    if(driveEnded==NO)
+    
     [self performSelector:@selector(startTimer) withObject:nil afterDelay:1.0];
 
 
@@ -730,14 +757,23 @@
 
 
 
-- (IBAction)End_drive_action:(id)sender
+- (void)endDriveFunction:(UILongPressGestureRecognizer  *)gesture
 {
+    if (gesture.state == UIGestureRecognizerStateEnded)
+    
+    {
+    
+  
+    
+    
     [self.follower endRouteTracking];
     
     [_driver_map addOverlay:self.follower.routePolyline];
     [_driver_map setRegion:self.follower.routeRegion animated:YES];
     
     [_drive_base_view setHidden:YES];
+        
+        driveEnded=YES;
     
    // _driver_map.showsUserLocation = NO;
     
@@ -901,6 +937,9 @@
         UIAlertView *driveAlert=[[UIAlertView alloc]initWithTitle:@"Message" message:@"You have not completed any drive." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     
         [driveAlert show];
+        
+    }
+        
         
     }
     

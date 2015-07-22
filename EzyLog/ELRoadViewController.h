@@ -42,7 +42,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *speed;
 @property (weak, nonatomic) IBOutlet UIView *drive_base_view;
 
-- (IBAction)End_drive_action:(id)sender;
+
 
 @property (weak, nonatomic) IBOutlet UILabel *driver_hours_driven;
 

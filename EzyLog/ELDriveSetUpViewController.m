@@ -133,6 +133,8 @@
         {
             NSLog(@"Super picker value not selected.....");
             _superNameLbl.text=[NSString stringWithFormat:@"%@ %@",[[get_result_sup objectAtIndex:0] valueForKey:@"first_name"],[[get_result_sup objectAtIndex:0] valueForKey:@"last_name"]];
+            
+            app.superID=[[get_result_sup objectAtIndex:0] valueForKey:@"id"];
         }
             
         }
@@ -156,6 +158,8 @@
            // _carRegLbl.text=[get_result_car[0] objectForKey:@"car_registration_no"];
             
            _carRegLbl.text=[NSString stringWithFormat:@"Car 1: %@",[get_result_car[0] objectForKey:@"car_registration_no"]];
+            
+            app.carID=[get_result_car[0] objectForKey:@"car_id"];
         }
 
     
@@ -462,7 +466,7 @@
     }
     else if(carPickOpen==YES)
     {
-        pickerValue=[NSString stringWithFormat:@"Car %d: %@",row+1,[get_result_car[row] objectForKey:@"car_registration_no"]];
+        pickerValue=[NSString stringWithFormat:@"Car %ld: %@",row+1,[get_result_car[row] objectForKey:@"car_registration_no"]];
         
         app.carID=[get_result_car[row] objectForKey:@"car_id"];
         
