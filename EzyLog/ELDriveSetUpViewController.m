@@ -252,7 +252,7 @@
         
         NSLog(@"url firing...");
         
-        //   NSLog(@"Result....%@",result);
+          NSLog(@"Result....%@",result);
         
         get_result_car=[[NSMutableArray alloc]init];
         
@@ -262,7 +262,7 @@
         
         get_result_dic=[[result objectForKey:@"data"]mutableCopy];
         
-        get_result_car=[[get_result_dic objectForKey:@"vehicle"] mutableCopy];
+        get_result_car=[[get_result_dic valueForKey:@"vehicle"] mutableCopy];
         
         NSLog(@"Car array......%@",get_result_arr);
         
@@ -364,7 +364,7 @@
       
         get_result_dic=[[result objectForKey:@"data"]mutableCopy];
         
-        get_result_sup=[[get_result_dic objectForKey:@"supervisor"] mutableCopy];
+        get_result_sup=[[get_result_dic valueForKey:@"supervisor"] mutableCopy];
         
        // NSLog(@"Supervisor array......%@",get_result_arr);
       

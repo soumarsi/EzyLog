@@ -39,7 +39,7 @@
     
     RS_JsonClass *globalOBJ;
     
-    NSMutableArray *resultArr;
+    NSMutableDictionary *resultArr;
     
     AppDelegate *app;
     
@@ -61,7 +61,7 @@
     
     menuslide = 0;
     
-    resultArr=[[NSMutableArray alloc]init];
+    resultArr=[[NSMutableDictionary alloc]init];
     
     globalOBJ=[[RS_JsonClass alloc]init];
     
@@ -101,11 +101,11 @@
     [globalOBJ GlobalDict:request Globalstr:@"array" Withblock:^(id result, NSError *error) {
         
         
-        if(result)
+        if(![[[result valueForKey:@"details"] valueForKey:@"total_drives"] isEqualToString:@"0"])
         {
         
         
-            resultArr=(NSMutableArray *)[result mutableCopy];
+            resultArr=(NSMutableDictionary *)[result mutableCopy];
             
             NSLog(@"Drive summary array..... %@",resultArr);
             

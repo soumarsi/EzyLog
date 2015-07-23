@@ -92,6 +92,10 @@
     
     BOOL driveEnded;
     
+    
+    NSInteger dayStart,dayEnd;
+    NSInteger monthStart,monthEnd;
+    NSInteger yearStart,yearEnd;
 
 
 }
@@ -154,6 +158,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
+    
+    
+     dayStart = [components day];
+     monthStart = [components month];
+     yearStart = [components year];
+    
+    
+     NSLog(@"Start date..... %ld/%ld/%ld",dayStart,monthStart,yearStart);
     
     
     driveEnded=NO;
@@ -266,7 +281,7 @@
     //long press gesture for End Drive button
     
     
-    UILongPressGestureRecognizer *gesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(endDriveFunction:)];
+    UILongPressGestureRecognizer *gesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(gesture_check:)];
     
     gesture.delegate=self;
     
@@ -359,7 +374,7 @@
         _busyBtn.hidden=YES;
         _multiLaneBtn.hidden=YES;
         
-        roadStrng=@"S";
+        roadStrng=@"U";
         
     
     }
@@ -371,7 +386,7 @@
         _busyBtn.hidden=YES;
         _multiLaneBtn.hidden=YES;
         
-        roadStrng=@"U";
+        roadStrng=@"S";
         
         
     }
@@ -606,7 +621,7 @@
        _speed.text = [NSString stringWithFormat:@"%.1f mph", [follower topSpeedWithUnit:SpeedUnitMilesPerHour]];
     _driver_avg_speed.text = [NSString stringWithFormat:@"%.1f mph", [follower averageSpeedWithUnit:SpeedUnitMilesPerHour]];
     
-    driveSpeed=[NSString stringWithFormat:@"%f", [follower averageSpeedWithUnit:SpeedUnitMilesPerHour]];
+        driveSpeed= _driver_avg_speed.text;
 
     
     _total_time.text = [follower routeDurationString];
@@ -757,194 +772,205 @@
 
 
 
-- (void)endDriveFunction:(UILongPressGestureRecognizer  *)gesture
-{
-    if (gesture.state == UIGestureRecognizerStateEnded)
-    
-    {
-    
-  
-    
-    
-    [self.follower endRouteTracking];
-    
-    [_driver_map addOverlay:self.follower.routePolyline];
-    [_driver_map setRegion:self.follower.routeRegion animated:YES];
-    
-    [_drive_base_view setHidden:YES];
-        
-        driveEnded=YES;
-    
-   // _driver_map.showsUserLocation = NO;
-    
-    Follower *mapControl=[[Follower alloc]init];
-    NSString *cor = [mapControl stop_location_update];
-    
-    NSLog(@"Cor : %@",cor);
-    
-    NSArray *Map_chunks = [cor componentsSeparatedByString: @"##"];
-    
-    NSLog(@"......%@",[Map_chunks objectAtIndex:0]);
-    
-    endLat=[NSString stringWithFormat:@"%@",[Map_chunks objectAtIndex:0]];
-    
-    endLong=[NSString stringWithFormat:@"%@",[Map_chunks objectAtIndex:1]];;
-    
-    //totalHours=[NSString stringWithFormat:@"@%",_total_time.text];
-    //
-    
-    dateEnd = [NSDate date];
-    
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    
-    [dateFormatter setDateFormat:@"HH.mm"];
-    
-    endTime = [dateFormatter stringFromDate:[NSDate date]];
-    
-    NSLog(@"current time: %.2f",[endTime floatValue]);
-    
-    totalHours=[NSString stringWithFormat:@"%.2f",[endTime floatValue]-[startTime floatValue]];
-
-    NSLog(@"Driving hours.... %f",[totalHours floatValue]);
-    
-    
-    if ([startTime floatValue] >= 18.00)
-    {
-        NSLog(@"Night drive.....");
-        
-        if ([endTime floatValue]>=6.00) {
-            
-            double dif=12-([startTime floatValue]-18.00)+[endTime floatValue]-6.00;
-            
-            dayHours=[NSString stringWithFormat:@"%.2f",[endTime floatValue]-6.00];
-            nightHours=[NSString stringWithFormat:@"%.2f",12-([startTime floatValue]-18.00)];
-            
-            //day
-            
-            day=[dayHours componentsSeparatedByString:@"."];
-            d=(int)([day[0]integerValue]*60)+(int)[day[1]integerValue];
-            dayHours=[NSString stringWithFormat:@"%d",d];
-            
-            
-            //night
-            
-            night=[nightHours componentsSeparatedByString:@"."];
-            n=(int)([night[0]integerValue]*60)+(int)[night[1]integerValue];
-            dayHours=[NSString stringWithFormat:@"%d",n];
-
-            
-            
-            
-           //total
-            totalHours=[NSString stringWithFormat:@"%.2f",dif];
-            
-            total=[totalHours componentsSeparatedByString:@"."];
-            
-            t=(int)([total[0] integerValue]*60)+(int)[total[1]integerValue];
-            
-            totalHours=[NSString stringWithFormat:@"%d",t];
-            
-        }
-        else
-        {
-        
-            double dif=[endTime floatValue]-[startTime floatValue];
-            
-            totalHours=[NSString stringWithFormat:@"%.2f",dif];
-            
-            total=[totalHours componentsSeparatedByString:@"."];
-            
-            t=(int)([total[0] integerValue]*60)+(int)[total[1]integerValue];
-            
-            totalHours=[NSString stringWithFormat:@"%d",t];
-
-            
-            nightHours=totalHours;
-        
-        }
-
-        
-    }
-    else if([startTime floatValue]>=6.00 && [startTime floatValue]<=18.00)
-    {
-        NSLog(@"Day drive .....");
-        
-        
-        if ([endTime floatValue]>=18.00) {
-            
-            double dif=12-([startTime floatValue]-6.00)+[endTime floatValue]-18.00;
-            
-            totalHours=[NSString stringWithFormat:@"%.2f",dif];
-            
-            dayHours=[NSString stringWithFormat:@"%.2f",12-([startTime floatValue]-6.00)];
-            
-            nightHours=[NSString stringWithFormat:@"%.2f",[endTime floatValue]-18.00];
-            
-            //total
-            total=[totalHours componentsSeparatedByString:@"."];
-            
-            t=(int)([total[0] integerValue]*60)+(int)[total[1]integerValue];
-            
-            totalHours=[NSString stringWithFormat:@"%d",t];
-            
-            
-            //day
-            
-            day=[dayHours componentsSeparatedByString:@"."];
-            d=(int)([day[0]integerValue]*60)+(int)[day[1]integerValue];
-            dayHours=[NSString stringWithFormat:@"%d",d];
-            
-            
-            //night
-            
-            night=[nightHours componentsSeparatedByString:@"."];
-            n=(int)([night[0]integerValue]*60)+(int)[night[1]integerValue];
-            dayHours=[NSString stringWithFormat:@"%d",n];
-
-
-            
-            
-        }
-        else
-        {
-            
-            double dif=[endTime floatValue]-[startTime floatValue];
-            
-            totalHours=[NSString stringWithFormat:@"%.2f",dif];
-            
-            total=[totalHours componentsSeparatedByString:@"."];
-            
-            t=(int)([total[0] integerValue]*60)+(int)[total[1]integerValue];
-            
-            totalHours=[NSString stringWithFormat:@"%d",t];
-            
-            dayHours=totalHours;
-            
-        }
-        
-        NSLog(@"You have drived total....> %@",totalHours);
-
-        
-    }
-    
-    if(![driveDistance isEqualToString:@""])
-    
-          [self fireURL];
-    else
-    {
-    
-        UIAlertView *driveAlert=[[UIAlertView alloc]initWithTitle:@"Message" message:@"You have not completed any drive." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    
-        [driveAlert show];
-        
-    }
-        
-        
-    }
-    
-    
-}
+//- (void)endDriveFunction:(UILongPressGestureRecognizer  *)gesture
+//{
+//    
+//    [self.follower endRouteTracking];
+//    
+//    [_driver_map addOverlay:self.follower.routePolyline];
+//    [_driver_map setRegion:self.follower.routeRegion animated:YES];
+//    
+//    [_drive_base_view setHidden:YES];
+//        
+//        driveEnded=YES;
+//    
+//   // _driver_map.showsUserLocation = NO;
+//    
+//    Follower *mapControl=[[Follower alloc]init];
+//    NSString *cor = [mapControl stop_location_update];
+//    
+//    NSLog(@"Cor : %@",cor);
+//    
+//    NSArray *Map_chunks = [cor componentsSeparatedByString: @"##"];
+//    
+//    NSLog(@"......%@",[Map_chunks objectAtIndex:0]);
+//    
+//    endLat=[NSString stringWithFormat:@"%@",[Map_chunks objectAtIndex:0]];
+//    
+//    endLong=[NSString stringWithFormat:@"%@",[Map_chunks objectAtIndex:1]];;
+//    
+//    //totalHours=[NSString stringWithFormat:@"@%",_total_time.text];
+//    //
+//    
+//    dateEnd = [NSDate date];
+//    
+//    
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    
+//    [dateFormatter setDateFormat:@"HH.mm"];
+//    
+//    endTime = [dateFormatter stringFromDate:[NSDate date]];
+//    
+//    NSLog(@"current time: %.2f",[endTime floatValue]);
+//    
+//    totalHours=[NSString stringWithFormat:@"%.2f",[endTime floatValue]-[startTime floatValue]];
+//
+//    NSLog(@"Driving hours.... %f",[totalHours floatValue]);
+//    
+//    
+//    if ([startTime floatValue] >= 18.00 || [startTime floatValue]<=6.00)
+//    {
+//        NSLog(@"Night drive.....");
+//        
+//        if([startTime floatValue]<=6)
+//        {
+//        
+//        
+//            
+//            NSLog(@"Drive started in midnight.....");
+//            
+//            if
+//        
+//        
+//        
+//        }
+//        
+//        
+//        
+////        if ([endTime floatValue]>=6.00) {
+////            
+////            NSLog(@"Crossed day....");
+////            
+////            double dif=12-([startTime floatValue]-18.00)+[endTime floatValue]-6.00;
+////            
+////            dayHours=[NSString stringWithFormat:@"%.2f",[endTime floatValue]-6.00];
+////            nightHours=[NSString stringWithFormat:@"%.2f",12-([startTime floatValue]-18.00)];
+////            
+////            //day
+////            
+////            day=[dayHours componentsSeparatedByString:@"."];
+////            d=(int)([day[0]integerValue]*60)+(int)[day[1]integerValue];
+////            dayHours=[NSString stringWithFormat:@"%d",d];
+////            
+////            
+////            //night
+////            
+////            night=[nightHours componentsSeparatedByString:@"."];
+////            n=(int)([night[0]integerValue]*60)+(int)[night[1]integerValue];
+////            dayHours=[NSString stringWithFormat:@"%d",n];
+////
+////            
+////            
+////            
+////           //total
+////            totalHours=[NSString stringWithFormat:@"%.2f",dif];
+////            
+////            total=[totalHours componentsSeparatedByString:@"."];
+////            
+////            t=(int)([total[0] integerValue]*60)+(int)[total[1]integerValue];
+////            
+////            totalHours=[NSString stringWithFormat:@"%d",t];
+////            
+////        }
+////        else
+//        //{
+//        
+//            double dif=[endTime floatValue]-[startTime floatValue];
+//            
+//            totalHours=[NSString stringWithFormat:@"%.2f",dif];
+//            
+//            total=[totalHours componentsSeparatedByString:@"."];
+//            
+//            t=(int)([total[0] integerValue]*60)+(int)[total[1]integerValue];
+//            
+//            totalHours=[NSString stringWithFormat:@"%d",t];
+//
+//            
+//            nightHours=totalHours;
+//        
+//      //  }
+//
+//        
+//    }
+//    else if([startTime floatValue]>=6.00 && [startTime floatValue]<=18.00)
+//    {
+//        NSLog(@"Day drive .....");
+//        
+//        
+//        if ([endTime floatValue]>=18.00) {
+//            
+//            double dif=12-([startTime floatValue]-6.00)+[endTime floatValue]-18.00;
+//            
+//            totalHours=[NSString stringWithFormat:@"%.2f",dif];
+//            
+//            dayHours=[NSString stringWithFormat:@"%.2f",12-([startTime floatValue]-6.00)];
+//            
+//            nightHours=[NSString stringWithFormat:@"%.2f",[endTime floatValue]-18.00];
+//            
+//            //total
+//            total=[totalHours componentsSeparatedByString:@"."];
+//            
+//            t=(int)([total[0] integerValue]*60)+(int)[total[1]integerValue];
+//            
+//            totalHours=[NSString stringWithFormat:@"%d",t];
+//            
+//            
+//            //day
+//            
+//            day=[dayHours componentsSeparatedByString:@"."];
+//            d=(int)([day[0]integerValue]*60)+(int)[day[1]integerValue];
+//            dayHours=[NSString stringWithFormat:@"%d",d];
+//            
+//            
+//            //night
+//            
+//            night=[nightHours componentsSeparatedByString:@"."];
+//            n=(int)([night[0]integerValue]*60)+(int)[night[1]integerValue];
+//            dayHours=[NSString stringWithFormat:@"%d",n];
+//
+//
+//            
+//            
+//        }
+//        else
+//        {
+//            
+//            double dif=[endTime floatValue]-[startTime floatValue];
+//            
+//            totalHours=[NSString stringWithFormat:@"%.2f",dif];
+//            
+//            total=[totalHours componentsSeparatedByString:@"."];
+//            
+//            t=(int)([total[0] integerValue]*60)+(int)[total[1]integerValue];
+//            
+//            totalHours=[NSString stringWithFormat:@"%d",t];
+//            
+//            dayHours=totalHours;
+//            
+//        }
+//        
+//        NSLog(@"You have drived total....> %@",totalHours);
+//
+//        
+//    }
+//    
+//    if(![driveDistance isEqualToString:@""])
+//    
+//          [self fireURL];
+//    else
+//    {
+//    
+//        UIAlertView *driveAlert=[[UIAlertView alloc]initWithTitle:@"Message" message:@"You have not completed any drive." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//    
+//        [driveAlert show];
+//        
+//    }
+//        
+//        
+//
+//    
+//    
+//}
 
 
 -(void)fireURL
@@ -993,4 +1019,411 @@
 
 }
 
+
+//- (void)endDriveFunction:(UILongPressGestureRecognizer  *)gesture
+//{
+//    if (gesture.state == UIGestureRecognizerStateEnded)
+//        
+//    {
+
+-(void)gesture_check:(UILongPressGestureRecognizer *)gesture
+{
+    if (gesture.state==UIGestureRecognizerStateRecognized)
+    {
+        [self End_Drive_Action:1];
+    }
+}
+        
+
+- (IBAction)End_Drive_Action:(int)sender
+{
+    
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
+    
+    
+    dayEnd = [components day];
+    monthEnd = [components month];
+    yearEnd = [components year];
+    
+    NSLog(@"End date..... %ld/%ld/%ld",dayEnd,monthEnd,yearEnd);
+    
+    
+    driveEnded=YES;
+    
+    
+    
+    [self.follower endRouteTracking];
+    
+    [_driver_map addOverlay:self.follower.routePolyline];
+    [_driver_map setRegion:self.follower.routeRegion animated:YES];
+    
+    [_drive_base_view setHidden:YES];
+    
+    // _driver_map.showsUserLocation = NO;
+    
+    Follower *mapControl=[[Follower alloc]init];
+    NSString *cor = [mapControl stop_location_update];
+    
+    NSLog(@"Cor : %@",cor);
+    
+    NSArray *Map_chunks = [cor componentsSeparatedByString: @"##"];
+    
+    NSLog(@"......%@",[Map_chunks objectAtIndex:0]);
+    
+    endLat=[NSString stringWithFormat:@"%@",[Map_chunks objectAtIndex:0]];
+    
+    endLong=[NSString stringWithFormat:@"%@",[Map_chunks objectAtIndex:1]];;
+    
+    //totalHours=[NSString stringWithFormat:@"@%",_total_time.text];
+    //
+    
+    dateEnd = [NSDate date];
+    
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    [dateFormatter setDateFormat:@"HH.mm"];
+    
+    endTime = [dateFormatter stringFromDate:[NSDate date]];
+    
+    NSLog(@"current time: %.2f",[endTime floatValue]);
+    
+    totalHours=[NSString stringWithFormat:@"%.2f",[endTime floatValue]-[startTime floatValue]];
+    
+    NSLog(@"Driving hours.... %f",[totalHours floatValue]);
+    
+    
+    if ([startTime floatValue] >= 18.00 || [startTime floatValue]<=6.00)
+        {
+             NSLog(@"Night drive.....");
+        
+                if([startTime floatValue]<=6.00)
+                {
+        
+        
+        
+                    NSLog(@"Drive started in midnight.....");
+        
+                    if([endTime floatValue]>=6.00)
+                    {
+                    
+                    
+                        
+                        double dif=6.00-([startTime floatValue]-00.00)+[endTime floatValue]-6.00;
+                        
+                        dayHours=[NSString stringWithFormat:@"%.2f",[endTime floatValue]-6.00];
+                        nightHours=[NSString stringWithFormat:@"%.2f",6.00-([startTime floatValue]-00.00)];
+                        
+                        //day
+                        
+                        day=[dayHours componentsSeparatedByString:@"."];
+                        d=(int)([day[0]integerValue]*60)+(int)[day[1]integerValue];
+                        dayHours=[NSString stringWithFormat:@"%d",d];
+                        
+                        
+                        //night
+                        
+                        night=[nightHours componentsSeparatedByString:@"."];
+                        n=(int)([night[0]integerValue]*60)+(int)[night[1]integerValue];
+                        dayHours=[NSString stringWithFormat:@"%d",n];
+                        
+                        
+                        
+                        
+                        //total
+                        totalHours=[NSString stringWithFormat:@"%.2f",dif];
+                        
+                        total=[totalHours componentsSeparatedByString:@"."];
+                        
+                        t=(int)([total[0] integerValue]*60)+(int)[total[1]integerValue];
+                        
+                        totalHours=[NSString stringWithFormat:@"%d",t];
+
+                    
+                    }
+                    
+                    else
+                    {
+                    
+                    
+                        double dif=[endTime floatValue]-[startTime floatValue];
+                        
+                        totalHours=[NSString stringWithFormat:@"%.2f",dif];
+                        
+                        total=[totalHours componentsSeparatedByString:@"."];
+                        
+                        t=(int)([total[0] integerValue]*60)+(int)[total[1]integerValue];
+                        
+                        totalHours=[NSString stringWithFormat:@"%d",t];
+                        
+                        
+                        nightHours=totalHours;
+
+                        
+                    
+                    
+                    }
+                
+                
+                
+                }
+            
+            else if ([startTime floatValue]>=18.00)
+            {
+            
+                     if([endTime floatValue]>=00.00 && [endTime floatValue]<06.00)
+                     {
+                     
+                     
+                         
+                         double dif=06.00-([startTime floatValue]-18.00)+[endTime floatValue]-00.00;
+                         
+                        
+                         nightHours=[NSString stringWithFormat:@"%.2f",dif];
+                         
+                         //day
+                         
+                         dayHours=@"00.00";
+                         
+                         //night
+                         
+                         night=[nightHours componentsSeparatedByString:@"."];
+                         
+                         n=(int)([night[0]integerValue]*60)+(int)[night[1]integerValue];
+                         
+                         nightHours=[NSString stringWithFormat:@"%d",n];
+                         
+                         
+                         
+                         
+                         //total
+                         
+                         totalHours=nightHours;
+                         
+                         total=[totalHours componentsSeparatedByString:@"."];
+                         
+                         t=(int)([total[0] integerValue]*60)+(int)[total[1]integerValue];
+                         
+                         totalHours=[NSString stringWithFormat:@"%d",t];
+
+                         
+                     
+                     
+                     }
+                
+                else if ([endTime floatValue]>=06.00 && (yearEnd==yearStart || yearEnd>yearStart) && (monthEnd==monthStart || monthEnd!=monthStart) && dayStart!=dayEnd)
+                {
+                
+                
+                    
+                    double dif=12.00-([startTime floatValue]-18.00)+[endTime floatValue]-06.00;
+                    
+                    
+                    nightHours=[NSString stringWithFormat:@"%.2f",12.00-([startTime floatValue]-18.00)];
+                    
+                    //day
+                    
+                    dayHours=[NSString stringWithFormat:@"%.2f",[endTime floatValue]-06.00];
+                    
+                    day=[dayHours componentsSeparatedByString:@"."];
+                    d=(int)([day[0]integerValue]*60)+(int)[day[1]integerValue];
+                    dayHours=[NSString stringWithFormat:@"%d",d];
+
+                    
+                    
+                    
+                    //night
+                    
+                    night=[nightHours componentsSeparatedByString:@"."];
+                    
+                    n=(int)([night[0]integerValue]*60)+(int)[night[1]integerValue];
+                    
+                    nightHours=[NSString stringWithFormat:@"%d",n];
+                    
+                    
+                    
+                    
+                    //total
+                    
+                    totalHours=[NSString stringWithFormat:@"%.2f",dif];
+                    
+                    total=[totalHours componentsSeparatedByString:@"."];
+                    
+                    t=(int)([total[0] integerValue]*60)+(int)[total[1]integerValue];
+                    
+                    totalHours=[NSString stringWithFormat:@"%d",t];
+
+                    
+                
+                
+                
+                }
+                
+                else
+                {
+                    
+                    double dif=[endTime floatValue]-[startTime floatValue];
+                    
+                    totalHours=[NSString stringWithFormat:@"%.2f",dif];
+                    
+                    total=[totalHours componentsSeparatedByString:@"."];
+                    
+                    t=(int)([total[0] integerValue]*60)+(int)[total[1]integerValue];
+                    
+                    totalHours=[NSString stringWithFormat:@"%d",t];
+                    
+                    
+                    nightHours=totalHours;
+                    
+                }
+
+            
+            
+            
+            }
+
+    
+    
+        }
+    
+    
+    
+    
+    
+//    
+//    if ([startTime floatValue] >= 18.00)
+//    {
+//        NSLog(@"Night drive.....");
+//        
+//        if ([endTime floatValue]>=6.00) {
+//            
+//            double dif=12-([startTime floatValue]-18.00)+[endTime floatValue]-6.00;
+//            
+//            dayHours=[NSString stringWithFormat:@"%.2f",[endTime floatValue]-6.00];
+//            nightHours=[NSString stringWithFormat:@"%.2f",12-([startTime floatValue]-18.00)];
+//            
+//            //day
+//            
+//            day=[dayHours componentsSeparatedByString:@"."];
+//            d=(int)([day[0]integerValue]*60)+(int)[day[1]integerValue];
+//            dayHours=[NSString stringWithFormat:@"%d",d];
+//            
+//            
+//            //night
+//            
+//            night=[nightHours componentsSeparatedByString:@"."];
+//            n=(int)([night[0]integerValue]*60)+(int)[night[1]integerValue];
+//            dayHours=[NSString stringWithFormat:@"%d",n];
+//            
+//            
+//            
+//            
+//            //total
+//            totalHours=[NSString stringWithFormat:@"%.2f",dif];
+//            
+//            total=[totalHours componentsSeparatedByString:@"."];
+//            
+//            t=(int)([total[0] integerValue]*60)+(int)[total[1]integerValue];
+//            
+//            totalHours=[NSString stringWithFormat:@"%d",t];
+//            
+//        }
+//        else
+//        {
+//            
+//            double dif=[endTime floatValue]-[startTime floatValue];
+//            
+//            totalHours=[NSString stringWithFormat:@"%.2f",dif];
+//            
+//            total=[totalHours componentsSeparatedByString:@"."];
+//            
+//            t=(int)([total[0] integerValue]*60)+(int)[total[1]integerValue];
+//            
+//            totalHours=[NSString stringWithFormat:@"%d",t];
+//            
+//            
+//            nightHours=totalHours;
+//            
+//        }
+//        
+//        
+//    }
+    
+    
+    
+    
+    else if([startTime floatValue]>=6.00 && [startTime floatValue]<18.00)
+    {
+        NSLog(@"Day drive .....");
+        
+        
+        if ([endTime floatValue]>=18.00) {
+            
+            double dif=12-([startTime floatValue]-6.00)+[endTime floatValue]-18.00;
+            
+            totalHours=[NSString stringWithFormat:@"%.2f",dif];
+            
+            dayHours=[NSString stringWithFormat:@"%.2f",12-([startTime floatValue]-6.00)];
+            
+            nightHours=[NSString stringWithFormat:@"%.2f",[endTime floatValue]-18.00];
+            
+            //total
+            total=[totalHours componentsSeparatedByString:@"."];
+            
+            t=(int)([total[0] integerValue]*60)+(int)[total[1]integerValue];
+            
+            totalHours=[NSString stringWithFormat:@"%d",t];
+            
+            
+            //day
+            
+            day=[dayHours componentsSeparatedByString:@"."];
+            d=(int)([day[0]integerValue]*60)+(int)[day[1]integerValue];
+            dayHours=[NSString stringWithFormat:@"%d",d];
+            
+            
+            //night
+            
+            night=[nightHours componentsSeparatedByString:@"."];
+            n=(int)([night[0]integerValue]*60)+(int)[night[1]integerValue];
+            dayHours=[NSString stringWithFormat:@"%d",n];
+            
+            
+            
+            
+        }
+        else
+        {
+            
+            double dif=[endTime floatValue]-[startTime floatValue];
+            
+            totalHours=[NSString stringWithFormat:@"%.2f",dif];
+            
+            total=[totalHours componentsSeparatedByString:@"."];
+            
+            t=(int)([total[0] integerValue]*60)+(int)[total[1]integerValue];
+            
+            totalHours=[NSString stringWithFormat:@"%d",t];
+            
+            dayHours=totalHours;
+            
+        }
+        
+        NSLog(@"You have drived total....> %@",totalHours);
+        
+        
+    }
+    
+    if(![driveDistance isEqualToString:@""])
+        
+        [self fireURL];
+    else
+    {
+        
+        UIAlertView *driveAlert=[[UIAlertView alloc]initWithTitle:@"Message" message:@"You have not completed any drive." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        
+        [driveAlert show];
+        
+    }
+}
 @end
