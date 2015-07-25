@@ -11,6 +11,8 @@
 #import "SupervisorSignupViewController.h"
 #import <CoreMotion/CoreMotion.h>
 #import "mySmoothLineView.h"
+#import "RS_JsonClass.h"
+#import "AppDelegate.h"
 
 @interface ELSupervisorSignatureViewController ()
 
@@ -18,6 +20,12 @@
 {
 
     BOOL fiveCheck;
+    
+    AppDelegate *app;
+    
+    RS_JsonClass *globalOBJ;
+    
+    
     
 }
 
@@ -30,7 +38,7 @@
 
 @implementation ELSupervisorSignatureViewController
 
-@synthesize submitBtn;
+@synthesize submitBtn,signUPData;
 
 - (BOOL)prefersStatusBarHidden
 {
@@ -40,6 +48,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    app=[[UIApplication sharedApplication]delegate];
+    
+    globalOBJ=[[RS_JsonClass alloc]init];
     
     submitBtn.userInteractionEnabled=YES;
     
@@ -100,14 +112,199 @@
 
 - (IBAction)submit__register:(id)sender
 {
-    SupervisorSignupViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Supervisor_Sign_up"];
-    [self.navigationController pushViewController:obj animated:YES];
+    
+    UIGraphicsBeginImageContext(self.view.bounds.size);
+    
+    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    CGRect rect = CGRectMake(_signatureBox.frame.origin.x,_signatureBox.frame.origin.y ,_signatureBox.frame.size.width, _signatureBox.frame.size.height);
+    CGImageRef imageRef = CGImageCreateWithImageInRect([viewImage CGImage], rect);
+    
+    UIImage *img = [UIImage imageWithCGImage:imageRef];
+    
+    //   screenshotImgView.image=img;
+    
+    
+    
+    NSData *signImageData=[NSData dataWithData:UIImageJPEGRepresentation(img, 1.0f)];
+    
+    
+    NSLog(@"Signature data----->%@",signImageData);
+
+    
+    CGImageRelease(imageRef);
+    
+    NSString *urlstring=[NSString stringWithFormat:@"%@supervisor_registration.php?%@",App_Domain_Url,signUPData];
+    
+    
+    [globalOBJ GlobalDict_image:[urlstring stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] Globalstr_image:@"array" globalimage:signImageData Withblock:^(id result, NSError *error) {
+        
+        
+        
+        NSLog(@"result...%@",[result objectForKey:@"status"]);
+        
+        if ([[result valueForKey:@"status"] isEqualToString:@"success"])
+        {
+            
+            
+            
+            NSMutableDictionary *get_result=[[result objectForKey:@"details" ]mutableCopy];
+            
+            NSUserDefaults *UserData = [[NSUserDefaults alloc]init];
+            
+            [UserData setObject:[get_result objectForKey:@"id"] forKey:@"Login_User_id"];
+            
+            [UserData setObject:[get_result objectForKey:@"first_name"] forKey:@"User_name"];
+            [UserData setObject:[get_result objectForKey:@"phone"] forKey:@"user_phone"];
+            
+            [UserData setObject:[get_result objectForKey:@"state"] forKey:@"user_state"];
+            
+            [UserData synchronize];
+            
+            
+            app.superID=[get_result objectForKey:@"id"];
+            
+            NSLog(@"Supervisor ID...%@",app.superID);
+            
+            
+            
+            if([[result valueForKey:@"status"] isEqualToString:@"success"])
+            {
+                
+                SupervisorSignupViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"supervisorregis"];
+                [self.navigationController pushViewController:obj animated:YES];
+                
+                
+                
+            }
+            else
+            {
+                
+                
+                
+                
+                
+            }
+            
+            
+            
+        }
+        
+        
+        
+    }];
+    
+
+    
+    
+    
+    
+//    SupervisorSignupViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Supervisor_Sign_up"];
+//    [self.navigationController pushViewController:obj animated:YES];
 }
 
 - (IBAction)submit:(id)sender
 {
-    ELRegisterVehicleViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"registervehicle"];
-    [self.navigationController pushViewController:obj animated:YES];
+    UIGraphicsBeginImageContext(self.view.bounds.size);
+    
+    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    CGRect rect = CGRectMake(_signatureBox.frame.origin.x,_signatureBox.frame.origin.y ,_signatureBox.frame.size.width, _signatureBox.frame.size.height);
+    CGImageRef imageRef = CGImageCreateWithImageInRect([viewImage CGImage], rect);
+    
+    UIImage *img = [UIImage imageWithCGImage:imageRef];
+    
+    //   screenshotImgView.image=img;
+    
+    
+    
+    NSData *signImageData=[NSData dataWithData:UIImageJPEGRepresentation(img, 1.0f)];
+    
+    
+    NSLog(@"Signature data----->%@",signImageData);
+
+    
+    
+    
+    CGImageRelease(imageRef);
+    
+    
+    
+    NSString *urlstring=[NSString stringWithFormat:@"%@supervisor_registration.php?%@",App_Domain_Url,signUPData];
+    
+    
+    [globalOBJ GlobalDict_image:[urlstring stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] Globalstr_image:@"array" globalimage:signImageData Withblock:^(id result, NSError *error) {
+        
+        
+        
+        NSLog(@"result...%@",[result objectForKey:@"status"]);
+        
+        if ([[result valueForKey:@"status"] isEqualToString:@"success"])
+        {
+            
+            
+            
+            NSMutableDictionary *get_result=[[result objectForKey:@"details" ]mutableCopy];
+            
+            NSUserDefaults *UserData = [[NSUserDefaults alloc]init];
+            
+            [UserData setObject:[get_result objectForKey:@"id"] forKey:@"Login_User_id"];
+            
+            [UserData setObject:[get_result objectForKey:@"first_name"] forKey:@"User_name"];
+            [UserData setObject:[get_result objectForKey:@"phone"] forKey:@"user_phone"];
+            
+            [UserData setObject:[get_result objectForKey:@"state"] forKey:@"user_state"];
+            
+            [UserData synchronize];
+            
+            
+            app.superID=[get_result objectForKey:@"id"];
+            
+            NSLog(@"Supervisor ID...%@",app.superID);
+            
+            
+            
+            if([[result valueForKey:@"status"] isEqualToString:@"success"])
+            {
+                    ELRegisterVehicleViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"registervehicle"];
+                    [self.navigationController pushViewController:obj animated:YES];
+                
+                
+                
+            }
+            else
+            {
+                
+                
+                
+                
+                
+            }
+            
+            
+            
+        }
+        
+        
+        
+    }];
+
+    
+    
+    
+    
+    
+    
+//    ELRegisterVehicleViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"registervehicle"];
+//    [self.navigationController pushViewController:obj animated:YES];
 
 }
 

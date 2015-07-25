@@ -65,6 +65,7 @@
 		848C52811B2EEF0F003E57F1 /* Oswald-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 848C52711B2EEF0F003E57F1 /* Oswald-Bold.ttf */; };
 		848C52821B2EEF0F003E57F1 /* Oswald-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 848C52721B2EEF0F003E57F1 /* Oswald-Light.ttf */; };
 		848C52831B2EEF0F003E57F1 /* Oswald-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 848C52731B2EEF0F003E57F1 /* Oswald-Regular.ttf */; };
+		8F5997C61B6218E5006CA7C9 /* EL_settingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5997C51B6218E5006CA7C9 /* EL_settingsViewController.m */; };
 		8F93CD671B46C218006F6BB0 /* ELPrivacyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F93CD661B46C218006F6BB0 /* ELPrivacyViewController.m */; };
 		8FA5363A1B513274004DF2F0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FA536391B513273004DF2F0 /* CoreLocation.framework */; };
 		8FA9AB971B4A3A260060346B /* ELSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FA9AB961B4A3A260060346B /* ELSettingsViewController.m */; };
@@ -175,6 +176,8 @@
 		848C52721B2EEF0F003E57F1 /* Oswald-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Light.ttf"; sourceTree = "<group>"; };
 		848C52731B2EEF0F003E57F1 /* Oswald-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Regular.ttf"; sourceTree = "<group>"; };
 		8C55A9CC3318C193F8CC1747 /* libPods-EzyLog.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EzyLog.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F5997C41B6218E5006CA7C9 /* EL_settingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EL_settingsViewController.h; sourceTree = "<group>"; };
+		8F5997C51B6218E5006CA7C9 /* EL_settingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EL_settingsViewController.m; sourceTree = "<group>"; };
 		8F93CD651B46C218006F6BB0 /* ELPrivacyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELPrivacyViewController.h; sourceTree = "<group>"; };
 		8F93CD661B46C218006F6BB0 /* ELPrivacyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELPrivacyViewController.m; sourceTree = "<group>"; };
 		8FA536391B513273004DF2F0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -359,6 +362,8 @@
 				8F93CD661B46C218006F6BB0 /* ELPrivacyViewController.m */,
 				8FA9AB951B4A3A260060346B /* ELSettingsViewController.h */,
 				8FA9AB961B4A3A260060346B /* ELSettingsViewController.m */,
+				8F5997C41B6218E5006CA7C9 /* EL_settingsViewController.h */,
+				8F5997C51B6218E5006CA7C9 /* EL_settingsViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -635,6 +640,7 @@
 				8467D8121B31AF4E0095F8DD /* ELTourTheAppViewController.m in Sources */,
 				8430D3581B302A8E001686E8 /* ELWelcomeScreen.m in Sources */,
 				8FA9AB971B4A3A260060346B /* ELSettingsViewController.m in Sources */,
+				8F5997C61B6218E5006CA7C9 /* EL_settingsViewController.m in Sources */,
 				81D6655B1B33E2C900B8C3BC /* DrivingDistanceAwardViewController.m in Sources */,
 				816B33C61B43E9CB00A9AC51 /* ELSupervisorSignatureViewController.m in Sources */,
 				81DB9E991B3BCB76009340BF /* SummaryAwardsViewController.m in Sources */,

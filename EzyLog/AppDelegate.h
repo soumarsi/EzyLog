@@ -24,6 +24,8 @@
 
 @property(nonatomic,strong)NSString *supName;
 
+@property(nonatomic,strong)NSString *userName,*screenName,*emailID;
+
 
 
 @property (strong, nonatomic) UIWindow *window;

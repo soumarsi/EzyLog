@@ -50,6 +50,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *driver_avg_speed;
 
-- (IBAction)End_Drive_Action:(int)sender;
+- (IBAction)End_Drive_Action:(id)sender;
 
 @end

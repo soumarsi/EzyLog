@@ -12,5 +12,11 @@
 @interface ELSupervisorSignatureViewController : UIViewController
 {
     mySmoothLineView * signView;
+    
 }
+
+
+@property(nonatomic,strong) NSString *signUPData;
+
+
 @end

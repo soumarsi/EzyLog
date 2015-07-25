@@ -10,20 +10,32 @@
 #import "SupervisorSignupViewController.h"
 #import <CoreMotion/CoreMotion.h>
 #import "mySmoothLineView.h"
+#import "RS_JsonClass.h"
+#import "AppDelegate.h"
 
 @interface ELLearnerSignatureViewController ()
 
 {
   
+    RS_JsonClass *globalOBJ;
+    
     BOOL fiveCheck;
+    
+    AppDelegate *app;
 
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *signatureBox;
 
+
+@property (strong, nonatomic) IBOutlet UIImageView *screenshotImgView;
+
+
 @end
 
 @implementation ELLearnerSignatureViewController
+
+@synthesize screenshotImgView,signatureBox,signUPData;
 
 - (BOOL)prefersStatusBarHidden
 {
@@ -35,9 +47,17 @@
 {
     [super viewDidLoad];
     
+    
+    
+    NSLog(@"URL data.....%@",signUPData);
+    
      self.view.transform = CGAffineTransformMakeRotation(M_PI_2);
     
     [self.view setMultipleTouchEnabled:YES];
+    
+    globalOBJ=[[RS_JsonClass alloc]init];
+    
+    app=[[UIApplication sharedApplication]delegate];
     
     
     [signView removeFromSuperview];
@@ -48,7 +68,7 @@
         
 //    signView= [[ mySmoothLineView alloc] initWithFrame:CGRectMake(108,123,353,89)];
         
-         signView= [[ mySmoothLineView alloc] initWithFrame:CGRectMake(_signatureBox.frame.origin.x+33,128,423,78)];
+         signView= [[ mySmoothLineView alloc] initWithFrame:CGRectMake(signatureBox.frame.origin.x+33,128,423,78)];
         
        // signView=[[mySmoothLineView alloc]initWithFrame:_signatureBox.frame];
         
@@ -78,32 +98,6 @@
 
 
 
-//-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    // Remove old red circles on screen
-////    NSArray *subviews = [self.view subviews];
-////    for (UIView *view in subviews) {
-////        [view removeFromSuperview];
-////    }
-//    
-//    // Enumerate over all the touches and draw a red dot on the screen where the touches were
-//    [touches enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
-//        // Get a single touch and it's location
-//        UITouch *touch = obj;
-//        CGPoint touchPoint = [touch locationInView:self.view];
-//        
-//        // Draw a red circle where the touch occurred
-//        UIView *touchView = [[UIView alloc] init];
-//        [touchView setBackgroundColor:[UIColor blackColor]];
-//        touchView.frame = CGRectMake(touchPoint.x, touchPoint.y, 8, 8);
-//        //touchView.layer.cornerRadius = 15;
-//        [self.view addSubview:touchView];
-//        //[touchView release];
-//    }];
-//}
-
-
-
 
 
 - (void)didReceiveMemoryWarning {
@@ -123,8 +117,93 @@
 
 - (IBAction)Signature_submit:(id)sender
 {
-    SupervisorSignupViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"supervisorregis"];
-    [self.navigationController pushViewController:obj animated:YES];
+    
+    UIGraphicsBeginImageContext(self.view.bounds.size);
+    
+    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    CGRect rect = CGRectMake(signatureBox.frame.origin.x,signatureBox.frame.origin.y ,signatureBox.frame.size.width, signatureBox.frame.size.height);
+    CGImageRef imageRef = CGImageCreateWithImageInRect([viewImage CGImage], rect);
+    
+    UIImage *img = [UIImage imageWithCGImage:imageRef];
+    
+ //  screenshotImgView.image=img;
+    
+    NSData *signImageData=[NSData dataWithData:UIImageJPEGRepresentation(img, 1.0f)];
+    
+    
+    NSLog(@"Signature data----->%@",signImageData);
+    
+    CGImageRelease(imageRef);
+ 
+    
+    NSString *urlstring=[NSString stringWithFormat:@"%@driver_registration.php?%@",App_Domain_Url,signUPData];
+    
+    
+    [globalOBJ GlobalDict_image:[urlstring stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] Globalstr_image:@"array" globalimage:signImageData Withblock:^(id result, NSError *error) {
+        
+        
+        
+        NSLog(@"result...%@",[result objectForKey:@"status"]);
+        
+        if ([[result valueForKey:@"status"] isEqualToString:@"success"])
+        {
+            NSMutableDictionary *get_result=[[result objectForKey:@"details" ]mutableCopy];
+            
+            NSUserDefaults *UserData = [[NSUserDefaults alloc]init];
+            
+            [UserData setObject:[get_result objectForKey:@"id"] forKey:@"Login_User_id"];
+            
+            [UserData setObject:[get_result objectForKey:@"first_name"] forKey:@"User_name"];
+            [UserData setObject:[get_result objectForKey:@"phone"] forKey:@"user_phone"];
+            
+            [UserData setObject:[get_result objectForKey:@"state"] forKey:@"user_state"];
+            
+            [UserData synchronize];
+            
+            app=[[UIApplication sharedApplication]delegate];
+            
+            app.userID=[NSString stringWithFormat:@"%@",[get_result objectForKey:@"id"]];
+            
+            
+            
+            if([[result valueForKey:@"status"] isEqualToString:@"success"])
+            {
+            
+                    SupervisorSignupViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"supervisorregis"];
+                    [self.navigationController pushViewController:obj animated:YES];
+
+            
+            
+            }
+            else
+            {
+            
+                
+                
+            
+            
+            }
+            
+            
+
+        }
+        
+        
+        
+    }];
+
+    
+    
+    
+//    SupervisorSignupViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"supervisorregis"];
+//    [self.navigationController pushViewController:obj animated:YES];
+    
+    
 }
 
 - (IBAction)Cleare_Screen:(id)sender
@@ -140,7 +219,7 @@
         
         //    signView= [[ mySmoothLineView alloc] initWithFrame:CGRectMake(108,123,353,89)];
         
-        signView=[[ mySmoothLineView alloc] initWithFrame:CGRectMake(_signatureBox.frame.origin.x+33,128,423,78)];
+        signView=[[ mySmoothLineView alloc] initWithFrame:CGRectMake(signatureBox.frame.origin.x+33,128,423,78)];
         
         // signView=[[mySmoothLineView alloc]initWithFrame:_signatureBox.frame];
         

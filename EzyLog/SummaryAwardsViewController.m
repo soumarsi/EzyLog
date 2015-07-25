@@ -17,6 +17,7 @@
 #import "ELWelcomeScreen.h"
 #import "ELSettingsViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "EL_settingsViewController.h"
 
 @interface SummaryAwardsViewController ()<SlideDelegate,UIGestureRecognizerDelegate>
 {
@@ -155,7 +156,7 @@
    else if(sender==4)
     {
         NSLog(@"########%ld",(long)sender);
-        SupervisorSignupViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"supervisorregis"];
+        EL_settingsViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"settings_new"];
         [self.navigationController pushViewController:obj animated:YES];
     }
    else if(sender==5)

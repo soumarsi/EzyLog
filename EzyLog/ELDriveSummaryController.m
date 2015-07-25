@@ -12,6 +12,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "SupervisorSignupViewController.h"
 #import "SummaryAwardsViewController.h"
+#import "EL_settingsViewController.h"
 
 #import "RS_JsonClass.h"
 #import "AppDelegate.h"
@@ -110,6 +111,7 @@
             NSLog(@"Drive summary array..... %@",resultArr);
             
             driveHourLbl.text=[NSString stringWithFormat:@"%.2f",[[[resultArr valueForKey:@"details"] valueForKey:@"final_drive_duration"] floatValue]/60 ];
+            driveHourLbl.adjustsFontSizeToFitWidth=YES;
             totalNoDrive.text=[NSString stringWithFormat:@"%@",[[resultArr valueForKey:@"details"] valueForKey:@"total_drives"]];
             dayHourLbl.text=[NSString stringWithFormat:@"%.2f",[[[resultArr valueForKey:@"details"] valueForKey:@"final_drive_day_duration"] floatValue]/60 ];
             if([dayHourLbl.text length]==4)
@@ -199,7 +201,7 @@
     else if(sender==4)
     {
         NSLog(@"########%ld",(long)sender);
-        SupervisorSignupViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"supervisorregis"];
+        EL_settingsViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"settings_new"];
         [self.navigationController pushViewController:obj animated:YES];
     }
     else if(sender==100)

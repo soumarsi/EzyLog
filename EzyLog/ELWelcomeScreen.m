@@ -40,7 +40,7 @@
 //    if ([FBSession activeSession].state== FBSessionStateOpen ||
 //        [FBSession activeSession].state== FBSessionStateOpenTokenExtended )
     
-    if((long)[userData valueForKey:@"status"])
+    if((long)[userData valueForKey:@"status"]!=0)
     {
         
         

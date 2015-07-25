@@ -16,7 +16,7 @@
 
 @implementation AppDelegate
 
-@synthesize userID,superID,carID,supName;
+@synthesize userID,superID,carID,supName,userName,emailID,screenName;
 
 
 

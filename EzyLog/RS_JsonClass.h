@@ -21,6 +21,8 @@
 //-(NSString *) GlobalDict_image:(NSString *)parameter Globalstr_image:(NSString *)parametercheck globalimage:(NSData *)imageparameter ;
 - (BOOL)connectedToNetwork;
 -(void)Userdict:(NSDictionary *)userdetails;
+-(void) GlobalDict_image:(NSString *)parameter Globalstr_image:(NSString *)parametercheck globalimage:(NSData *)imageparameter Withblock:(Urlresponceblock)responce;
+-(void) GlobalDict_Sign_image:(NSString *)parameter Globalstr_image:(NSString *)parametercheck globalimage:(NSData *)imageparameter Withblock:(Urlresponceblock)responce;
 
 @property NSString *error_str;
 

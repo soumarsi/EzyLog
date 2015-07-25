@@ -100,6 +100,8 @@
 
 }
 
+@property(nonatomic,strong)UILongPressGestureRecognizer *longPress ;
+
 @property (strong, nonatomic) IBOutlet UIButton *parkBtn1;
 
 @property (strong, nonatomic) IBOutlet UIButton *parkBtn2;
@@ -155,6 +157,8 @@
 @end
 
 @implementation ELRoadViewController
+
+@synthesize longPress;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -281,13 +285,13 @@ NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalend
     //long press gesture for End Drive button
     
     
-    UILongPressGestureRecognizer *gesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(gesture_check:)];
-    
-    gesture.delegate=self;
-    
-    gesture.minimumPressDuration =2.0;
-    
-    [endDriveButton addGestureRecognizer:gesture];
+//    longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(gesture_check:)];
+//    
+//    longPress.delegate=self;
+//    
+//    longPress.minimumPressDuration =2.0;
+//    
+//    [endDriveButton addGestureRecognizer:longPress];
     
    // gesture.allowableMovement = 600;
     
@@ -1026,17 +1030,23 @@ NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalend
 //        
 //    {
 
--(void)gesture_check:(UILongPressGestureRecognizer *)gesture
-{
-    if (gesture.state==UIGestureRecognizerStateRecognized)
-    {
-        [self End_Drive_Action:1];
-    }
-}
-        
+//-(void)gesture_check:(UILongPressGestureRecognizer *)gesture
+//{
+//    if (gesture.state==UIGestureRecognizerStateRecognized)
+//    {
+//        [self End_Drive_Action:1];
+//    }
+//}
 
-- (IBAction)End_Drive_Action:(int)sender
+
+- (IBAction)End_Drive_Action:(id)sender
 {
+    
+    
+    UILongPressGestureRecognizer *gesture=(UILongPressGestureRecognizer *)(id)sender;
+    
+    if(gesture.state==UIGestureRecognizerStateBegan)
+    {
     
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
     
@@ -1423,6 +1433,9 @@ NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalend
         UIAlertView *driveAlert=[[UIAlertView alloc]initWithTitle:@"Message" message:@"You have not completed any drive." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         
         [driveAlert show];
+        
+    }
+        
         
     }
 }

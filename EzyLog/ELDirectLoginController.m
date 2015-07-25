@@ -131,6 +131,10 @@
                          
                          app.userID=[get_result objectForKey:@"id"];
                          
+                         app.userName=[NSString stringWithFormat:@"%@ %@",[get_result objectForKey:@"first_name"],[get_result objectForKey:@"last_name"]];
+                         app.emailID=[get_result objectForKey:@"email"];
+                         app.screenName=[get_result objectForKey:@"screen_name"];
+                         
                          NSLog(@"User id in appdelegate: %@",app.userID);
                         
                          [spinner stopAnimating];

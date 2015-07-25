@@ -14,6 +14,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "RS_JsonClass.h"
 #import "AppDelegate.h"
+#import "EL_settingsViewController.h"
 
 @interface ELActivityLogViewController ()<SlideDelegate>
 {
@@ -34,9 +35,21 @@
     NSString *strmon;
     
     
+    IBOutlet UIActivityIndicatorView *spinner;
     
     
-    //A
+    
+    
+    //Lazy loading
+    
+    
+    int start,end;
+    
+    NSUInteger lastCell;
+    
+    BOOL isProcessing;
+    
+    
 }
 @end
 
@@ -47,11 +60,21 @@
     self.activitytabview.delegate=self;
     self.activitytabview.dataSource=self;
     menuslide = 0;
+    
+    
+    
+    start=0;
+    end=10;
+    
     // Do any additional setup after loading the view.
     
     globalOBJ=[[RS_JsonClass alloc]init];
     activityResult=[[NSMutableArray alloc]init];
     app=[[UIApplication sharedApplication]delegate];
+    
+    [spinner startAnimating];
+    
+    isProcessing=NO;
     
     [self getData];
     
@@ -73,7 +96,7 @@
     
     NSLog(@"Driver id is %@",app.userID);
     
-    NSString *postData = [NSString stringWithFormat:@"driver_id=%@",app.userID];//,app.userID
+    NSString *postData = [NSString stringWithFormat:@"driver_id=%@&start=%@&records=%@",app.userID,[NSString stringWithFormat:@"%d",start],[NSString stringWithFormat:@"%d",end]];//,app.userID
     
     NSLog(@"Post data....%@",postData);
     
@@ -91,11 +114,25 @@
         
            // NSLog(@"Totale drives result.... %@",result);
             
-            activityResult=(NSMutableArray *)[result objectForKey:@"details"];
+            activityResult=[[NSMutableArray alloc]init];
             
-             NSLog(@"Totale drives result.... %@",activityResult);
+            activityResult=(NSMutableArray *)[[result objectForKey:@"details"] mutableCopy];
+            
+           //  NSLog(@"Totale drives result.... %@",activityResult);
+            
+            
+            if(end==10)
             
             [_activitytabview reloadData];
+            
+            else
+            {
+            
+                
+                [self insertNewRows];
+            
+            
+            }
         
         
         }
@@ -171,7 +208,7 @@
     else if(sender==4)
     {
         NSLog(@"########%ld",(long)sender);
-        SupervisorSignupViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"supervisorregis"];
+        EL_settingsViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"settings_new"];
         [self.navigationController pushViewController:obj animated:YES];
     }
     else if(sender==100)
@@ -241,21 +278,29 @@
      cell.roadImageView.image=[UIImage imageNamed:[NSString stringWithFormat:@"%@_road.png",[[activityResult objectAtIndex:indexPath.row] valueForKey:@"road_condition"]]];
     
     
-//    UILabel *driveHoursLbl=(UILabel *)[cell viewWithTag:0];
-//    
-//    driveHoursLbl.text=[NSString stringWithFormat:@"%.2f",[[[activityResult objectAtIndex:indexPath.row] valueForKey:@"total_drive_hr"] floatValue]/60];
+if(indexPath.row==(activityResult.count -1) && isProcessing==NO)
+{
+
+
+   // start=start+10;
+   
     
-//    UILabel *distanceLbl=(UILabel *)[cell viewWithTag:1];
-//    distanceLbl.text=[NSString stringWithFormat:@"%@ KMS",[[activityResult objectAtIndex:indexPath.row] valueForKey:@"drive_km"] ];
+    end+=10;
     
-//    UILabel *speedLbl=(UILabel *)[cell viewWithTag:2];
-//    speedLbl.text=[NSString stringWithFormat:@"%@ KPH",[[activityResult objectAtIndex:indexPath.row] valueForKey:@"avg_speed"] ];
+    lastCell=activityResult.count;
     
+    NSLog(@"Last cell is %ld",lastCell);
     
+    [self getData];
+
+}
     
     
     return  cell;
 }
+
+
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -263,6 +308,76 @@
     [self.navigationController pushViewController:obj animated:YES];
  
 }
+
+
+
+-(void)insertNewRows
+{
+    isProcessing=YES;
+    
+    
+    [spinner stopAnimating];
+    
+    
+    if(end!=10)
+    {
+        int count=(int)lastCell;
+        
+        int countLimit=(int)activityResult.count;
+        
+        
+        
+        //inserting
+        
+        [_activitytabview beginUpdates];
+        
+        
+        for(int k=count; k<countLimit; k++)
+        {
+            
+            
+            NSLog(@"Inserting new rows....");
+            
+            
+            
+            
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:k
+                                                        inSection:0];
+            
+            
+            
+            [_activitytabview insertRowsAtIndexPaths:@[indexPath]
+                              withRowAnimation:UITableViewRowAnimationRight];
+            
+            
+            
+        }
+        
+        [_activitytabview endUpdates];
+        
+        [spinner stopAnimating];
+        
+ 
+        
+        //  [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:breakArray.count-5 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        
+        
+    }
+    
+
+    isProcessing=NO;
+    
+     
+    
+    
+}
+
+
+
+
+
+
+
 
 
 

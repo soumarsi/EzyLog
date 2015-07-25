@@ -1167,145 +1167,59 @@
     
     NSString *postData = [NSString stringWithFormat:@"first_name=%@&last_name=%@&phone=%@&screen_name=%@&email=%@&password=%@&permit_no=%@&permit_expiry=%@&post_code=%@&state=%@&dob=%@",[_fname text],[_lname text],[_phno text],[_screennm text],[_email text],[_pass text],[_learnerpermitno text],_permitExp,[_postcode text],[_statelbl text], _dob];
     
-    [request setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+//    [request setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+//    
+//   [request setHTTPBody:[postData dataUsingEncoding:NSUTF8StringEncoding]];
+//    
+//    [globalobj GlobalDict:request Globalstr:@"array" Withblock:^(id result, NSError *error)
+//     {
+//     
+//     if(result)
+//     {
+//         NSLog(@"result...%@",[result objectForKey:@"status"]);
+//         if ([[result valueForKey:@"status"] isEqualToString:@"success"])
+//         {
+//             NSMutableDictionary *get_result=[[result objectForKey:@"details" ]mutableCopy];
+//             
+//             NSUserDefaults *UserData = [[NSUserDefaults alloc]init];
+//             
+//             [UserData setObject:[get_result objectForKey:@"id"] forKey:@"Login_User_id"];
+//             
+//             [UserData setObject:[get_result objectForKey:@"first_name"] forKey:@"User_name"];
+//             [UserData setObject:[get_result objectForKey:@"phone"] forKey:@"user_phone"];
+//             
+//             [UserData setObject:[get_result objectForKey:@"state"] forKey:@"user_state"];
+//             
+//              [UserData synchronize];
+//             
+//             AppDelegate *app=[[UIApplication sharedApplication]delegate];
+//             
+//             app.userID=[NSString stringWithFormat:@"%@",[get_result objectForKey:@"id"]];
+//             
     
-   [request setHTTPBody:[postData dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    [globalobj GlobalDict:request Globalstr:@"array" Withblock:^(id result, NSError *error)
-     {
-     
-     if(result)
-     {
-         NSLog(@"result...%@",[result objectForKey:@"status"]);
-         if ([[result valueForKey:@"status"] isEqualToString:@"success"])
-         {
-             NSMutableDictionary *get_result=[[result objectForKey:@"details" ]mutableCopy];
-             
-             NSUserDefaults *UserData = [[NSUserDefaults alloc]init];
-             
-             [UserData setObject:[get_result objectForKey:@"id"] forKey:@"Login_User_id"];
-             
-             [UserData setObject:[get_result objectForKey:@"first_name"] forKey:@"User_name"];
-             [UserData setObject:[get_result objectForKey:@"phone"] forKey:@"user_phone"];
-             
-             [UserData setObject:[get_result objectForKey:@"state"] forKey:@"user_state"];
-             
-              [UserData synchronize];
-             
-             AppDelegate *app=[[UIApplication sharedApplication]delegate];
-             
-             app.userID=[NSString stringWithFormat:@"%@",[get_result objectForKey:@"id"]];
-             
-             
              //ELLearnerSignatureViewController
              
              ELLearnerSignatureViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Signature_Page_learner"];
-             [self.navigationController pushViewController:obj animated:YES];
-         }
-         else
-         {
-             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Sorry" message:@"Registration failed" delegate:nil cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
              
-             [alert show];
-         }
-     }
-     }];
+             obj.signUPData=postData;
+             
+             
+             [self.navigationController pushViewController:obj animated:YES];
+       //  }
+//         else
+//         {
+//             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Sorry" message:@"Registration failed" delegate:nil cancelButtonTitle:@"OK"
+//                                                  otherButtonTitles:nil];
+//             
+//             [alert show];
+//         }
+         
+    // }
+    // }];
     
-//    NSString *post =[[NSString alloc] initWithFormat:@"first_name=%@&last_name=%@&phone=%@&screen_name=%@&email=%@&password=%@&permit_no=%@&permit_expiry=%@&post_code=%@&state=%@&dob=%@",[_fname text],[_lname text],[_phno text],[_screennm text],[_email text],[_pass text],[_learnerpermitno text],_permitExp,[_postcode text],[_statelbl text], _dob];
-//    NSLog(@"PostData: %@",post);
-//    
-//    NSURL *url=[NSURL URLWithString:@"http://www.esolz.co.in/lab9/ezylog/iosapp/driver_registration.php?"];
-//    _request = [NSMutableURLRequest requestWithURL:url];
-//    _connection = [[NSURLConnection alloc ]initWithRequest:_request delegate:self];
-//    
-//    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-//    
-//    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
-//    
-//    // NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-//    [_request setURL:url];
-//    [_request setHTTPMethod:@"POST"];
-//    [_request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-//    [_request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-//    [_request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-//    [_request setHTTPBody:postData];
     
     
 }
-//- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-//{
-//    
-//    
-//    
-//    
-//    self.connection = nil;
-//    self.buffer     = nil;
-//    
-//    NSLog(@"Error: %@",[error localizedDescription]);
-//    NSLog(@"Connection failed! Error - %@ %@",
-//          [error localizedDescription],
-//          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
-//    NSLog(@"connectionssssssss...lost");
-//    
-//    
-//    
-//}
-
-
-
-//- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-//{
-//    [self.buffer setLength:0];
-//    NSLog(@"didReceiveResponse");
-//}
-
-
-
-//- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-//{
-//    
-//    
-//    [self.buffer appendData:data];
-//    
-//    NSLog(@"Data Loading....wait");
-//    
-//}
-//- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-//{
-//    NSLog(@"connectionDidFinishLoading");
-//    NSError *error = [[NSError alloc] init];
-//    NSHTTPURLResponse *response = nil;
-//    NSData *urlData=[NSURLConnection sendSynchronousRequest:_request returningResponse:&response error:&error];
-//    
-//    NSLog(@"Response code: %ld", (long)[response statusCode]);
-//    if ([response statusCode] >=200 && [response statusCode] <300)
-//    {
-//        NSString *responseData = [[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
-//        NSLog(@"Response ==> %@", responseData);
-//        _jsonResult = [NSJSONSerialization JSONObjectWithData:urlData options:0 error:&error];
-//        NSLog(@"jsonresult...............%@",_jsonResult);
-//        
-//        //Signup Checking...............
-//        
-//        if ([[_jsonResult valueForKey:@"status"] isEqualToString:@"success"])
-//        {
-//            ELSignUpViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"supervisorregis"];
-//            [self.navigationController pushViewController:obj animated:YES];
-//        }
-//        else
-//        {
-//            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:[_jsonResult valueForKey:@"status"] message:[_jsonResult valueForKey:@"message"] delegate:nil cancelButtonTitle:@"OK"
-//                                                 otherButtonTitles:nil];
-//            
-//            [alert show];
-//        }
-//        
-//        
-//        
-//        
-//    }
-//}
 
 
 @end

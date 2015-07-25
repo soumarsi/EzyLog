@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *signatureimg;
 @property (weak, nonatomic) IBOutlet UIView *baseview;
 
+@property(nonatomic,strong) NSString *signUPData;
+
 - (IBAction)Signature_submit:(id)sender;
 - (IBAction)Cleare_Screen:(id)sender;
 @end

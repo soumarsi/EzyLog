@@ -244,102 +244,74 @@
         
         else
         {
-            NSLog(@"%@",finaldate);
-            RS_JsonClass *globalobj=[[RS_JsonClass alloc]init];
-            //NSURL *url=[NSURL URLWithString:@"http://www.esolz.co.in/lab9/ezylog/iosapp/supervisor_registration.php?"];
-            NSString *urlstring=[NSString stringWithFormat:@"http://www.esolz.co.in/lab9/ezylog/iosapp/supervisor_registration.php?"];
-            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlstring]];
-            [request setHTTPMethod:@"POST"];
-            NSString *postData = [NSString stringWithFormat:@"driver_id=%@&first_name=%@&last_name=%@&dob=%@&email=%@&password=%d&post_code=%@&licence_no=%@&licence_expiry=%@&licenced_instructor=%@&instructor_no=%@",app.userID,[_fname text],[_lname text],finaldate,[_email text],344343,[_postcode text],[_licenceno text],licence,licencedinst,[_insno text]];
-            [request setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+//            NSLog(@"%@",finaldate);
+//            RS_JsonClass *globalobj=[[RS_JsonClass alloc]init];
+//            //NSURL *url=[NSURL URLWithString:@"http://www.esolz.co.in/lab9/ezylog/iosapp/supervisor_registration.php?"];
+//            NSString *urlstring=[NSString stringWithFormat:@"http://www.esolz.co.in/lab9/ezylog/iosapp/supervisor_registration.php?"];
+//            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlstring]];
+//            [request setHTTPMethod:@"POST"];
+           NSString *postData = [NSString stringWithFormat:@"driver_id=%@&first_name=%@&last_name=%@&dob=%@&email=%@&password=%d&post_code=%@&licence_no=%@&licence_expiry=%@&licenced_instructor=%@&instructor_no=%@",app.userID,[_fname text],[_lname text],finaldate,[_email text],344343,[_postcode text],[_licenceno text],licence,licencedinst,[_insno text]];
+//            [request setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+//            
+//            [request setHTTPBody:[postData dataUsingEncoding:NSUTF8StringEncoding]];
+//            
+//            [globalobj GlobalDict:request Globalstr:@"array" Withblock:^(id result, NSError *error)
+//             {
+//                 if(result)
+//                 {
+//                     NSLog(@"result...%@",[result objectForKey:@"status"]);
+//                     if ([[result valueForKey:@"status"] isEqualToString:@"success"])
+//                     {
+//                         
+//                         
+//                         NSMutableDictionary *get_result=[[result objectForKey:@"details" ]mutableCopy];
+//                         
+//                         NSUserDefaults *UserData = [[NSUserDefaults alloc]init];
+//                         
+//                         [UserData setObject:[get_result objectForKey:@"id"] forKey:@"Login_User_id"];
+//                         
+//                         [UserData setObject:[get_result objectForKey:@"first_name"] forKey:@"User_name"];
+//                         [UserData setObject:[get_result objectForKey:@"phone"] forKey:@"user_phone"];
+//                         
+//                         [UserData setObject:[get_result objectForKey:@"state"] forKey:@"user_state"];
+//                         
+//                         [UserData synchronize];
+//                         
+//                         
+//                         app.superID=[get_result objectForKey:@"id"];
+//                         
+//                         NSLog(@"Supervisor ID...%@",app.superID);
+//                         
+//                         
+//                         //                     ELDriveSetUpViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Drive_Setup"];
+//                         //                     [self.navigationController pushViewController:obj animated:YES];
+//                         
+//                         
             
-            [request setHTTPBody:[postData dataUsingEncoding:NSUTF8StringEncoding]];
-            
-            [globalobj GlobalDict:request Globalstr:@"array" Withblock:^(id result, NSError *error)
-             {
-                 if(result)
-                 {
-                     NSLog(@"result...%@",[result objectForKey:@"status"]);
-                     if ([[result valueForKey:@"status"] isEqualToString:@"success"])
-                     {
-                         
-                         
-                         NSMutableDictionary *get_result=[[result objectForKey:@"details" ]mutableCopy];
-                         
-                         NSUserDefaults *UserData = [[NSUserDefaults alloc]init];
-                         
-                         [UserData setObject:[get_result objectForKey:@"id"] forKey:@"Login_User_id"];
-                         
-                         [UserData setObject:[get_result objectForKey:@"first_name"] forKey:@"User_name"];
-                         [UserData setObject:[get_result objectForKey:@"phone"] forKey:@"user_phone"];
-                         
-                         [UserData setObject:[get_result objectForKey:@"state"] forKey:@"user_state"];
-                         
-                         [UserData synchronize];
-                         
-                         
-                         app.superID=[get_result objectForKey:@"id"];
-                         
-                         NSLog(@"Supervisor ID...%@",app.superID);
-                         
-                         
-                         //                     ELDriveSetUpViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Drive_Setup"];
-                         //                     [self.navigationController pushViewController:obj animated:YES];
-                         
-                         
-                         
                          
                          ELSupervisorSignatureViewController *obj=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"SuperSignature_Page"];
+                         
+                         obj.signUPData=postData;
+                         
+                         
                          [self.navigationController pushViewController:obj animated:YES];
                          
                          
                      }
-                     else
-                     {
-                         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Sorry" message:@"Registration failed" delegate:nil cancelButtonTitle:@"OK"
-                                                              otherButtonTitles:nil];
-                         
-                         [alert show];
-                     }
-                 }
-             }];
-            
-            
-            //
-            //        NSString *post =[[NSString alloc] initWithFormat:@"first_name=%@&last_name=%@&dob=%@&email=%@&password=%d&post_code=%@&licence_no=%@&licence_expiry=%@&licenced_instructor=%@&instructor_no=%@",[_fname text],[_lname text],finaldate,[_email text],344343,[_postcode text],[_licenceno text],licence,licencedinst,[_insno text]];
-            //        NSLog(@"PostData: %@",post);
-            //
-            //        request = [NSMutableURLRequest requestWithURL:url];
-            //
-            //        connection = [[NSURLConnection alloc ]initWithRequest:request delegate:self];
-            //
-            //
-            //
-            //        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-            //
-            //
-            //
-            //        NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
-            //
-            //
-            //
-            //    // NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-            //    
-            //        [request setURL:url];
-            //    
-            //        [request setHTTPMethod:@"POST"];
-            //    
-            //        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-            //    
-            //        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-            //    
-            //        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-            //    
-            //        [request setHTTPBody:postData];
-            //        
-            
-        }
-
+                   //  else
+//                     {
+//                         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Sorry" message:@"Registration failed" delegate:nil cancelButtonTitle:@"OK"
+//                                                              otherButtonTitles:nil];
+//                         
+//                         [alert show];
+//                     }
+//                 }
+//             }];
+//            
+//            
+//            
+//        }
+//
         
        
     }
